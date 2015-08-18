@@ -1,0 +1,304 @@
+From potrmwn at gmail.com  Tue May  1 09:31:01 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Tue, 01 May 2007 09:31:01 +0200
+Subject: [Tel-dev] Tel Logo
+Message-ID: <1178004661.5720.3.camel@rebian.home>
+
+
+> > > > Da gibt es ja in Inkscape das "Whiteboard" was afaik ?ber Jabber
+> > > > l?uft. Wie w?rs?
+> > >
+> > > Erkl?r mal, was das ist... Ich habe noch nicht so viel mit Inkscape
+> > > gemacht.
+> >
+> > Ich kenne Inkscape auch erst seit ein paar Tagen ^^ mawe hat mich dazu
+> > bewegt.
+> > Ich nehme an, dass man damit gemeinsam an einer Grafik ?ber Jabber
+> > arbeiten kann. Leider kratzt Inkscape immer, wenn ich versuche micht bei
+> > Gmail einzuloggen :-( (ev. keine Unterst?tzung daf?r)
+> > Wenn ich da falsch liege: meckern erlaubt ^^
+> 
+> Bei Gelegenheit werde ich es auch mal ausprobieren...
+
+Und, schon ausprobiert?
+
+Wie steht's nun mit einem Logo? Leider hat sich da bei tel einige Zeit
+nichts getan.
+Der andere, der mir das Logo geschickt hat, hat sich
+nicht mehr gemeldet.
+
+@Cen: Wie siehst bei dir mit Logo und Design aus? hat sich schon was
+getan?
+
+Gr?sse,
+Pot
+-- 
+Hacker bauen Dinge auf, Cracker zerst?ren sie.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070501/e9b0d9df/attachment.pgp>
+
+From admin at berlios.de  Tue May  1 09:55:37 2007
+From: admin at berlios.de (admin at berlios.de)
+Date: Tue, 1 May 2007 09:55:37 +0200 (CEST)
+Subject: [Tel-dev] [Feature #3200] adding a subtitle in all languages
+Message-ID: <200705010755.l417tbcO011007@unicorn.berlios.de>
+
+Feature Request #3200, was updated on 2007-Mar-01 18:08
+You can respond by visiting: 
+http://developer.berlios.de/feature/?func=detailfeature&feature_id=3200&group_id=8132
+
+Category: website
+Status: Closed
+Priority: 5
+Summary: adding a subtitle in all languages
+
+By: pot
+Date: 2007-Mar-01 18:08
+
+Message:
+Logged In: YES 
+user_id=36037
+Browser: Mozilla/5.0 (X11; U; Linux x86_64; de; rv:1.8.1.1) Gecko/20061205 Iceweasel/2.0.0.1 (Debian-2.0.0.1+dfsg-4)
+
+try to add a subtitle in the header.php to make a
+"slogan" in all languages
+
+example: "tel, das Konsolentelefonbuch"
+
+----------------------------------------------------------------------
+You can respond by visiting: 
+http://developer.berlios.de/feature/?func=detailfeature&feature_id=3200&group_id=8132
+
+
+From basti.wiesner at gmx.net  Tue May  1 15:48:37 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Tue, 1 May 2007 15:48:37 +0200
+Subject: [Tel-dev] Tel Logo
+In-Reply-To: <1178004661.5720.3.camel@rebian.home>
+References: <1178004661.5720.3.camel@rebian.home>
+Message-ID: <200705011548.37332.basti.wiesner@gmx.net>
+
+[ Remo Wenger <potrmwn at gmail.com> ]
+> > > > > Da gibt es ja in Inkscape das "Whiteboard" was afaik ?ber Jabber
+> > > > > l?uft. Wie w?rs?
+> > > >
+> > > > Erkl?r mal, was das ist... Ich habe noch nicht so viel mit Inkscape
+> > > > gemacht.
+> > >
+> > > Ich kenne Inkscape auch erst seit ein paar Tagen ^^ mawe hat mich
+> > > dazu bewegt.
+> > > Ich nehme an, dass man damit gemeinsam an einer Grafik ?ber Jabber
+> > > arbeiten kann. Leider kratzt Inkscape immer, wenn ich versuche micht
+> > > bei Gmail einzuloggen :-( (ev. keine Unterst?tzung daf?r)
+> > > Wenn ich da falsch liege: meckern erlaubt ^^
+> >
+> > Bei Gelegenheit werde ich es auch mal ausprobieren...
+>
+> Und, schon ausprobiert?
+
+Nee, nicht dazu gekommen. Mein Computer hat zwischendurch ein paar Probleme 
+gemacht, und jetzt muss ich erstmal f?rs Abi lernen. Ich schreibe am 11. 
+und am 24./25. meine Pr?fungen. Deswegen habe ich auch nicht 
+weiterprogrammiert.
+
+PS: Ich habe mir inkscape gerade nochmal angeschaut und finde da 
+kein "Whiteboard". Wie gibts das denn?
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+
+
+From potrmwn at gmail.com  Tue May  1 19:43:18 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Tue, 01 May 2007 19:43:18 +0200
+Subject: [Tel-dev] Tel Logo
+In-Reply-To: <200705011548.37332.basti.wiesner@gmx.net>
+References: <1178004661.5720.3.camel@rebian.home>
+	<200705011548.37332.basti.wiesner@gmx.net>
+Message-ID: <1178041398.5962.1.camel@rebian.home>
+
+Am Dienstag, den 01.05.2007, 15:48 +0200 schrieb Sebastian Wiesner:
+> > Und, schon ausprobiert?
+> 
+> Nee, nicht dazu gekommen. Mein Computer hat zwischendurch ein paar Probleme 
+> gemacht, und jetzt muss ich erstmal f?rs Abi lernen. Ich schreibe am 11. 
+> und am 24./25. meine Pr?fungen. Deswegen habe ich auch nicht 
+> weiterprogrammiert.
+Ou, dann viel Gl?ck. Hab am 12. auch ein wichtiger (Eignungs-)Test.
+
+> PS: Ich habe mir inkscape gerade nochmal angeschaut und finde da 
+> kein "Whiteboard". Wie gibts das denn?
+Keine Ahnung. Welche Version hast du? Meine ist 0.45.
+
+Gr?sse,
+Pot
+-- 
+Hacker bauen Dinge auf, Cracker zerst?ren sie.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070501/d2f2eefb/attachment.pgp>
+
+From basti.wiesner at gmx.net  Tue May  1 22:49:06 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Tue, 1 May 2007 22:49:06 +0200
+Subject: [Tel-dev] Tel Logo
+In-Reply-To: <1178041398.5962.1.camel@rebian.home>
+References: <1178004661.5720.3.camel@rebian.home>
+	<200705011548.37332.basti.wiesner@gmx.net>
+	<1178041398.5962.1.camel@rebian.home>
+Message-ID: <200705012249.13338.basti.wiesner@gmx.net>
+
+[ Remo Wenger <potrmwn at gmail.com> ]
+> Am Dienstag, den 01.05.2007, 15:48 +0200 schrieb Sebastian Wiesner:
+> > > Und, schon ausprobiert?
+> >
+> > Nee, nicht dazu gekommen. Mein Computer hat zwischendurch ein paar
+> > Probleme gemacht, und jetzt muss ich erstmal f?rs Abi lernen. Ich
+> > schreibe am 11. und am 24./25. meine Pr?fungen. Deswegen habe ich auch
+> > nicht
+> > weiterprogrammiert.
+>
+> Ou, dann viel Gl?ck. Hab am 12. auch ein wichtiger (Eignungs-)Test.
+
+Danke, dir auch...
+Wenn's vorbei ist, hab ich auch wieder mehr Zeit, um an tel weiter zu 
+schreiben... ich habe zwar noch einiges gemacht, aber ich spiele zurzeit 
+noch mit dem plugin-system rum (ich bin einfach noch nicht zufrieden ;) ), 
+deswegen commite ich noch nicht... zurzeit herrscht in meiner working copy 
+eher chaos ;) da muss noch ordnung rein ;)
+
+> > PS: Ich habe mir inkscape gerade nochmal angeschaut und finde da
+> > kein "Whiteboard". Wie gibts das denn?
+>
+> Keine Ahnung. Welche Version hast du? Meine ist 0.45.
+
+Ich auch... allerdings l?uft bei mir gerade gentoo, vielleicht habe ich da 
+beim kompilieren eine option vergessen...
+
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: This is a digitally signed message part.
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070501/ca6613c5/attachment.pgp>
+
+From chbjung at googlemail.com  Wed May  2 23:06:10 2007
+From: chbjung at googlemail.com (Christian Jung)
+Date: Wed, 2 May 2007 23:06:10 +0200
+Subject: [Tel-dev] Tel Logo
+In-Reply-To: <200705012249.13338.basti.wiesner@gmx.net>
+References: <1178004661.5720.3.camel@rebian.home>
+	<200705011548.37332.basti.wiesner@gmx.net>
+	<1178041398.5962.1.camel@rebian.home>
+	<200705012249.13338.basti.wiesner@gmx.net>
+Message-ID: <c6f3d5c20705021406h707f5385y4b9bcdd6407e9d7a@mail.gmail.com>
+
+so, dies ist nun mein erster post den ich hier ?berhaupt t?tige. falls ich
+alles falsch mache bitte nicht all zu b?se sein :p
+leider hab ich in letzter zeit kaum was gemacht, werde mich aber bem?hen die
+?bersetzungen demn?chst aufzufrischen und mich dann eben an das hier
+angesprochene logo machen.
+
+Am 01.05.07 schrieb Sebastian Wiesner <basti.wiesner at gmx.net>:
+>
+> [ Remo Wenger <potrmwn at gmail.com> ]
+> > Am Dienstag, den 01.05.2007, 15:48 +0200 schrieb Sebastian Wiesner:
+> > > > Und, schon ausprobiert?
+> > >
+> > > Nee, nicht dazu gekommen. Mein Computer hat zwischendurch ein paar
+> > > Probleme gemacht, und jetzt muss ich erstmal f?rs Abi lernen. Ich
+> > > schreibe am 11. und am 24./25. meine Pr?fungen. Deswegen habe ich auch
+> > > nicht
+> > > weiterprogrammiert.
+> >
+> > Ou, dann viel Gl?ck. Hab am 12. auch ein wichtiger (Eignungs-)Test.
+>
+> Danke, dir auch...
+> Wenn's vorbei ist, hab ich auch wieder mehr Zeit, um an tel weiter zu
+> schreiben... ich habe zwar noch einiges gemacht, aber ich spiele zurzeit
+> noch mit dem plugin-system rum (ich bin einfach noch nicht zufrieden ;) ),
+> deswegen commite ich noch nicht... zurzeit herrscht in meiner working copy
+> eher chaos ;) da muss noch ordnung rein ;)
+>
+> > > PS: Ich habe mir inkscape gerade nochmal angeschaut und finde da
+> > > kein "Whiteboard". Wie gibts das denn?
+> >
+> > Keine Ahnung. Welche Version hast du? Meine ist 0.45.
+>
+> Ich auch... allerdings l?uft bei mir gerade gentoo, vielleicht habe ich da
+> beim kompilieren eine option vergessen...
+>
+>
+> --
+> Freiheit ist immer die Freiheit der Andersdenkenden.
+>                                             (Rosa Luxemburg)
+>
+> _______________________________________________
+> Tel-dev mailing list
+> Tel-dev at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/tel-dev
+>
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070502/36f5305f/attachment.html>
+
+From potrmwn at gmail.com  Thu May  3 14:16:50 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Thu, 03 May 2007 14:16:50 +0200
+Subject: [Tel-dev] Tel Logo
+In-Reply-To: <c6f3d5c20705021406h707f5385y4b9bcdd6407e9d7a@mail.gmail.com>
+References: <1178004661.5720.3.camel@rebian.home>
+	<200705011548.37332.basti.wiesner@gmx.net>
+	<1178041398.5962.1.camel@rebian.home>
+	<200705012249.13338.basti.wiesner@gmx.net>
+	<c6f3d5c20705021406h707f5385y4b9bcdd6407e9d7a@mail.gmail.com>
+Message-ID: <1178194610.5470.13.camel@rebian.home>
+
+Am Mittwoch, den 02.05.2007, 23:06 +0200 schrieb Christian Jung:
+> so, dies ist nun mein erster post den ich hier ?berhaupt t?tige.
+Herzlich willkommen ;-)
+
+> falls ich alles falsch mache bitte nicht all zu b?se sein :p
+> leider hab ich in letzter zeit kaum was gemacht, werde mich aber
+> bem?hen die ?bersetzungen demn?chst aufzufrischen
+Auf das freue ich mich schon :-)
+
+Wegen des Posts selber:
+Bitte vermeide HTML-Mails in Mailinglisten. Bitte beachte auch, dass du
+die E-Mails korrekt zitierst (keine Fullquoten, nur das n?tigste
+zitieren und die Antwort direkt unten hin schreiben) [1].
+Zudem bitte ich dich, auf die Gross- und Kleinschreibweise zu achten.
+
+So nun genug gemeckert.
+
+Sch?nen Tag noch,
+Pot
+
+[1] http://einklich.net/usenet/zitier.htm
+-- 
+Hacker bauen Dinge auf, Cracker zerst?ren sie.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070503/524c0c42/attachment.pgp>
+

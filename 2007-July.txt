@@ -1,0 +1,97 @@
+From potrmwn at gmail.com  Fri Jul 27 00:11:47 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Fri, 27 Jul 2007 00:11:47 +0200
+Subject: [Tel-dev] Barrierefreiheit der tel Website
+Message-ID: <46A91C23.4060701@gmail.com>
+
+Hallo Liste
+
+Einen Thread ?ber Barrierefreiheit einer Website auf UU.de [1] brachte mich
+zum Nachdenken der Barrierefreiheit der tel Website.
+
+Folgende M?ngel sind mir aufgefallen:
+
+Inhaltsverzeichnis:
+Kontrast Dunkelgr?n auf Schwarz schlecht? Wie sollte das am besten geregelt
+werden?
+
+Externe Links:
+.. ?ffnen nicht in einem neuen Fenster. Nicht barrierefrei?
+
+*Impressum*:
+Ist Pflicht! Ganz vergessen ^^ Bin nicht so scharf meine pers?nlichen Daten
+anzugeben (das hat einige Gr?nde). Ich weiss auch nicht, wie das in der
+Schweiz geregelt ist. Muss ich mich als Autor an die Gesetze von 
+Deutschland
+(Serverstandort) richten oder die Gesetze der Schweiz (Wohnort)?
+Reicht "Kontaktiere uns" nicht?
+
+Aufl?sung:
+Eine Ansicht mit einer 800x600 Aufl?sung ist nur schwer lesbar, da
+sich "Content" und "Neuigkeiten" vermischen.
+
+Drucken:
+Druckt unn?tige Sachen (Banner, Neuigkeiten, W3C-Images, 
+Inhaltsverzeichnis)
+aus. Ein Druck-stylesheet muss her!
+
+Blockschrift:
+Dient Blockschrift der besseren Lesbarkeit des Textes?
+
+Was f?llt sonst noch auf, was man beachten sollte?
+
+Mit freundlichen Gr?ssen,
+Pot
+
+[1] http://forum.ubuntuusers.de/viewtopic.php?p=850708
+
+
+From basti.wiesner at gmx.net  Fri Jul 27 15:54:42 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Fri, 27 Jul 2007 15:54:42 +0200
+Subject: [Tel-dev] Barrierefreiheit der tel Website
+In-Reply-To: <46A91C23.4060701@gmail.com>
+References: <46A91C23.4060701@gmail.com>
+Message-ID: <200707271554.50868.basti.wiesner@gmx.net>
+
+[ Remo Wenger <potrmwn at gmail.com> ]
+> *Impressum*:
+> Ist Pflicht! Ganz vergessen ^^ Bin nicht so scharf meine pers?nlichen
+> Daten anzugeben (das hat einige Gr?nde). Ich weiss auch nicht, wie das in
+> der Schweiz geregelt ist. Muss ich mich als Autor an die Gesetze von
+> Deutschland
+> (Serverstandort) richten oder die Gesetze der Schweiz (Wohnort)?
+> Reicht "Kontaktiere uns" nicht?
+
+Keine Ahnung, ob das reicht. Aber eigentlich hat keine andere 
+Projekt-Website, die ich kenne, ein echtes Impressum. Ich habe auf meiner 
+Seite auch keines.
+
+> Drucken:
+> Druckt unn?tige Sachen (Banner, Neuigkeiten, W3C-Images,
+> Inhaltsverzeichnis)
+> aus. Ein Druck-stylesheet muss her!
+
+Definitiv. Es w?re cool, wenn du dich darum k?mmern k?nntest.
+
+> Blockschrift:
+> Dient Blockschrift der besseren Lesbarkeit des Textes?
+
+Nur, wenn Silben vern?nftig getrennt werden. Ist das nicht der Fall, 
+entstehen h?ssliche L?cken zwischen W?rtern, was imho vermieden werden 
+sollte und der Lesbarkeit auch nicht zutr?glich ist.
+
+Ansonsten f?llt mir nichts mehr ein, ich habe mich mit diesem Thema noch 
+nicht ernsthaft auseinander gesetzt.
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: This is a digitally signed message part.
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070727/f9c6b5d8/attachment.pgp>
+

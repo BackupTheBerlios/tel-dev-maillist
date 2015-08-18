@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Tel-dev] tel Webseite wird nun &#252;ber SVN	geregelt
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/tel-dev/2007-February/index.html" >
+   <LINK REL="made" HREF="mailto:tel-dev%40lists.berlios.de?Subject=Re%3A%20%5BTel-dev%5D%0A%09%3D%3Fiso-8859-15%3Fq%3Ftel_Webseite_wird_nun_%3DFCber_SVN%3D09gere%3F%3D%0A%09%3D%3Fiso-8859-15%3Fq%3Fgelt%3F%3D&In-Reply-To=%3C200702261825.32740.basti.wiesner%40gmx.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000032.html">
+   <LINK REL="Next"  HREF="000036.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Tel-dev] tel Webseite wird nun &#252;ber SVN	geregelt</H1>
+    <B>Sebastian Wiesner</B> 
+    <A HREF="mailto:tel-dev%40lists.berlios.de?Subject=Re%3A%20%5BTel-dev%5D%0A%09%3D%3Fiso-8859-15%3Fq%3Ftel_Webseite_wird_nun_%3DFCber_SVN%3D09gere%3F%3D%0A%09%3D%3Fiso-8859-15%3Fq%3Fgelt%3F%3D&In-Reply-To=%3C200702261825.32740.basti.wiesner%40gmx.net%3E"
+       TITLE="[Tel-dev] tel Webseite wird nun &#252;ber SVN	geregelt">basti.wiesner at gmx.net
+       </A><BR>
+    <I>Mon Feb 26 18:25:25 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000032.html">[Tel-dev] tel Webseite wird nun &#252;ber SVN	geregelt
+</A></li>
+        <LI>Next message: <A HREF="000036.html">[Tel-dev] tel Webseite wird nun &#252;ber 	SVN	geregelt
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#34">[ date ]</a>
+              <a href="thread.html#34">[ thread ]</a>
+              <a href="subject.html#34">[ subject ]</a>
+              <a href="author.html#34">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Remo Wenger hackte folgendes:
+&gt;<i> Am Montag, den 26.02.2007, 13:41 +0100 schrieb Sebastian Wiesner:
+</I>&gt;<i> &gt; &gt; Probleme:
+</I>&gt;<i> &gt; &gt; - Aus, f&#252;r mich unerkl&#228;rlichem Grund bekommen wir bei jedem commit
+</I>&gt;<i> &gt; &gt; eine E-Mail
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Ich hab eine commit Benachrichtigung in den post-commit hook
+</I>&gt;<i> &gt; eingebaut... Wenn du die nocht mehr willst, sagt bescheid. Diese Mail
+</I>&gt;<i> &gt; ist geht &#252;ber die tel-svn Liste, da kann ich dich austragen...
+</I>&gt;<i>
+</I>&gt;<i> Achso. Ja mich nervts ein bisschen.. w&#228;r' nett wenn du mich austragen
+</I>&gt;<i> k&#246;nntest ;-)
+</I>
+Sure...
+Ich glaube, ich wollte dich sowieso nicht eintragen, ich habe nur vergessen, 
+deine Adresse zu l&#246;schen, weil ich die mail-adressen per copy n paste in 
+die Formulare eingetragen habe. Zu dem Zeitpunkt warst du ja auch noch 
+nicht im SVN aktiv...
+
+&gt;<i> &gt; &gt; - Nicht-Webmaster k&#246;nnen auch die Webseite ver&#228;ndern (kann imho &#252;ber
+</I>&gt;<i> &gt; &gt; UNIX-Rechte geregelt werden)
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; kein problem, solange unser projekt klein ist
+</I>&gt;<i>
+</I>&gt;<i> Wird aber eins, wenn es gross wird ;-)
+</I>
+Naja, ich denke, wir k&#246;nnen uns in dem Punkt doch erstmal auf darauf 
+verlassen, dass da niemand dran rummanipuliert. Wer randaliert, fliegt 
+sowieso wieder raus!
+Au&#223;erdem kann man auch so genug Schaden anrichten, man braucht ja z.B. nur 
+einmal im svn Verzeichnis rm -r auszuf&#252;hren.
+
+&gt;<i> &gt; &gt; - <A HREF="http://tel.berlios.de/.svn/">http://tel.berlios.de/.svn/</A> ist so erreichbar. Ob das schlimm ist
+</I>&gt;<i> &gt; &gt; weiss ich nicht
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Wieso? Checkst du jetzt direkt in htdocs aus?
+</I>&gt;<i>
+</I>&gt;<i> Ja, weil ich keine Rechte dazu habe, rsync auszuf&#252;hren. Und mit cp weiss
+</I>&gt;<i> ich nicht wie ich Dateien/Ordner exkludieren kann und mit welcher Option
+</I>&gt;<i> _nur_ ge&#228;nderte oder neue Dateien kopiert werden.
+</I>&gt;<i> Aber so finde ich es nicht schlimm, das Skript muss lediglich ein kurzes
+</I>&gt;<i> &quot;svn update&quot; ausf&#252;hren und schon fertig.
+</I>
+Kein Problem...
+
+&gt;<i> Da in jedem Ordner eine .svn steckt, finde ich es m&#252;hsam und auch eig.
+</I>&gt;<i> sinnlos, jeder Ordner mit htaccess zu &quot;verschliessen&quot;. Ob die .svn
+</I>&gt;<i> irgend eine Gefahr darstellen, werde ich mich noch informieren.
+</I>
+N&#246;, ich denke nicht dass die gef&#228;hrlich sind. Ich denke, da steht nichts 
+gef&#228;hrliches drinnen.
+Es w&#228;re ja auch irgendwie unsinnig, weil man sowieso leicht an die Metadaten 
+kommt. Man muss ja nur einmal einen anonymen SVN-Checkout f&#252;hren, wie auf 
+der BerliOS Website beschrieben...
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/tel-dev/attachments/20070226/d3a213e9/attachment.pgp">https://lists.berlios.de/pipermail/tel-dev/attachments/20070226/d3a213e9/attachment.pgp</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000032.html">[Tel-dev] tel Webseite wird nun &#252;ber SVN	geregelt
+</A></li>
+	<LI>Next message: <A HREF="000036.html">[Tel-dev] tel Webseite wird nun &#252;ber 	SVN	geregelt
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#34">[ date ]</a>
+              <a href="thread.html#34">[ thread ]</a>
+              <a href="subject.html#34">[ subject ]</a>
+              <a href="author.html#34">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/tel-dev">More information about the Tel-dev
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Tel-dev] hardcoded
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/tel-dev/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:tel-dev%40lists.berlios.de?Subject=Re%3A%20%5BTel-dev%5D%20hardcoded&In-Reply-To=%3C20071011124714.177709af.web%40yokoy.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000164.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Tel-dev] hardcoded</H1>
+    <B>web at yokoy.de</B> 
+    <A HREF="mailto:tel-dev%40lists.berlios.de?Subject=Re%3A%20%5BTel-dev%5D%20hardcoded&In-Reply-To=%3C20071011124714.177709af.web%40yokoy.de%3E"
+       TITLE="[Tel-dev] hardcoded">web at yokoy.de
+       </A><BR>
+    <I>Thu Oct 11 12:47:14 CEST 2007</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000164.html">[Tel-dev] hardcoded
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#163">[ date ]</a>
+              <a href="thread.html#163">[ thread ]</a>
+              <a href="subject.html#163">[ subject ]</a>
+              <a href="author.html#163">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>hi,
+
+erst mal vielen Dank fuer dieses Projekt ;-)
+ich hab die tel-dev Mailingliste just abonniert, weil ich auf der Suche nach einem brauchbaren und schlanken Python Adressbuch bin und gleich auf ein Problem gestossen bin.
+
+Nun habe ich aus meinem alten kaddressbook ein .csv exportiert und wollte es mit tel importieren. Geht natuerlich nicht, weil hier ganz andere Felder/csv verwendet werden. Default Werte vorzugeben ist sinnvoll, aber warum hardcoded? Warum liesst man nicht die Felder aus der ersten Zeile aus und baut damit ein neues Adressbuch mit diesen Feldern auf (falls noch kein .tel/phonebook.csv existiert)?
+Oder habe ich beim importieren Fehler gemacht? Die Ausgabe und die erste Zeile aus dem kaddressbook.csv weiter unten.
+
+
+Gruesse,
+yokoy
+
+
+<A HREF="https://lists.berlios.de/mailman/listinfo/tel-dev">yokoy at 24u7</A>:~/.tel$ tel --import addressbook_from_kde.csv 
+Traceback (most recent call last):
+  File &quot;/usr/bin/tel&quot;, line 62, in &lt;module&gt;
+    ConsoleIFace().start()
+  File &quot;/usr/lib/tel/consoleiface.py&quot;, line 585, in start
+    options.command_function(options, *args)
+  File &quot;/usr/lib/tel/consoleiface.py&quot;, line 365, in _cmd_import
+    import_book = phonebook.PhoneBook(path)
+  File &quot;/usr/lib/tel/phonebook.py&quot;, line 238, in __init__
+    self.load()
+  File &quot;/usr/lib/tel/phonebook.py&quot;, line 303, in load
+    entry[k] = row[k].decode('utf-8')
+  File &quot;/usr/lib/tel/phonebook.py&quot;, line 138, in __setitem__
+    raise KeyError('Invalid field %s' % key)
+KeyError: 'Invalid field Formatierter Name'
+
+
+erste Zeile, ohne Umbruch:
+
+&quot;Formatierter Name&quot;,&quot;Nachname&quot;,&quot;Vorname&quot;,&quot;Zus&#228;tzliche Namen&quot;,&quot;Titel-Abk. (vor Name)&quot;,&quot;Titel-Abk. (n
+ach Name)&quot;,&quot;Spitzname&quot;,&quot;Geburtstag&quot;,&quot;Stra&#223;e (privat)&quot;,&quot;Stadt (privat)&quot;,&quot;Staat/Bundesland (privat)&quot;,
+&quot;Postleitzahl (privat)&quot;,&quot;Land (privat)&quot;,&quot;Aufkleber (Privatadresse)&quot;,&quot;Stra&#223;e (gesch&#228;ftlich)&quot;,&quot;Stadt 
+(gesch&#228;ftlich)&quot;,&quot;Staat/Bundesland (gesch&#228;ftlich)&quot;,&quot;Postleitzahl (gesch&#228;ftlich)&quot;,&quot;Land (gesch&#228;ftlich
+)&quot;,&quot;Aufkleber (Gesch&#228;ftsadresse)&quot;,&quot;Telefon (privat)&quot;,&quot;Telefon (gesch&#228;ftlich)&quot;,&quot;Mobiltelefon&quot;,&quot;Fax (
+privat)&quot;,&quot;Fax (gesch&#228;ftlich)&quot;,&quot;Autotelefon&quot;,&quot;ISDN&quot;,&quot;Pager&quot;,&quot;E-Mail-Adresse&quot;,&quot;Mail-Programm&quot;,&quot;Titel&quot;
+,&quot;Stellung&quot;,&quot;Organisation/Firma&quot;,&quot;Notiz&quot;,&quot;Startseite&quot;,&quot;Abteilung&quot;,&quot;Beruf&quot;,&quot;Name des Assistenten&quot;,&quot;N
+ame des Managers&quot;,&quot;Name des Partners&quot;,&quot;B&#252;ro&quot;,&quot;IM-Adresse&quot;,&quot;Jubil&#228;um&quot;,&quot;Blog&quot;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000164.html">[Tel-dev] hardcoded
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#163">[ date ]</a>
+              <a href="thread.html#163">[ thread ]</a>
+              <a href="subject.html#163">[ subject ]</a>
+              <a href="author.html#163">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/tel-dev">More information about the Tel-dev
+mailing list</a><br>
+</body></html>

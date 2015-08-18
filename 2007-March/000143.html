@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Tel-dev] Plugin System f&#252;r neue Dateitypen
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/tel-dev/2007-March/index.html" >
+   <LINK REL="made" HREF="mailto:tel-dev%40lists.berlios.de?Subject=Re%3A%20%5BTel-dev%5D%20%3D%3Futf-8%3Fq%3FPlugin_System_f%3DC3%3DBCr_neue_Dateitypen%3F%3D&In-Reply-To=%3C200703251806.33786.basti.wiesner%40gmx.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000141.html">
+   <LINK REL="Next"  HREF="000144.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Tel-dev] Plugin System f&#252;r neue Dateitypen</H1>
+    <B>Sebastian Wiesner</B> 
+    <A HREF="mailto:tel-dev%40lists.berlios.de?Subject=Re%3A%20%5BTel-dev%5D%20%3D%3Futf-8%3Fq%3FPlugin_System_f%3DC3%3DBCr_neue_Dateitypen%3F%3D&In-Reply-To=%3C200703251806.33786.basti.wiesner%40gmx.net%3E"
+       TITLE="[Tel-dev] Plugin System f&#252;r neue Dateitypen">basti.wiesner at gmx.net
+       </A><BR>
+    <I>Sun Mar 25 18:06:28 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000141.html">[Tel-dev] Bugs Reports
+</A></li>
+        <LI>Next message: <A HREF="000144.html">[Tel-dev] Fwd: tel requests/bugs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#143">[ date ]</a>
+              <a href="thread.html#143">[ thread ]</a>
+              <a href="subject.html#143">[ subject ]</a>
+              <a href="author.html#143">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi @all,
+
+ich habe mal einen neuen Entwicklungszweig f&#252;r die Entwicklung des 
+Pluginsystems erzeugt. Er ist unter branches/plugin-system-dev zu finden.
+
+Darin ist bereits der erste Entwurf eines backendmanager Moduls zu finden, 
+welches Plugins sucht, l&#228;dt und verwaltet. Au&#223;erdem habe ich ein Plugin f&#252;r 
+CSV Dateien entworfen. Generell sollte das Plugin-System aber auch Backends 
+unterst&#252;tzen, welche nicht auf Dateien basieren... So k&#246;nnte es &#252;ber solche 
+Backends sp&#228;ter einmal m&#246;glich sein, Datenbanken oder LDAP Server 
+anzusprechen. Prim&#228;r habe ich aber erstmal an KDE/Gnome gedacht. KDE bietet 
+f&#252;r den Zugriff aufs Standardadressbuch ein eigenes API, welches ohne 
+Dateien auskommt.
+
+Die ganze Sache ist zwar schon rudiment&#228;r funktionsf&#228;hig, aber noch nicht in 
+tel integriert (was noch einiges an Arbeit darstellen wird). Man kann 
+backendmanager aber bereits importieren und Backends laden. Remo, du 
+k&#246;nntest auch schon mal mit der Entwicklung des Plugins f&#252;r Mutt-Dateien 
+anfangen. Nimm das CSV Plugin als Beispiel. Allerdings kann sich das Format 
+der Plugin-Dateien noch &#228;ndern, bis jetzt haben wir es ja noch nicht in der 
+Praxis erprobt und wissen nicht, wie es sich da bew&#228;hrt ;)
+
+lunar
+
+PS: Unter [1] steht ein &#220;berblick &#252;ber das Konzept von Entwicklungszweigen 
+und wie man damit arbeitet bereit.
+
+
+[1] <A HREF="http://svnbook.red-bean.com/nightly/en/svn.branchmerge.html">http://svnbook.red-bean.com/nightly/en/svn.branchmerge.html</A> (Englisch)
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/tel-dev/attachments/20070325/9b25ace2/attachment.pgp">https://lists.berlios.de/pipermail/tel-dev/attachments/20070325/9b25ace2/attachment.pgp</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000141.html">[Tel-dev] Bugs Reports
+</A></li>
+	<LI>Next message: <A HREF="000144.html">[Tel-dev] Fwd: tel requests/bugs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#143">[ date ]</a>
+              <a href="thread.html#143">[ thread ]</a>
+              <a href="subject.html#143">[ subject ]</a>
+              <a href="author.html#143">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/tel-dev">More information about the Tel-dev
+mailing list</a><br>
+</body></html>

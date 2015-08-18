@@ -1,0 +1,4403 @@
+From basti.wiesner at gmx.net  Sat Feb 24 12:11:50 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Sat, 24 Feb 2007 12:11:50 +0100
+Subject: [Tel-dev] tel Homepage
+In-Reply-To: <1172314042.10089.16.camel@rebian.home>
+References: <1172314042.10089.16.camel@rebian.home>
+Message-ID: <200702241211.58586.basti.wiesner@gmx.net>
+
+Oops :(
+Deine Mails sind doch glatt an meinem Spamfilter h?ngen geblieben...
+Ich glaube ich muss den mal weniger restriktiv konfigurieren ;)
+
+Ich habe die Mail ?brigens auch an die Liste geschickt. Jetzt, wo wir die 
+Mailinglisten haben, sollten wir sie auch nutzen! ;)
+Ich w?rde vorschlagen, wir schicken ab jetzt alles unverschl?sselt an die 
+dev Liste. Immerhin geh?rt die Entwicklung der Website ja auch zu Projekt, 
+oder?
+
+> F?r die Website von tel habe ich mir etwas ganz einfaches ausgedacht:
+>
+> Es gibt header, content und footer. Header und footer werden bei jeder
+> Seite eingebunden. Die Seiten werden immer so aufgerufen:
+> index.php?to=kurzname. Der Kurzname kann in der config.php bestimmt
+> werden und man kann dort sagen, auf welche Datei dieser Kurzname linkt.
+
+Ok.
+
+> Zur Sprachetrennung:
+>
+> PHP liest die Sprache aus http aus, welche der Browser mitschickt. Die
+> erlaubten Sprachen werden in index.php definiert (momentan en und de).
+> Die Standartsprache ist en, wenn keine andere (erlaubte) Sprache
+> gefunden wird.
+> So k?nnen wir und ?bersetzer einfach eine Datei in lang/en oder lang/de
+> anlegen und die dementsprechend ?bersetzen. Damit nicht alle grossen
+> Formatierungen von der einen Sprache auf die andere Sprache ?bertragen
+> werden m?ssen, m?ssen wir Design gut mit CSS abtrennen.
+
+Apropos Design: Grau auf Schwarz sieht gut aus! Das passt zum 
+Konsolen-Charakter von tel! :)
+
+Nur die Link-Farbe ist imho nicht so gut. Violett auf schwarz ist schwer zu 
+erkennen. Das ist zu dunkel. 
+Wenn wir schon das Farbschema an die Konsole anpassen, k?nnen wir das bei 
+den Links doch auch so machen!
+Die Textkonsolen zeigen symbolische Links ja standardm??ig in einem hellen 
+blau (fast schon t?rkis) an. Das w?re doch die geeignete Farbe, was meinst 
+du?
+Au?erdem sollten wir noch das BerliOS Logo einbauen, mit einem Link auf die 
+Projektseite 
+(http://developer.berlios.de/docman/display_doc.php?docid=55&group_id=2).
+Ich glaube, dass verlangt BerliOS sogar... Aber wir sollten uns ja auch 
+erkenntlich zeigen, dass sie uns kostenlosen Webspace zur Verf?gung 
+stellen ;)
+
+> Die Datei ihv.php in den Sprachenordner (lang/de lang/en) ist das
+> Inhaltsverzeichnis (eingebunden in header.php).
+
+k
+
+> Wenn du willst, kannst du jetzt schon beginnen, die Webseite aufzubauen.
+
+Mal schauen ;) Gerade schreibe ich noch ein bisschen an Tel rum ;)
+
+> 1) Bei config.php ein neuer Kurzname einrichten und einer Datei zuweisen
+> 2) Datei bei beiden Sprachen erstellen (wenn du nicht ?bersetzen willst,
+> mach trotzdem eine Datei bei den anderen Sprachen mit einem Hinweis,
+> dass es noch nicht ?bersetzt wurde, sonst bekommt der User einfach
+> nichts zu sehen)
+> 3) Inhaltsverzeichnis anpassen (Link zu: ?to=kurzname)
+
+ok
+
+> Fertig ;-)
+>
+> Wenn du eine bessere Idee hast, wie wir das l?sen k?nnten, dann immer
+> her damit.
+
+Mmmh, ich denke, wir probierens erstmal so und schauen, wie sich das im 
+praktischen Einsatz bew?hrt ;)
+
+Btw, das svn Repo steht jetzt. Du kannst ?ber Websvn einen Blick 
+reinwerfen...
+Die alten Versionen sind alle unter tags/ zu finden, in trunk ist das, woran 
+ich grad rumschreibe...
+Unter branches k?nnen wir sp?ter mal ?ltere Versionen ablegen, wenn wir die 
+noch mit bugfixes unterst?tzen wollen. Momentan brauchen wir den Ordner 
+aber noch nicht...
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070224/4094893e/attachment.pgp>
+
+From potrmwn at gmail.com  Sat Feb 24 12:19:56 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Sat, 24 Feb 2007 12:19:56 +0100
+Subject: [Tel-dev] tel Homepage
+In-Reply-To: <200702241211.58586.basti.wiesner@gmx.net>
+References: <1172314042.10089.16.camel@rebian.home>
+	<200702241211.58586.basti.wiesner@gmx.net>
+Message-ID: <1172315996.10089.23.camel@rebian.home>
+
+Am Samstag, den 24.02.2007, 12:11 +0100 schrieb Sebastian Wiesner:
+> Oops :(
+> Deine Mails sind doch glatt an meinem Spamfilter h?ngen geblieben...
+> Ich glaube ich muss den mal weniger restriktiv konfigurieren ;)
+Kein Problem ;-)
+
+> Ich habe die Mail ?brigens auch an die Liste geschickt. Jetzt, wo wir die 
+> Mailinglisten haben, sollten wir sie auch nutzen! ;)
+> Ich w?rde vorschlagen, wir schicken ab jetzt alles unverschl?sselt an die 
+> dev Liste. Immerhin geh?rt die Entwicklung der Website ja auch zu Projekt, 
+> oder?
+Stimmt, hast recht. Nur hier beim Evolution weiss ich nicht ganz wie ich
+mit Mailinglisten umgehen soll. Wenn ich auf antworten klicke gehts halt
+an dich.. Mal schauen
+
+> [..] Nur die Link-Farbe ist imho nicht so gut. Violett auf schwarz ist schwer zu 
+> erkennen. Das ist zu dunkel. 
+> Wenn wir schon das Farbschema an die Konsole anpassen, k?nnen wir das bei 
+> den Links doch auch so machen!
+> Die Textkonsolen zeigen symbolische Links ja standardm??ig in einem hellen 
+> blau (fast schon t?rkis) an. Das w?re doch die geeignete Farbe, was meinst 
+> du?
+Gute Idee. Die Links hab ich noch nicht formatiert.. werd mich aber
+nachher dahinter klemmen.
+
+> Au?erdem sollten wir noch das BerliOS Logo einbauen, mit einem Link auf die 
+> Projektseite 
+> (http://developer.berlios.de/docman/display_doc.php?docid=55&group_id=2).
+> Ich glaube, dass verlangt BerliOS sogar... Aber wir sollten uns ja auch 
+> erkenntlich zeigen, dass sie uns kostenlosen Webspace zur Verf?gung 
+> stellen ;)
+Habe ich auch schon gedacht. Mir w?re es sogar lieber so ;-)
+
+> > Wenn du willst, kannst du jetzt schon beginnen, die Webseite aufzubauen.
+> 
+> Mal schauen ;) Gerade schreibe ich noch ein bisschen an Tel rum ;)
+*auch will*
+Hab keine Zeit um python zu lernen.
+Wie ungerecht die Welt doch ist ^^
+
+> Mmmh, ich denke, wir probierens erstmal so und schauen, wie sich das im 
+> praktischen Einsatz bew?hrt ;)
+Jop
+
+> Btw, das svn Repo steht jetzt. Du kannst ?ber Websvn einen Blick 
+> reinwerfen...
+> Die alten Versionen sind alle unter tags/ zu finden, in trunk ist das, woran 
+> ich grad rumschreibe...
+> Unter branches k?nnen wir sp?ter mal ?ltere Versionen ablegen, wenn wir die 
+> noch mit bugfixes unterst?tzen wollen. Momentan brauchen wir den Ordner 
+> aber noch nicht...
+Ok
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070224/cf878bd6/attachment.pgp>
+
+From basti.wiesner at gmx.net  Sat Feb 24 12:22:33 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Sat, 24 Feb 2007 12:22:33 +0100
+Subject: [Tel-dev] tel Homepage
+In-Reply-To: <200702241211.58586.basti.wiesner@gmx.net>
+References: <1172314042.10089.16.camel@rebian.home>
+	<200702241211.58586.basti.wiesner@gmx.net>
+Message-ID: <200702241222.46527.basti.wiesner@gmx.net>
+
+Nachtrag:
+Ich sehe gerade, dass du sowohl Dateien als auch Kommentare auf Deutsch 
+erstellt hast...
+Macht es dir was aus, das in Englisch zu ?ndern? Englisch ist halt 
+internationaler ;)
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070224/76177ca9/attachment.pgp>
+
+From potrmwn at gmail.com  Sat Feb 24 12:32:10 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Sat, 24 Feb 2007 12:32:10 +0100
+Subject: [Tel-dev] tel Homepage
+In-Reply-To: <200702241222.46527.basti.wiesner@gmx.net>
+References: <1172314042.10089.16.camel@rebian.home>
+	<200702241211.58586.basti.wiesner@gmx.net>
+	<200702241222.46527.basti.wiesner@gmx.net>
+Message-ID: <1172316730.10089.24.camel@rebian.home>
+
+Am Samstag, den 24.02.2007, 12:22 +0100 schrieb Sebastian Wiesner:
+> Nachtrag:
+> Ich sehe gerade, dass du sowohl Dateien als auch Kommentare auf Deutsch 
+> erstellt hast...
+> Macht es dir was aus, das in Englisch zu ?ndern? Englisch ist halt 
+> internationaler ;)
+Ne, mach nur. Ist besser so
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070224/2f88859c/attachment.pgp>
+
+From potrmwn at gmail.com  Sat Feb 24 12:33:04 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Sat, 24 Feb 2007 12:33:04 +0100
+Subject: [Tel-dev] tel Homepage
+In-Reply-To: <200702241222.46527.basti.wiesner@gmx.net>
+References: <1172314042.10089.16.camel@rebian.home>
+	<200702241211.58586.basti.wiesner@gmx.net>
+	<200702241222.46527.basti.wiesner@gmx.net>
+Message-ID: <1172316784.10089.26.camel@rebian.home>
+
+Achso, du meinst ich soll das ?ndern ;-)
+Mach das lieber du, du bist hier der Englisch K?nner ^^
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070224/48d4372e/attachment.pgp>
+
+From basti.wiesner at gmx.net  Sat Feb 24 12:36:58 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Sat, 24 Feb 2007 12:36:58 +0100
+Subject: [Tel-dev] tel Homepage
+In-Reply-To: <1172316784.10089.26.camel@rebian.home>
+References: <1172314042.10089.16.camel@rebian.home>
+	<200702241222.46527.basti.wiesner@gmx.net>
+	<1172316784.10089.26.camel@rebian.home>
+Message-ID: <200702241237.03263.basti.wiesner@gmx.net>
+
+Remo Wenger hackte folgendes:
+> Achso, du meinst ich soll das ?ndern ;-)
+> Mach das lieber du, du bist hier der Englisch K?nner ^^
+
+Gut, dann k?mmere ich mich auch etwas um den englischen Inhalt.
+
+Deine Aufgabe ist dann das Design, ok? Du kennst dich mit html und php 
+offenbar besser aus als ich, ich w?rde dich also bitten, die Linkfarbe zu 
+?ndern, und das Logo von berlios noch hinzu zu f?gen (siehe meine vorherige 
+Mail), ok?
+
+So, aber erstmal mach ich noch das neue tel fertig. Hinzu kommt eine 
+M?glichkeit, nur bestimmte Felder zu durchsuchen ('--fields'), nur 
+bestimmte Felder auszugeben ('--output') und beim Suchen Gro?- und 
+Kleinschreibung zu ignorieren ('--ignore-case').
+Die beiden ersten Dinge sind schon commited, am letzteren bastel ich grad 
+noch rum...
+Wenns fertig ist, sage ich nochmal bescheid, dann kannst du die Version aus 
+dem Repository runterladen und nochmal testen!
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070224/12a5ebe1/attachment.pgp>
+
+From potrmwn at gmail.com  Sat Feb 24 12:44:24 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Sat, 24 Feb 2007 12:44:24 +0100
+Subject: [Tel-dev] tel Homepage
+In-Reply-To: <200702241237.03263.basti.wiesner@gmx.net>
+References: <1172314042.10089.16.camel@rebian.home>
+	<200702241222.46527.basti.wiesner@gmx.net>
+	<1172316784.10089.26.camel@rebian.home>
+	<200702241237.03263.basti.wiesner@gmx.net>
+Message-ID: <1172317464.10089.31.camel@rebian.home>
+
+Am Samstag, den 24.02.2007, 12:36 +0100 schrieb Sebastian Wiesner:
+> Remo Wenger hackte folgendes:
+> > Achso, du meinst ich soll das ?ndern ;-)
+> > Mach das lieber du, du bist hier der Englisch K?nner ^^
+> 
+> Gut, dann k?mmere ich mich auch etwas um den englischen Inhalt.
+Danke
+
+> Deine Aufgabe ist dann das Design, ok? Du kennst dich mit html und php 
+> offenbar besser aus als ich, ich w?rde dich also bitten, die Linkfarbe zu 
+> ?ndern, und das Logo von berlios noch hinzu zu f?gen (siehe meine vorherige 
+> Mail), ok?
+Nat?rlich. Die Linkfarbe wurde schon angepasst (#55FFFF). Wie gef?llt es
+dir?
+
+> So, aber erstmal mach ich noch das neue tel fertig. Hinzu kommt eine 
+> M?glichkeit, nur bestimmte Felder zu durchsuchen ('--fields'), nur 
+> bestimmte Felder auszugeben ('--output') und beim Suchen Gro?- und 
+> Kleinschreibung zu ignorieren ('--ignore-case').
+Finde ich eine gute Idee. Sucht ein normaler User nicht standartm?ssig
+immer so? Dann w?re es f?r ihn (evtl) zu viel Aufwand, bei jeder suche
+--ignore-case zu w?hlen. Ev. k?nnte man das umkehren. Aber das passt
+hier nicht in dieses Topic ;-)
+
+> Wenns fertig ist, sage ich nochmal bescheid, dann kannst du die Version aus 
+> dem Repository runterladen und nochmal testen!
+Jop mach ich!
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070224/810db56e/attachment.pgp>
+
+From basti.wiesner at gmx.net  Sat Feb 24 13:08:59 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Sat, 24 Feb 2007 13:08:59 +0100
+Subject: [Tel-dev] tel Homepage
+In-Reply-To: <1172317464.10089.31.camel@rebian.home>
+References: <1172314042.10089.16.camel@rebian.home>
+	<200702241237.03263.basti.wiesner@gmx.net>
+	<1172317464.10089.31.camel@rebian.home>
+Message-ID: <200702241309.04849.basti.wiesner@gmx.net>
+
+Remo Wenger hackte folgendes:
+> Am Samstag, den 24.02.2007, 12:36 +0100 schrieb Sebastian Wiesner:
+> > Remo Wenger hackte folgendes:
+> > > Achso, du meinst ich soll das ?ndern ;-)
+> > > Mach das lieber du, du bist hier der Englisch K?nner ^^
+> >
+> > Gut, dann k?mmere ich mich auch etwas um den englischen Inhalt.
+>
+> Danke
+
+Kein Problem
+
+> > Deine Aufgabe ist dann das Design, ok? Du kennst dich mit html und php
+> > offenbar besser aus als ich, ich w?rde dich also bitten, die Linkfarbe
+> > zu ?ndern, und das Logo von berlios noch hinzu zu f?gen (siehe meine
+> > vorherige Mail), ok?
+>
+> Nat?rlich. Die Linkfarbe wurde schon angepasst (#55FFFF). Wie gef?llt es
+> dir?
+
+Gut! Sieht jetzt genauso aus wie symlinks auf der Konsole!
+Kannst du noch die Links beim "hovern" unterstreichen lassen? Ich denke, ein 
+Besucher erwartet das, immerhin machen das ja viele Websites so, oder?
+
+> > So, aber erstmal mach ich noch das neue tel fertig. Hinzu kommt eine
+> > M?glichkeit, nur bestimmte Felder zu durchsuchen ('--fields'), nur
+> > bestimmte Felder auszugeben ('--output') und beim Suchen Gro?- und
+> > Kleinschreibung zu ignorieren ('--ignore-case').
+>
+> Finde ich eine gute Idee. Sucht ein normaler User nicht standartm?ssig
+> immer so? Dann w?re es f?r ihn (evtl) zu viel Aufwand, bei jeder suche
+> --ignore-case zu w?hlen. Ev. k?nnte man das umkehren. Aber das passt
+> hier nicht in dieses Topic ;-)
+
+Stimmt, deswegen schick ich zu dem Thema gleich noch eine neue Mail an die 
+Liste...
+
+> > Wenns fertig ist, sage ich nochmal bescheid, dann kannst du die Version
+> > aus dem Repository runterladen und nochmal testen!
+>
+> Jop mach ich!
+
+Danke... Dann entdecken wir die Bugs offentlich vor dem Release ;)
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070224/97954b44/attachment.pgp>
+
+From potrmwn at gmail.com  Sat Feb 24 13:12:12 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Sat, 24 Feb 2007 13:12:12 +0100
+Subject: [Tel-dev] tel Homepage
+In-Reply-To: <200702241237.03263.basti.wiesner@gmx.net>
+References: <1172314042.10089.16.camel@rebian.home>
+	<200702241222.46527.basti.wiesner@gmx.net>
+	<1172316784.10089.26.camel@rebian.home>
+	<200702241237.03263.basti.wiesner@gmx.net>
+Message-ID: <1172319132.10089.36.camel@rebian.home>
+
+So. Bis jetzt ist tel.berlios.de CSS und XHTML 1.1 valide. Die Links zu
+den CSS und XHTML Validatoren wurden in header.php eingebunden, dass
+nicht bei jeder Sprache bei ihv.php neu eingebunden werden muss.
+
+Die Links sind auch so, wie es in meinem gnome-terminal angezeigt wird.
+Ausserdem habe ich einen Link auf berliOS gemacht. Dieser versuche ich
+noch mit den div's korrekt zu positionieren.
+
+Greets,
+Pot
+
+PS: Wieso steht da immer [Tel-dev] im Betreff? Ist das n?tig?
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070224/7184f4de/attachment.pgp>
+
+From potrmwn at gmail.com  Sat Feb 24 13:16:27 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Sat, 24 Feb 2007 13:16:27 +0100
+Subject: [Tel-dev] tel Homepage
+In-Reply-To: <200702241309.04849.basti.wiesner@gmx.net>
+References: <1172314042.10089.16.camel@rebian.home>
+	<200702241237.03263.basti.wiesner@gmx.net>
+	<1172317464.10089.31.camel@rebian.home>
+	<200702241309.04849.basti.wiesner@gmx.net>
+Message-ID: <1172319387.10089.40.camel@rebian.home>
+
+Am Samstag, den 24.02.2007, 13:08 +0100 schrieb Sebastian Wiesner:
+> Remo Wenger hackte folgendes:
+Wieso hacke ich? LOL
+Ich dr?cke ganz sanft und liebevoll auf die Tastatur, nicht hacken.
+
+> Gut! Sieht jetzt genauso aus wie symlinks auf der Konsole!
+> Kannst du noch die Links beim "hovern" unterstreichen lassen? Ich denke, ein 
+> Besucher erwartet das, immerhin machen das ja viele Websites so, oder?
+Done
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070224/79e62d16/attachment.pgp>
+
+From basti.wiesner at gmx.net  Sat Feb 24 13:18:51 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Sat, 24 Feb 2007 13:18:51 +0100
+Subject: [Tel-dev] tel Homepage
+In-Reply-To: <1172319132.10089.36.camel@rebian.home>
+References: <1172314042.10089.16.camel@rebian.home>
+	<200702241237.03263.basti.wiesner@gmx.net>
+	<1172319132.10089.36.camel@rebian.home>
+Message-ID: <200702241318.51963.basti.wiesner@gmx.net>
+
+Remo Wenger hackte folgendes:
+> So. Bis jetzt ist tel.berlios.de CSS und XHTML 1.1 valide. Die Links zu
+> den CSS und XHTML Validatoren wurden in header.php eingebunden, dass
+> nicht bei jeder Sprache bei ihv.php neu eingebunden werden muss.
+
+Cool!
+
+> Die Links sind auch so, wie es in meinem gnome-terminal angezeigt wird.
+> Ausserdem habe ich einen Link auf berliOS gemacht. Dieser versuche ich
+> noch mit den div's korrekt zu positionieren.
+
+Wenns hilft kannst du dir ja mal den Quellcode der Website meines anderen 
+Projekts anschauen...
+
+Da sieht das ganze so aus:
+
+<div id="header">
+  <div class="headimg" style="float : left;">
+    <a href="http://developer.berlios.de" title="BerliOS Developer"> <img  
+src="http://developer.berlios.de/bslogo.php?group_id=7729" width="124px" 
+height="32px" border="0" alt="BerliOS Developer Logo"/></a>
+  </div>
+  <div class="headimg" style="float : right;">
+   <span style="font-size : x-small;">created by lunar </span><img 
+src="/img/pig.png" title="This is my logo" alt="" width="39" height="50" 
+style="vertical-align : middle;" />
+  </div>
+  <div id="pagetitle">KeyJnoteGUI</div>
+
+Die relevanten Ausschnitte aus dem Style-Sheet
+
+#pagetitle {
+    font-size : xx-large;
+    font-variant : small-caps;
+    font-weight : bold;
+    text-align : center;
+    padding-bottom : 0.5em;
+    padding-left : 0.5em;
+    padding-right : 0.5em;
+    padding-top : 0.5em;
+    margin-left : 25%;
+    margin-right : 25%;
+  }
+
+
+.headimg {
+    padding : 15px;
+    display : inline;
+  }
+
+
+#submenu {
+    font-size : smaller;
+    background-image : url('img/right.png');
+    background-position : right;
+    background-repeat : repeat;
+    border-color : black;
+    border-style : solid;
+    border-width : thin;
+    float : right;
+    font-weight : bold;
+    margin : 20px;
+    text-align : right;
+    width : 220px;
+  }
+
+Hope it helps...
+
+> PS: Wieso steht da immer [Tel-dev] im Betreff? Ist das n?tig?
+
+N?, afaik nicht. Ich glaube, das kann man in der Konfiguration der Liste 
+ausschalten. Aber so sieht man halt gleich beim Betreff, zu welcher Liste 
+die Mail geh?rt...
+
+gru?
+lunar
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070224/039c78c5/attachment.pgp>
+
+From basti.wiesner at gmx.net  Sat Feb 24 13:19:24 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Sat, 24 Feb 2007 13:19:24 +0100
+Subject: [Tel-dev] =?utf-8?q?Gro=C3=9F-_und_Kleinschreibung_bei_der_Suche?=
+	=?utf-8?b?Li4u?=
+Message-ID: <200702241319.24935.basti.wiesner@gmx.net>
+
+Remo Wenger hackte folgendes:
+> Am Samstag, den 24.02.2007, 12:36 +0100 schrieb Sebastian Wiesner:
+> > So, aber erstmal mach ich noch das neue tel fertig. Hinzu kommt eine
+> > M?glichkeit, nur bestimmte Felder zu durchsuchen ('--fields'), nur
+> > bestimmte Felder auszugeben ('--output') und beim Suchen Gro?- und
+> > Kleinschreibung zu ignorieren ('--ignore-case').
+>
+> Finde ich eine gute Idee. Sucht ein normaler User nicht standartm?ssig
+> immer so? Dann w?re es f?r ihn (evtl) zu viel Aufwand, bei jeder suche
+> --ignore-case zu w?hlen. Ev. k?nnte man das umkehren. Aber das passt
+> hier nicht in dieses Topic ;-)
+
+Mmmh, aber alle bekannten Konsolenutilities zum Suchen beachten 
+standardm??ig die Gro?- und Kleinschreibung (gibts da eigentlich nichts 
+k?rzeres f?r? ;) Im Englischen hei?t das einfach nur "case"...)
+
+find -name -> mit Gro?- und Kleinschreibung
+locate -> mit Gro?- und Kleinschreibung
+grep -> Mit Gro?- und Kleinschreibung
+
+Von grep hab' ich mir auch die Syntax der Option abgeschaut:
+-i/--ignore-case schaltet bei grep die Ber?cksichtigung der Schreibweise ab!
+
+My two cents
+lunar
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070224/b711217e/attachment.pgp>
+
+From basti.wiesner at gmx.net  Sat Feb 24 13:21:15 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Sat, 24 Feb 2007 13:21:15 +0100
+Subject: [Tel-dev] tel Homepage
+In-Reply-To: <1172319387.10089.40.camel@rebian.home>
+References: <1172314042.10089.16.camel@rebian.home>
+	<200702241309.04849.basti.wiesner@gmx.net>
+	<1172319387.10089.40.camel@rebian.home>
+Message-ID: <200702241321.15942.basti.wiesner@gmx.net>
+
+Remo Wenger hackte folgendes:
+> Am Samstag, den 24.02.2007, 13:08 +0100 schrieb Sebastian Wiesner:
+> > Remo Wenger hackte folgendes:
+>
+> Wieso hacke ich? LOL
+> Ich dr?cke ganz sanft und liebevoll auf die Tastatur, nicht hacken.
+
+Das kann ich ja nicht wissen...
+Ich schlie?e halt gerne von mir auf andere... Meine Tastatur lebt bei meinem 
+Tippstil sicher nicht komfortabel ;)
+
+> > Gut! Sieht jetzt genauso aus wie symlinks auf der Konsole!
+> > Kannst du noch die Links beim "hovern" unterstreichen lassen? Ich
+> > denke, ein Besucher erwartet das, immerhin machen das ja viele Websites
+> > so, oder?
+>
+> Done
+
+Thx
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070224/8a0fceac/attachment.pgp>
+
+From potrmwn at gmail.com  Sat Feb 24 13:23:13 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Sat, 24 Feb 2007 13:23:13 +0100
+Subject: [Tel-dev]
+	=?iso-8859-1?q?Gro=DF-_und_Kleinschreibung_bei_der=09Su?=
+	=?iso-8859-1?q?che=2E=2E=2E?=
+In-Reply-To: <200702241319.24935.basti.wiesner@gmx.net>
+References: <200702241319.24935.basti.wiesner@gmx.net>
+Message-ID: <1172319793.10089.44.camel@rebian.home>
+
+Am Samstag, den 24.02.2007, 13:19 +0100 schrieb Sebastian Wiesner:
+> Mmmh, aber alle bekannten Konsolenutilities zum Suchen beachten 
+> standardm??ig die Gro?- und Kleinschreibung (gibts da eigentlich nichts 
+> k?rzeres f?r? ;) Im Englischen hei?t das einfach nur "case"...)
+Nehmen wir case oder einfach: GuK ^^
+
+> find -name -> mit Gro?- und Kleinschreibung
+> locate -> mit Gro?- und Kleinschreibung
+> grep -> Mit Gro?- und Kleinschreibung
+Stimmt.
+
+> Von grep hab' ich mir auch die Syntax der Option abgeschaut:
+> -i/--ignore-case schaltet bei grep die Ber?cksichtigung der Schreibweise ab!
+Wenn es -i gibt, ist meine Welt zufrieden ;-)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070224/7e89b418/attachment.pgp>
+
+From potrmwn at gmail.com  Sat Feb 24 13:26:42 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Sat, 24 Feb 2007 13:26:42 +0100
+Subject: [Tel-dev] tel Homepage
+In-Reply-To: <200702241318.51963.basti.wiesner@gmx.net>
+References: <1172314042.10089.16.camel@rebian.home>
+	<200702241237.03263.basti.wiesner@gmx.net>
+	<1172319132.10089.36.camel@rebian.home>
+	<200702241318.51963.basti.wiesner@gmx.net>
+Message-ID: <1172320002.10089.46.camel@rebian.home>
+
+Am Samstag, den 24.02.2007, 13:18 +0100 schrieb Sebastian Wiesner:
+> Wenns hilft kannst du dir ja mal den Quellcode der Website meines anderen 
+> Projekts anschauen...
+> 
+> Da sieht das ganze so aus:
+> [..]
+> Hope it helps...
+Danke.
+
+> > PS: Wieso steht da immer [Tel-dev] im Betreff? Ist das n?tig?
+> 
+> N?, afaik nicht. Ich glaube, das kann man in der Konfiguration der Liste 
+> ausschalten. Aber so sieht man halt gleich beim Betreff, zu welcher Liste 
+> die Mail geh?rt...
+Dann lassen wirs so.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070224/60c3a292/attachment.pgp>
+
+From basti.wiesner at gmx.net  Sat Feb 24 13:31:00 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Sat, 24 Feb 2007 13:31:00 +0100
+Subject: [Tel-dev]
+	=?iso-8859-15?q?Gro=DF-_und_Kleinschreibung_bei_der=09S?=
+	=?iso-8859-15?q?uche=2E=2E=2E?=
+In-Reply-To: <1172319793.10089.44.camel@rebian.home>
+References: <200702241319.24935.basti.wiesner@gmx.net>
+	<1172319793.10089.44.camel@rebian.home>
+Message-ID: <200702241331.00535.basti.wiesner@gmx.net>
+
+Remo Wenger hackte folgendes:
+> Am Samstag, den 24.02.2007, 13:19 +0100 schrieb Sebastian Wiesner:
+> > Mmmh, aber alle bekannten Konsolenutilities zum Suchen beachten
+> > standardm??ig die Gro?- und Kleinschreibung (gibts da eigentlich nichts
+> > k?rzeres f?r? ;) Im Englischen hei?t das einfach nur "case"...)
+>
+> Nehmen wir case oder einfach: GuK ^^
+
+GuK ist gut... Klingt lustig und keiner wei?, was gemeint ist ;)
+
+> > find -name -> mit Gro?- und Kleinschreibung
+> > locate -> mit Gro?- und Kleinschreibung
+> > grep -> Mit Gro?- und Kleinschreibung
+>
+> Stimmt.
+>
+> > Von grep hab' ich mir auch die Syntax der Option abgeschaut:
+> > -i/--ignore-case schaltet bei grep die Ber?cksichtigung der
+> > Schreibweise ab!
+>
+> Wenn es -i gibt, ist meine Welt zufrieden ;-)
+
+Ok, dann mach ich dass so...
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070224/f68b2f43/attachment.pgp>
+
+From potrmwn at gmail.com  Sat Feb 24 13:55:29 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Sat, 24 Feb 2007 13:55:29 +0100
+Subject: [Tel-dev] tel Homepage
+In-Reply-To: <200702241318.51963.basti.wiesner@gmx.net>
+References: <1172314042.10089.16.camel@rebian.home>
+	<200702241237.03263.basti.wiesner@gmx.net>
+	<1172319132.10089.36.camel@rebian.home>
+	<200702241318.51963.basti.wiesner@gmx.net>
+Message-ID: <1172321729.10089.56.camel@rebian.home>
+
+Der BerliOS Banner ist nun nach meiner Vorstellung korrekt positioniert.
+
+Jetzt muss nur noch mehr Inhalt in die Website. Was brauchts da?
+- Download Link
+- Einf?hrung
+- Wie SVN benutzen? (ev einfach zu
+https://developer.berlios.de/svn/?group_id=8132 linken)
+- Kontaktadressen (gut gruppiert, wer macht was)
+- Link zur alten BASH-Version (darf ja noch benutzt werden, sollte
+einfach stillgelegt sein, deshalb schalte ich den SVN-Server bald ab)
+- Kleine Dokumentation? (Welches OS, was ben?tigt, ..)
+- FAQ? (Ev. erst wenn tel gr?sser ist)
+- Lizenz
+- ..
+
+Ideen?
+
+Greets,
+Pot
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070224/20d4f96b/attachment.pgp>
+
+From basti.wiesner at gmx.net  Sat Feb 24 15:54:05 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Sat, 24 Feb 2007 15:54:05 +0100
+Subject: [Tel-dev] tel Homepage
+In-Reply-To: <1172321729.10089.56.camel@rebian.home>
+References: <1172314042.10089.16.camel@rebian.home>
+	<200702241318.51963.basti.wiesner@gmx.net>
+	<1172321729.10089.56.camel@rebian.home>
+Message-ID: <200702241554.06110.basti.wiesner@gmx.net>
+
+Remo Wenger hackte folgendes:
+> Der BerliOS Banner ist nun nach meiner Vorstellung korrekt positioniert.
+>
+> Jetzt muss nur noch mehr Inhalt in die Website. Was brauchts da?
+> - Download Link
+
+Auf jeden Fall!
+
+> - Einf?hrung
+
+W?rde ich mit dem Link zur Bash Version zusammenlegen. So etwa:
+
+"Vor einiger Zeit hatten pot und sabsirro auf ubuntuusers.de die Idee, eine 
+kleines Telefonbuch f?r die Konsole in bash [hier der link zu bash-Version] 
+zu schreiben. Bald war bash nicht mehr ausreichend. ?berlegungen, tel in 
+perl neu zu schreiben, kam lunar durch eine Version in python zuvor. Diese 
+wurde im Laufe des Diskussions-Thread [der Link zum uu.de Thread] 
+weiterentwickelt. Schnell war sie ein eigenes Projekt, welches nun hier zu 
+finden ist. Dieses Projekt f?hrt die Bash Version in Python fort!
+
+Dann kommen vielleicht noch ein paar Screenshots der Highlights:
+- Einmal das Editieren von Eintr?gen...
+- Die Suche mit Ausgabe als Tabelle
+- ...
+
+> - Wie SVN benutzen? (ev einfach zu
+> https://developer.berlios.de/svn/?group_id=8132 linken)
+
+Mmmh, vielleicht eine Art Development-Seite mit
+- Hinweisen zu svn (Struktur, Link, 
+https://developer.berlios.de/svn/?group_id=8132)
+- Wie man Bugs meldet...
+- und neue Features vorschlagen kann!
+
+> - Kontaktadressen (gut gruppiert, wer macht was)
+
+Jupp
+
+> - Link zur alten BASH-Version (darf ja noch benutzt werden, sollte
+> einfach stillgelegt sein, deshalb schalte ich den SVN-Server bald ab)
+
+siehe Einf?hrung...
+
+> - Kleine Dokumentation? (Welches OS, was ben?tigt, ..)
+
+Gute Idee. Die Ausgabe auf der Konsole (--help) ist vielleicht etwas knapp 
+bemessen, wir k?nnten Tel auf der Website ausf?hrlicher dokumentieren. Tel 
+gibt dann bei --help noch einen Hinweis auf die Website aus.
+Btw, da w?rde ich eventuell noch warten. Wenn wir diesem Teil in docbook 
+schreiben, dann kann man sowohl html als auch eine manpage erzeugen ohne 
+das ganze zweimal zu schreiben! Dann ist die Hilfe sp?ter auch mal als "man 
+tel" verf?gbar.
+
+> - FAQ? (Ev. erst wenn tel gr?sser ist)
+
+Noch gibts ja nicht viele Fragen, oder? ;)
+
+> - Lizenz
+> - ..
+>
+> Ideen?
+
+Vielleicht noch eine kleine News Rubrik? Berlios bietet ja ein News-System 
+an, welches man auch auf die Website exportieren kann:
+https://developer.berlios.de/docman/display_doc.php?docid=215&group_id=2#newsexport
+
+lunar
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070224/550cdb5b/attachment.pgp>
+
+From basti.wiesner at gmx.net  Sun Feb 25 10:35:16 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Sun, 25 Feb 2007 10:35:16 +0100
+Subject: [Tel-dev] tel Homepage
+In-Reply-To: <200702241554.06110.basti.wiesner@gmx.net>
+References: <1172314042.10089.16.camel@rebian.home>
+	<1172321729.10089.56.camel@rebian.home>
+	<200702241554.06110.basti.wiesner@gmx.net>
+Message-ID: <200702251035.21337.basti.wiesner@gmx.net>
+
+Nachtrag:
+
+Ich habe mir die Website mal heruntergeladen und auf meinem lokalen 
+Webserver getestet. 
+Dabei ist mir aufgefallen, dass Berlios f?r php offenbar alle Warnungen 
+deaktiviert hat. Zumindest kamen bei mir Warnung, wenn man index.php ohne 
+to aufruft. Daraufhin habe ich die Reihenfolge der if Abfragen in der Datei 
+etwas ver?ndert, damit diese Warnungen nicht mehr kommen.
+
+Au?erdem habe ich die Navigationsleiste am linken Rand so ver?ndert, dass 
+nun eine Liste <ul></ul> verwendet wird.
+Damit die Listenzeichen verschwinden und au?erdem die Links im Men? zur 
+besseren Lesbarkeit einen gr??eren Abstand voneinander haben, gibts im 
+Stylesheet eine neue Klasse "navigation", die sowohl f?r die Liste als auch 
+f?r die Links im Inhaltsverzeichnis verwendet werden muss.
+Die Liste wird in header.php erzeugt. Die Navigationslinks werden in der 
+jeweiligen ihv.php nun so erzeugt:
+<li><a class="navigation" href="blubb">test</a></li>
+Ich denke, so sieht die Seite besser aus... Einen Screenshot im Firefox habe 
+ich mal angeh?ngt.
+
+Au?erdem hab ich noch einen Link zu ?bersicht eingef?gt, damit man wieder 
+dahin zur?ckfindet. ;)
+
+Leider kann ich das alles nicht hochladen... scp bringt mir ein "Permission 
+denied" :( Offenbar ein Rechte-Problem...
+Ich w?rde deswegen vorschlagen, dass wir die Website auch ins svn einf?gen 
+(als vierter Ordner website neben trunk, branches und tags). Dann kann 
+jeder seine ?nderungen dorthin commiten. Sobald die Website dann 
+aktualisiert wurden, ziehst du dir die neueste Version und kopierst sie auf 
+den Server. So vermeiden wir das Rechteproblem, ohne dass du jedes mal ein 
+chmod nach dem Hochladen ausf?hren musst. Au?erdem verhindern wir so, dass 
+einer versehentlich die ?nderungen des anderen ?berschreibt. Was h?lst du 
+davon?
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: shot3.png
+Type: image/png
+Size: 68611 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070225/7e0666e6/attachment.png>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070225/7e0666e6/attachment.pgp>
+
+From basti.wiesner at gmx.net  Sun Feb 25 20:02:51 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Sun, 25 Feb 2007 20:02:51 +0100
+Subject: [Tel-dev] tel Homepage
+In-Reply-To: <200702251035.21337.basti.wiesner@gmx.net>
+References: <1172314042.10089.16.camel@rebian.home>
+	<200702241554.06110.basti.wiesner@gmx.net>
+	<200702251035.21337.basti.wiesner@gmx.net>
+Message-ID: <200702252002.57154.basti.wiesner@gmx.net>
+
+> Au?erdem habe ich die Navigationsleiste am linken Rand so ver?ndert, dass
+> nun eine Liste <ul></ul> verwendet wird.
+> Damit die Listenzeichen verschwinden und au?erdem die Links im Men? zur
+> besseren Lesbarkeit einen gr??eren Abstand voneinander haben, gibts im
+> Stylesheet eine neue Klasse "navigation", die sowohl f?r die Liste als
+> auch f?r die Links im Inhaltsverzeichnis verwendet werden muss.
+> Die Liste wird in header.php erzeugt. Die Navigationslinks werden in der
+> jeweiligen ihv.php nun so erzeugt:
+> <li><a class="navigation" href="blubb">test</a></li>
+> Ich denke, so sieht die Seite besser aus... Einen Screenshot im Firefox
+> habe ich mal angeh?ngt.
+
+Noch ein Nachtrag:
+Habe jetzt noch eine "Download" Seite hinzugef?gt.
+Au?erdem habe ich das ganze so ver?ndert, dass wir "h1" f?r ?berschriften 
+nehmen und Abs?tzen mit <p> einschlie?en. Das l?sst sich dann leichter im 
+Stylesheet tunen...
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070225/83957046/attachment.pgp>
+
+From potrmwn at gmail.com  Sun Feb 25 20:13:13 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Sun, 25 Feb 2007 20:13:13 +0100
+Subject: [Tel-dev] tel Homepage
+In-Reply-To: <200702251035.21337.basti.wiesner@gmx.net>
+References: <1172314042.10089.16.camel@rebian.home>
+	<1172321729.10089.56.camel@rebian.home>
+	<200702241554.06110.basti.wiesner@gmx.net>
+	<200702251035.21337.basti.wiesner@gmx.net>
+Message-ID: <1172430793.5322.6.camel@rebian.home>
+
+Am Sonntag, den 25.02.2007, 10:35 +0100 schrieb Sebastian Wiesner:
+> Nachtrag:
+> 
+> Ich habe mir die Website mal heruntergeladen und auf meinem lokalen 
+> Webserver getestet. 
+> Dabei ist mir aufgefallen, dass Berlios f?r php offenbar alle Warnungen 
+> deaktiviert hat.
+Ist mir auch schon aufgefallen.
+
+> Zumindest kamen bei mir Warnung, wenn man index.php ohne 
+> to aufruft. Daraufhin habe ich die Reihenfolge der if Abfragen in der Datei 
+> etwas ver?ndert, damit diese Warnungen nicht mehr kommen.
+Ok.
+
+> Au?erdem habe ich die Navigationsleiste am linken Rand so ver?ndert, dass 
+> nun eine Liste <ul></ul> verwendet wird.
+Gut.
+
+> Damit die Listenzeichen verschwinden und au?erdem die Links im Men? zur 
+> besseren Lesbarkeit einen gr??eren Abstand voneinander haben, gibts im 
+> Stylesheet eine neue Klasse "navigation", die sowohl f?r die Liste als auch 
+> f?r die Links im Inhaltsverzeichnis verwendet werden muss.
+> Die Liste wird in header.php erzeugt. Die Navigationslinks werden in der 
+> jeweiligen ihv.php nun so erzeugt:
+> <li><a class="navigation" href="blubb">test</a></li>
+Ist "blubb" der Kurzname? Oder der Link?
+Es ist imho m?glich das ganze einem DIV zuzuweisen, dann entf?llt das
+class="navigation".
+
+> Ich denke, so sieht die Seite besser aus... Einen Screenshot im Firefox habe 
+> ich mal angeh?ngt.
+Glaube ich auch. Auch der Code ist so besser.
+
+> Au?erdem hab ich noch einen Link zu ?bersicht eingef?gt, damit man wieder 
+> dahin zur?ckfindet. ;)
+Den gibt es schon (versteckt), der Banner ;-)
+
+> Leider kann ich das alles nicht hochladen... scp bringt mir ein "Permission 
+> denied" :( Offenbar ein Rechte-Problem...
+> Ich w?rde deswegen vorschlagen, dass wir die Website auch ins svn einf?gen 
+> (als vierter Ordner website neben trunk, branches und tags). Dann kann 
+> jeder seine ?nderungen dorthin commiten. Sobald die Website dann 
+> aktualisiert wurden, ziehst du dir die neueste Version und kopierst sie auf 
+> den Server. So vermeiden wir das Rechteproblem, ohne dass du jedes mal ein 
+> chmod nach dem Hochladen ausf?hren musst. Au?erdem verhindern wir so, dass 
+> einer versehentlich die ?nderungen des anderen ?berschreibt. Was h?lst du 
+> davon?
+K?nnten wir, wir k?nnten auch das automatisieren (so wie bei meinem SVN
+Server), dass ein Script ausgef?hrt wird, der alle ge?nderten Dateien in
+den htdocs-Ordner kopiert, sobald ein commit ausgef?hrt wird.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070225/3a3a9fae/attachment.pgp>
+
+From potrmwn at gmail.com  Sun Feb 25 20:15:11 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Sun, 25 Feb 2007 20:15:11 +0100
+Subject: [Tel-dev] tel Homepage
+In-Reply-To: <200702252002.57154.basti.wiesner@gmx.net>
+References: <1172314042.10089.16.camel@rebian.home>
+	<200702241554.06110.basti.wiesner@gmx.net>
+	<200702251035.21337.basti.wiesner@gmx.net>
+	<200702252002.57154.basti.wiesner@gmx.net>
+Message-ID: <1172430911.5322.7.camel@rebian.home>
+
+Am Sonntag, den 25.02.2007, 20:02 +0100 schrieb Sebastian Wiesner:
+> Noch ein Nachtrag:
+> Habe jetzt noch eine "Download" Seite hinzugef?gt.
+> Au?erdem habe ich das ganze so ver?ndert, dass wir "h1" f?r ?berschriften 
+> nehmen und Abs?tzen mit <p> einschlie?en. Das l?sst sich dann leichter im 
+> Stylesheet tunen...
+Je mehr CSS umso besser ;-)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070225/efb3258d/attachment.pgp>
+
+From basti.wiesner at gmx.net  Sun Feb 25 20:23:44 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Sun, 25 Feb 2007 20:23:44 +0100
+Subject: [Tel-dev] tel Homepage
+In-Reply-To: <1172430793.5322.6.camel@rebian.home>
+References: <1172314042.10089.16.camel@rebian.home>
+	<200702251035.21337.basti.wiesner@gmx.net>
+	<1172430793.5322.6.camel@rebian.home>
+Message-ID: <200702252023.49767.basti.wiesner@gmx.net>
+
+> > Damit die Listenzeichen verschwinden und au?erdem die Links im Men? zur
+> > besseren Lesbarkeit einen gr??eren Abstand voneinander haben, gibts im
+> > Stylesheet eine neue Klasse "navigation", die sowohl f?r die Liste als
+> > auch f?r die Links im Inhaltsverzeichnis verwendet werden muss.
+> > Die Liste wird in header.php erzeugt. Die Navigationslinks werden in
+> > der jeweiligen ihv.php nun so erzeugt:
+> > <li><a class="navigation" href="blubb">test</a></li>
+>
+> Ist "blubb" der Kurzname? Oder der Link?
+
+der volle link "index.php?to='home'
+
+> Es ist imho m?glich das ganze einem DIV zuzuweisen, dann entf?llt das
+> class="navigation".
+
+Mmmh, mag sein, ich kenne mich da nicht so aus...
+
+> > Ich denke, so sieht die Seite besser aus... Einen Screenshot im Firefox
+> > habe ich mal angeh?ngt.
+>
+> Glaube ich auch. Auch der Code ist so besser.
+
+k.
+
+> > Au?erdem hab ich noch einen Link zu ?bersicht eingef?gt, damit man
+> > wieder dahin zur?ckfindet. ;)
+>
+> Den gibt es schon (versteckt), der Banner ;-)
+
+D'oh :-/ naja, dann gibts halt jetzt noch einen link f?r die dummen wie 
+mich ;)
+
+> > Leider kann ich das alles nicht hochladen... scp bringt mir ein
+> > "Permission denied" :( Offenbar ein Rechte-Problem...
+> > Ich w?rde deswegen vorschlagen, dass wir die Website auch ins svn
+> > einf?gen (als vierter Ordner website neben trunk, branches und tags).
+> > Dann kann jeder seine ?nderungen dorthin commiten. Sobald die Website
+> > dann aktualisiert wurden, ziehst du dir die neueste Version und
+> > kopierst sie auf den Server. So vermeiden wir das Rechteproblem, ohne
+> > dass du jedes mal ein chmod nach dem Hochladen ausf?hren musst.
+> > Au?erdem verhindern wir so, dass einer versehentlich die ?nderungen des
+> > anderen ?berschreibt. Was h?lst du davon?
+>
+> K?nnten wir, wir k?nnten auch das automatisieren (so wie bei meinem SVN
+> Server), dass ein Script ausgef?hrt wird, der alle ge?nderten Dateien in
+> den htdocs-Ordner kopiert, sobald ein commit ausgef?hrt wird.
+
+Keine schlechte Idee ;)
+Subversion bietet hooks, die beim commiten ausgef?hrt werden... Da sollte 
+man mittels eines skripts was drehen k?nnen. Der selbe trick wird ja auch 
+ausgef?hrt, um die benachrichtigungsmails an tel-svn zu schicken...
+
+Achja, ich habe noch einen zus?tzlichen Parameter "lang" eingef?gt, der die 
+Spracheinstellung ?berschreibt, damit man auch die anderen Versionen testen 
+kann: index.php?to=home&lang=en zeigt jetzt die englische Seite an, ok?
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070225/89009093/attachment.pgp>
+
+From potrmwn at gmail.com  Sun Feb 25 20:34:03 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Sun, 25 Feb 2007 20:34:03 +0100
+Subject: [Tel-dev] tel Homepage
+In-Reply-To: <200702252023.49767.basti.wiesner@gmx.net>
+References: <1172314042.10089.16.camel@rebian.home>
+	<200702251035.21337.basti.wiesner@gmx.net>
+	<1172430793.5322.6.camel@rebian.home>
+	<200702252023.49767.basti.wiesner@gmx.net>
+Message-ID: <1172432043.5322.12.camel@rebian.home>
+
+Am Sonntag, den 25.02.2007, 20:23 +0100 schrieb Sebastian Wiesner:
+> > Es ist imho m?glich das ganze einem DIV zuzuweisen, dann entf?llt das
+> > class="navigation".
+> 
+> Mmmh, mag sein, ich kenne mich da nicht so aus...
+Schau das nachher noch an, wenn es im Repo ist.
+
+> > > Au?erdem hab ich noch einen Link zu ?bersicht eingef?gt, damit man
+> > > wieder dahin zur?ckfindet. ;)
+> >
+> > Den gibt es schon (versteckt), der Banner ;-)
+> 
+> D'oh :-/ naja, dann gibts halt jetzt noch einen link f?r die dummen wie 
+> mich ;)
+Sowieso besser so ;-)
+
+> > > Leider kann ich das alles nicht hochladen... scp bringt mir ein
+> > > "Permission denied" :( Offenbar ein Rechte-Problem...
+> > > Ich w?rde deswegen vorschlagen, dass wir die Website auch ins svn
+> > > einf?gen (als vierter Ordner website neben trunk, branches und tags).
+> > > Dann kann jeder seine ?nderungen dorthin commiten. Sobald die Website
+> > > dann aktualisiert wurden, ziehst du dir die neueste Version und
+> > > kopierst sie auf den Server. So vermeiden wir das Rechteproblem, ohne
+> > > dass du jedes mal ein chmod nach dem Hochladen ausf?hren musst.
+> > > Au?erdem verhindern wir so, dass einer versehentlich die ?nderungen des
+> > > anderen ?berschreibt. Was h?lst du davon?
+> >
+> > K?nnten wir, wir k?nnten auch das automatisieren (so wie bei meinem SVN
+> > Server), dass ein Script ausgef?hrt wird, der alle ge?nderten Dateien in
+> > den htdocs-Ordner kopiert, sobald ein commit ausgef?hrt wird.
+> 
+> Keine schlechte Idee ;)
+> Subversion bietet hooks, die beim commiten ausgef?hrt werden... Da sollte 
+> man mittels eines skripts was drehen k?nnen. Der selbe trick wird ja auch 
+> ausgef?hrt, um die benachrichtigungsmails an tel-svn zu schicken...
+Das Script das ich vorher benutzt habe kann ich ja mal da einbauen ..
+nur wie kommt man in den hooks Ordner? Kann man den auf shell.berlios.de
+irgendwie erreichen?
+
+> Achja, ich habe noch einen zus?tzlichen Parameter "lang" eingef?gt, der die 
+> Spracheinstellung ?berschreibt, damit man auch die anderen Versionen testen 
+> kann: index.php?to=home&lang=en zeigt jetzt die englische Seite an, ok?
+Sehr gut. Sp?ter k?nnten wir das ausbauen und jeden Link mit &lang=
+$_GET['lang'] versehen, damit der Betrachter die Sprache selbst noch
+w?hlen kann.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070225/85efcf9c/attachment.pgp>
+
+From potrmwn at gmail.com  Sun Feb 25 22:00:39 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Sun, 25 Feb 2007 22:00:39 +0100
+Subject: [Tel-dev] =?iso-8859-1?q?tel_Webseite_wird_nun_=FCber_SVN_geregel?=
+	=?iso-8859-1?q?t?=
+Message-ID: <1172437239.5322.20.camel@rebian.home>
+
+Hi @ all (momentan nur lunar ^^)
+
+tel wird nun auch ?ber subversion geregelt. Gr?nde daf?r liegen auf der
+Hand:
+- kein Durcheinander bei mehreren Webmastern
+- Einfachere Nutzung (muss also nicht zuerst heruntergeladen, ge?ndert
+und dann wieder heraufgeladen werden)
+- Gewohnte Nutzung ?ber subversion
+
+Probleme:
+- Aus, f?r mich unerkl?rlichem Grund bekommen wir bei jedem commit eine
+E-Mail
+- Nicht-Webmaster k?nnen auch die Webseite ver?ndern (kann imho ?ber
+UNIX-Rechte geregelt werden)
+- http://tel.berlios.de/.svn/ ist so erreichbar. Ob das schlimm ist
+weiss ich nicht
+
+So long,
+Pot
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070225/ca78b7ef/attachment.pgp>
+
+From potrmwn at gmail.com  Sun Feb 25 22:20:11 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Sun, 25 Feb 2007 22:20:11 +0100
+Subject: [Tel-dev] tel Homepage
+In-Reply-To: <200702241554.06110.basti.wiesner@gmx.net>
+References: <1172314042.10089.16.camel@rebian.home>
+	<200702241318.51963.basti.wiesner@gmx.net>
+	<1172321729.10089.56.camel@rebian.home>
+	<200702241554.06110.basti.wiesner@gmx.net>
+Message-ID: <1172438411.5322.29.camel@rebian.home>
+
+Am Samstag, den 24.02.2007, 15:54 +0100 schrieb Sebastian Wiesner:
+> > - Einf?hrung
+> 
+> W?rde ich mit dem Link zur Bash Version zusammenlegen. So etwa:
+> 
+> "Vor einiger Zeit hatten pot und sabsirro auf ubuntuusers.de die Idee, eine 
+> kleines Telefonbuch f?r die Konsole in bash [hier der link zu bash-Version] 
+> zu schreiben. Bald war bash nicht mehr ausreichend. ?berlegungen, tel in 
+> perl neu zu schreiben, kam lunar durch eine Version in python zuvor. Diese 
+> wurde im Laufe des Diskussions-Thread [der Link zum uu.de Thread] 
+> weiterentwickelt. Schnell war sie ein eigenes Projekt, welches nun hier zu 
+> finden ist. Dieses Projekt f?hrt die Bash Version in Python fort!
+> 
+> Dann kommen vielleicht noch ein paar Screenshots der Highlights:
+> - Einmal das Editieren von Eintr?gen...
+> - Die Suche mit Ausgabe als Tabelle
+> - ...
+> 
+> > - Wie SVN benutzen? (ev einfach zu
+> > https://developer.berlios.de/svn/?group_id=8132 linken)
+> 
+> Mmmh, vielleicht eine Art Development-Seite mit
+> - Hinweisen zu svn (Struktur, Link, 
+> https://developer.berlios.de/svn/?group_id=8132)
+> - Wie man Bugs meldet...
+> - und neue Features vorschlagen kann!
+Dies werde ich morgen ?bernehmen, wenn du das nicht schon gemacht
+hast ;-)
+
+> > - Kontaktadressen (gut gruppiert, wer macht was)
+> 
+> Jupp
+siehe oben
+
+> Gute Idee. Die Ausgabe auf der Konsole (--help) ist vielleicht etwas knapp 
+> bemessen, wir k?nnten Tel auf der Website ausf?hrlicher dokumentieren. Tel 
+> gibt dann bei --help noch einen Hinweis auf die Website aus.
+> Btw, da w?rde ich eventuell noch warten. Wenn wir diesem Teil in docbook 
+> schreiben, dann kann man sowohl html als auch eine manpage erzeugen ohne 
+> das ganze zweimal zu schreiben! Dann ist die Hilfe sp?ter auch mal als "man 
+> tel" verf?gbar.
+Ev. auch kurz wie man es installieren soll (f?r noobs):
+Wohin kopieren, wohin linken, Rechte setzen, ..
+
+Oder sogar eine deb veranstalten? ^^ Dies w?rde sicher in UU.de
+interessant wirken, da es einfach zu installieren ist. Na gut, jetzt ist
+es auch einfach zu benutzen aber um es korrekt zu machen m?sste man das
+Skript korrekt kopieren und verlinken, und da ist Otto-Normaluser zu
+faul dazu ;-)
+
+> > - FAQ? (Ev. erst wenn tel gr?sser ist)
+> 
+> Noch gibts ja nicht viele Fragen, oder? ;)
+Ev. werden bald einige gestellt (Mailingliste, UU.de-Forum ;-))
+> 
+> > - Lizenz
+> > - ..
+> >
+> > Ideen?
+> 
+> Vielleicht noch eine kleine News Rubrik? Berlios bietet ja ein News-System 
+> an, welches man auch auf die Website exportieren kann:
+> https://developer.berlios.de/docman/display_doc.php?docid=215&group_id=2#newsexport
+Gute Idee. Das werde ich mir sp?ter mal genauer anschauen und implementieren.
+
+> lunar
+Pot
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070225/7da0ddcd/attachment.pgp>
+
+From basti.wiesner at gmx.net  Mon Feb 26 13:41:57 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Mon, 26 Feb 2007 13:41:57 +0100
+Subject: [Tel-dev]
+	=?iso-8859-15?q?tel_Webseite_wird_nun_=FCber_SVN_gerege?=
+	=?iso-8859-15?q?lt?=
+In-Reply-To: <1172437239.5322.20.camel@rebian.home>
+References: <1172437239.5322.20.camel@rebian.home>
+Message-ID: <200702261342.07742.basti.wiesner@gmx.net>
+
+Remo Wenger hackte folgendes:
+> Hi @ all (momentan nur lunar ^^)
+>
+> tel wird nun auch ?ber subversion geregelt. Gr?nde daf?r liegen auf der
+> Hand:
+> - kein Durcheinander bei mehreren Webmastern
+> - Einfachere Nutzung (muss also nicht zuerst heruntergeladen, ge?ndert
+> und dann wieder heraufgeladen werden)
+> - Gewohnte Nutzung ?ber subversion
+
+So weit, so gut
+
+> Probleme:
+> - Aus, f?r mich unerkl?rlichem Grund bekommen wir bei jedem commit eine
+> E-Mail
+
+Ich hab eine commit Benachrichtigung in den post-commit hook eingebaut...
+Wenn du die nocht mehr willst, sagt bescheid. Diese Mail ist geht ?ber die 
+tel-svn Liste, da kann ich dich austragen...
+
+> - Nicht-Webmaster k?nnen auch die Webseite ver?ndern (kann imho ?ber
+> UNIX-Rechte geregelt werden)
+
+kein problem, solange unser projekt klein ist
+
+> - http://tel.berlios.de/.svn/ ist so erreichbar. Ob das schlimm ist
+> weiss ich nicht
+
+Wieso? Checkst du jetzt direkt in htdocs aus?
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070226/059a7cb4/attachment.pgp>
+
+From basti.wiesner at gmx.net  Mon Feb 26 13:47:56 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Mon, 26 Feb 2007 13:47:56 +0100
+Subject: [Tel-dev] tel Homepage
+In-Reply-To: <1172438411.5322.29.camel@rebian.home>
+References: <1172314042.10089.16.camel@rebian.home>
+	<200702241554.06110.basti.wiesner@gmx.net>
+	<1172438411.5322.29.camel@rebian.home>
+Message-ID: <200702261347.57126.basti.wiesner@gmx.net>
+
+> > Gute Idee. Die Ausgabe auf der Konsole (--help) ist vielleicht etwas
+> > knapp bemessen, wir k?nnten Tel auf der Website ausf?hrlicher
+> > dokumentieren. Tel gibt dann bei --help noch einen Hinweis auf die
+> > Website aus.
+> > Btw, da w?rde ich eventuell noch warten. Wenn wir diesem Teil in
+> > docbook schreiben, dann kann man sowohl html als auch eine manpage
+> > erzeugen ohne das ganze zweimal zu schreiben! Dann ist die Hilfe sp?ter
+> > auch mal als "man tel" verf?gbar.
+>
+> Ev. auch kurz wie man es installieren soll (f?r noobs):
+> Wohin kopieren, wohin linken, Rechte setzen, ..
+>
+> Oder sogar eine deb veranstalten? ^^ Dies w?rde sicher in UU.de
+> interessant wirken, da es einfach zu installieren ist. Na gut, jetzt ist
+> es auch einfach zu benutzen aber um es korrekt zu machen m?sste man das
+> Skript korrekt kopieren und verlinken, und da ist Otto-Normaluser zu
+> faul dazu ;-)
+
+Naja, jetzt reicht ja eigentlich noch ein cp tel.py /usr/local/bin und 
+anschlie?endes chmod...
+Wer ein konsolen-telefonbuch verwendet, wird sich schon (zumindest ein 
+bisschen) damit auskennen ;)
+Sp?ter, wenn die ausstehenden Features (ich hab sie mal im Feature Manager 
+auf der Website eingetragen) einigerma?en implementiert sind, werd' ich tel 
+wahrscheinlich auf mehrere Dateien verteilen (mit 1000 Zeilen wirds langsam 
+un?bersichlicht ;) ) und ein sch?nes Installations-Skript schreiben. Daf?r 
+gibts die distutils, die einen Teil der Arbeit automatisch machen...
+Dann werd ich auch die n?tigen Funktionen schreiben, um tel endlich deutsch 
+zu machen (automatische extraktion der Nachrichten aus dem Code und 
+Installieren der Messagedateien).
+
+> > > - FAQ? (Ev. erst wenn tel gr?sser ist)
+> >
+> > Noch gibts ja nicht viele Fragen, oder? ;)
+>
+> Ev. werden bald einige gestellt (Mailingliste, UU.de-Forum ;-))
+
+Mal schaun ;)
+
+>
+> > > - Lizenz
+> > > - ..
+> > >
+> > > Ideen?
+> >
+> > Vielleicht noch eine kleine News Rubrik? Berlios bietet ja ein
+> > News-System an, welches man auch auf die Website exportieren kann:
+> > https://developer.berlios.de/docman/display_doc.php?docid=215&group_id=
+> >2#newsexport
+>
+> Gute Idee. Das werde ich mir sp?ter mal genauer anschauen und
+> implementieren.
+
+Cool
+
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070226/ba14c75c/attachment.pgp>
+
+From basti.wiesner at gmx.net  Mon Feb 26 13:57:52 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Mon, 26 Feb 2007 13:57:52 +0100
+Subject: [Tel-dev]
+	=?iso-8859-15?q?tel_Webseite_wird_nun_=FCber_SVN_gerege?=
+	=?iso-8859-15?q?lt?=
+In-Reply-To: <200702261342.07742.basti.wiesner@gmx.net>
+References: <1172437239.5322.20.camel@rebian.home>
+	<200702261342.07742.basti.wiesner@gmx.net>
+Message-ID: <200702261357.52424.basti.wiesner@gmx.net>
+
+> Wieso? Checkst du jetzt direkt in htdocs aus?
+
+Edit: Habs mir angeschaut...
+Ich denke nicht, dass es ein Problem ist... Commiten kann man ja mit der 
+Info nicht, wenn man nicht Mitglied unseres Projekts ist...
+Was die Log-Meldung angeht, die kann man ja sowieso ?ber anonymen Zugriff 
+oder websvn anschauen... 
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070226/a70fe69c/attachment.pgp>
+
+From basti.wiesner at gmx.net  Mon Feb 26 14:01:10 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Mon, 26 Feb 2007 14:01:10 +0100
+Subject: [Tel-dev] Kontaktseite
+Message-ID: <200702261401.10835.basti.wiesner@gmx.net>
+
+Hi,
+
+Ich denke, wir sollten die Seite in Kontakt umbenennen. Entwickler k?nnte 
+man auch so verstehen, dass hier an der Entwicklung interessierte Infos 
+finden.
+
+Au?erdem sieht die Tabelle imho noch nicht sch?n aus. Da sollte man mit 
+Padding noch was drehen...
+
+Oder wir schreiben die Daten nicht nebeneinander, sondern untereinander...
+Quasi als Visitenkarten:
+
+Sebastian "lunar" Wiesner
+Tel-Entwickler
+basti dot wiesner at gmx dot de
+GPG-Key-Link
+
+So ists imho ?bersichtlicher...
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070226/f01b556f/attachment.pgp>
+
+From potrmwn at gmail.com  Mon Feb 26 17:06:03 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Mon, 26 Feb 2007 17:06:03 +0100
+Subject: [Tel-dev]
+	=?iso-8859-1?q?tel_Webseite_wird_nun_=FCber_SVN=09gereg?=
+	=?iso-8859-1?q?elt?=
+In-Reply-To: <200702261357.52424.basti.wiesner@gmx.net>
+References: <1172437239.5322.20.camel@rebian.home>
+	<200702261342.07742.basti.wiesner@gmx.net>
+	<200702261357.52424.basti.wiesner@gmx.net>
+Message-ID: <1172505963.5189.6.camel@rebian.home>
+
+Am Montag, den 26.02.2007, 13:57 +0100 schrieb Sebastian Wiesner:
+> > Wieso? Checkst du jetzt direkt in htdocs aus?
+> 
+> Edit: Habs mir angeschaut...
+> Ich denke nicht, dass es ein Problem ist... Commiten kann man ja mit der 
+> Info nicht, wenn man nicht Mitglied unseres Projekts ist...
+> Was die Log-Meldung angeht, die kann man ja sowieso ?ber anonymen Zugriff 
+> oder websvn anschauen... 
+Gut, dann w?re das auch gekl?rt.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070226/1dbb7417/attachment.pgp>
+
+From potrmwn at gmail.com  Mon Feb 26 17:12:11 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Mon, 26 Feb 2007 17:12:11 +0100
+Subject: [Tel-dev] Kontaktseite
+In-Reply-To: <200702261401.10835.basti.wiesner@gmx.net>
+References: <200702261401.10835.basti.wiesner@gmx.net>
+Message-ID: <1172506331.5189.13.camel@rebian.home>
+
+Am Montag, den 26.02.2007, 14:01 +0100 schrieb Sebastian Wiesner:
+> Ich denke, wir sollten die Seite in Kontakt umbenennen. Entwickler k?nnte 
+> man auch so verstehen, dass hier an der Entwicklung interessierte Infos 
+> finden.
+Ok, stimmt.
+
+> Au?erdem sieht die Tabelle imho noch nicht sch?n aus. Da sollte man mit 
+> Padding noch was drehen...
+Ja, ich hab nur mal kurz das ganze erstellt und hab dann commited. Aber
+danach hatte BerliOS anscheinend ein Problem mit dem webserver, ich
+konnt unsere Projektwebseite nie erreichen. Aus diesem Grund konnte ich
+nicht weiter daran arbeiten.
+
+> Oder wir schreiben die Daten nicht nebeneinander, sondern untereinander...
+> Quasi als Visitenkarten:
+> 
+> Sebastian "lunar" Wiesner
+> Tel-Entwickler
+> basti dot wiesner at gmx dot de
+> GPG-Key-Link
+GPG-Key-Link? Ich finde, der User kann das von einem Key-Server
+herunterladen. imho ist es m?hsam, den Key falls er signiert wurde
+wieder da und dort (?berall wo er halt verstreut ist) zu aktualisieren.
+Ev. k?nnten wir statdessen die Adresse zum Key-Server angeben (was eig.
+auch nicht n?tig ist, da sich die Server sowieso synchronisieren)
+
+> So ists imho ?bersichtlicher...
+Jetzt vielleicht, aber was, wenn tell 100 Entwickler hat? Ich weiss, ein
+bisschen ?bertrieben, aber man kann nie wissen.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070226/36f75bad/attachment.pgp>
+
+From potrmwn at gmail.com  Mon Feb 26 17:05:27 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Mon, 26 Feb 2007 17:05:27 +0100
+Subject: [Tel-dev]
+	=?iso-8859-1?q?tel_Webseite_wird_nun_=FCber_SVN=09gereg?=
+	=?iso-8859-1?q?elt?=
+In-Reply-To: <200702261342.07742.basti.wiesner@gmx.net>
+References: <1172437239.5322.20.camel@rebian.home>
+	<200702261342.07742.basti.wiesner@gmx.net>
+Message-ID: <1172505927.5189.4.camel@rebian.home>
+
+Am Montag, den 26.02.2007, 13:41 +0100 schrieb Sebastian Wiesner:
+> > Probleme:
+> > - Aus, f?r mich unerkl?rlichem Grund bekommen wir bei jedem commit eine
+> > E-Mail
+> 
+> Ich hab eine commit Benachrichtigung in den post-commit hook eingebaut...
+> Wenn du die nocht mehr willst, sagt bescheid. Diese Mail ist geht ?ber die 
+> tel-svn Liste, da kann ich dich austragen...
+Achso. Ja mich nervts ein bisschen.. w?r' nett wenn du mich austragen
+k?nntest ;-)
+
+> > - Nicht-Webmaster k?nnen auch die Webseite ver?ndern (kann imho ?ber
+> > UNIX-Rechte geregelt werden)
+> 
+> kein problem, solange unser projekt klein ist
+Wird aber eins, wenn es gross wird ;-)
+
+> > - http://tel.berlios.de/.svn/ ist so erreichbar. Ob das schlimm ist
+> > weiss ich nicht
+> 
+> Wieso? Checkst du jetzt direkt in htdocs aus?
+Ja, weil ich keine Rechte dazu habe, rsync auszuf?hren. Und mit cp weiss
+ich nicht wie ich Dateien/Ordner exkludieren kann und mit welcher Option
+_nur_ ge?nderte oder neue Dateien kopiert werden.
+Aber so finde ich es nicht schlimm, das Skript muss lediglich ein kurzes
+"svn update" ausf?hren und schon fertig.
+
+Da in jedem Ordner eine .svn steckt, finde ich es m?hsam und auch eig.
+sinnlos, jeder Ordner mit htaccess zu "verschliessen". Ob die .svn
+irgend eine Gefahr darstellen, werde ich mich noch informieren.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070226/bcd14754/attachment.pgp>
+
+From potrmwn at gmail.com  Mon Feb 26 17:41:40 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Mon, 26 Feb 2007 17:41:40 +0100
+Subject: [Tel-dev] Kontaktseite
+In-Reply-To: <1172506331.5189.13.camel@rebian.home>
+References: <200702261401.10835.basti.wiesner@gmx.net>
+	<1172506331.5189.13.camel@rebian.home>
+Message-ID: <1172508100.5189.20.camel@rebian.home>
+
+Nachtrag:
+
+> > Ich denke, wir sollten die Seite in Kontakt umbenennen. Entwickler k?nnte 
+> > man auch so verstehen, dass hier an der Entwicklung interessierte Infos 
+> > finden.
+> Ok, stimmt.
+Hab ich jetzt getan.
+> 
+> > Au?erdem sieht die Tabelle imho noch nicht sch?n aus. Da sollte man mit 
+> > Padding noch was drehen...
+> Ja, ich hab nur mal kurz das ganze erstellt und hab dann commited. Aber
+> danach hatte BerliOS anscheinend ein Problem mit dem webserver, ich
+> konnt unsere Projektwebseite nie erreichen. Aus diesem Grund konnte ich
+> nicht weiter daran arbeiten.
+> 
+> > Oder wir schreiben die Daten nicht nebeneinander, sondern untereinander...
+> > Quasi als Visitenkarten:
+> > 
+> > Sebastian "lunar" Wiesner
+> > Tel-Entwickler
+> > basti dot wiesner at gmx dot de
+DOT de oder DOT net?
+
+> > GPG-Key-Link
+> GPG-Key-Link? Ich finde, der User kann das von einem Key-Server
+> herunterladen. imho ist es m?hsam, den Key falls er signiert wurde
+> wieder da und dort (?berall wo er halt verstreut ist) zu aktualisieren.
+> Ev. k?nnten wir statdessen die Adresse zum Key-Server angeben (was eig.
+> auch nicht n?tig ist, da sich die Server sowieso synchronisieren)
+Das hab ich auch mal umgesetzt, nur die GPG-Sache habe ich mal
+weggelassen.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070226/2eec6904/attachment.pgp>
+
+From basti.wiesner at gmx.net  Mon Feb 26 18:25:25 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Mon, 26 Feb 2007 18:25:25 +0100
+Subject: [Tel-dev]
+	=?iso-8859-15?q?tel_Webseite_wird_nun_=FCber_SVN=09gere?=
+	=?iso-8859-15?q?gelt?=
+In-Reply-To: <1172505927.5189.4.camel@rebian.home>
+References: <1172437239.5322.20.camel@rebian.home>
+	<200702261342.07742.basti.wiesner@gmx.net>
+	<1172505927.5189.4.camel@rebian.home>
+Message-ID: <200702261825.32740.basti.wiesner@gmx.net>
+
+Remo Wenger hackte folgendes:
+> Am Montag, den 26.02.2007, 13:41 +0100 schrieb Sebastian Wiesner:
+> > > Probleme:
+> > > - Aus, f?r mich unerkl?rlichem Grund bekommen wir bei jedem commit
+> > > eine E-Mail
+> >
+> > Ich hab eine commit Benachrichtigung in den post-commit hook
+> > eingebaut... Wenn du die nocht mehr willst, sagt bescheid. Diese Mail
+> > ist geht ?ber die tel-svn Liste, da kann ich dich austragen...
+>
+> Achso. Ja mich nervts ein bisschen.. w?r' nett wenn du mich austragen
+> k?nntest ;-)
+
+Sure...
+Ich glaube, ich wollte dich sowieso nicht eintragen, ich habe nur vergessen, 
+deine Adresse zu l?schen, weil ich die mail-adressen per copy n paste in 
+die Formulare eingetragen habe. Zu dem Zeitpunkt warst du ja auch noch 
+nicht im SVN aktiv...
+
+> > > - Nicht-Webmaster k?nnen auch die Webseite ver?ndern (kann imho ?ber
+> > > UNIX-Rechte geregelt werden)
+> >
+> > kein problem, solange unser projekt klein ist
+>
+> Wird aber eins, wenn es gross wird ;-)
+
+Naja, ich denke, wir k?nnen uns in dem Punkt doch erstmal auf darauf 
+verlassen, dass da niemand dran rummanipuliert. Wer randaliert, fliegt 
+sowieso wieder raus!
+Au?erdem kann man auch so genug Schaden anrichten, man braucht ja z.B. nur 
+einmal im svn Verzeichnis rm -r auszuf?hren.
+
+> > > - http://tel.berlios.de/.svn/ ist so erreichbar. Ob das schlimm ist
+> > > weiss ich nicht
+> >
+> > Wieso? Checkst du jetzt direkt in htdocs aus?
+>
+> Ja, weil ich keine Rechte dazu habe, rsync auszuf?hren. Und mit cp weiss
+> ich nicht wie ich Dateien/Ordner exkludieren kann und mit welcher Option
+> _nur_ ge?nderte oder neue Dateien kopiert werden.
+> Aber so finde ich es nicht schlimm, das Skript muss lediglich ein kurzes
+> "svn update" ausf?hren und schon fertig.
+
+Kein Problem...
+
+> Da in jedem Ordner eine .svn steckt, finde ich es m?hsam und auch eig.
+> sinnlos, jeder Ordner mit htaccess zu "verschliessen". Ob die .svn
+> irgend eine Gefahr darstellen, werde ich mich noch informieren.
+
+N?, ich denke nicht dass die gef?hrlich sind. Ich denke, da steht nichts 
+gef?hrliches drinnen.
+Es w?re ja auch irgendwie unsinnig, weil man sowieso leicht an die Metadaten 
+kommt. Man muss ja nur einmal einen anonymen SVN-Checkout f?hren, wie auf 
+der BerliOS Website beschrieben...
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070226/d3a213e9/attachment.pgp>
+
+From basti.wiesner at gmx.net  Mon Feb 26 18:37:16 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Mon, 26 Feb 2007 18:37:16 +0100
+Subject: [Tel-dev] Kontaktseite
+In-Reply-To: <1172508100.5189.20.camel@rebian.home>
+References: <200702261401.10835.basti.wiesner@gmx.net>
+	<1172506331.5189.13.camel@rebian.home>
+	<1172508100.5189.20.camel@rebian.home>
+Message-ID: <200702261837.41187.basti.wiesner@gmx.net>
+
+Remo Wenger hackte folgendes:
+> Nachtrag:
+> > > Ich denke, wir sollten die Seite in Kontakt umbenennen. Entwickler
+> > > k?nnte man auch so verstehen, dass hier an der Entwicklung
+> > > interessierte Infos finden.
+> >
+> > Ok, stimmt.
+>
+> Hab ich jetzt getan.
+
+k
+
+> > > Au?erdem sieht die Tabelle imho noch nicht sch?n aus. Da sollte man
+> > > mit Padding noch was drehen...
+> >
+> > Ja, ich hab nur mal kurz das ganze erstellt und hab dann commited. Aber
+> > danach hatte BerliOS anscheinend ein Problem mit dem webserver, ich
+> > konnt unsere Projektwebseite nie erreichen. Aus diesem Grund konnte ich
+> > nicht weiter daran arbeiten.
+> >
+> > > Oder wir schreiben die Daten nicht nebeneinander, sondern
+> > > untereinander... Quasi als Visitenkarten:
+> > >
+> > > Sebastian "lunar" Wiesner
+> > > Tel-Entwickler
+> > > basti dot wiesner at gmx dot de
+>
+> DOT de oder DOT net?
+
+*sch?m* .net nat?rlich, so schick ich ja die ganze Zeit... Keine Ahnung, 
+welcher Fehlerteufel da ?ber mich kam :-S
+
+> > > GPG-Key-Link
+> >
+> > GPG-Key-Link? Ich finde, der User kann das von einem Key-Server
+> > herunterladen. imho ist es m?hsam, den Key falls er signiert wurde
+> > wieder da und dort (?berall wo er halt verstreut ist) zu aktualisieren.
+> > Ev. k?nnten wir statdessen die Adresse zum Key-Server angeben (was eig.
+> > auch nicht n?tig ist, da sich die Server sowieso synchronisieren)
+>
+> Das hab ich auch mal umgesetzt, nur die GPG-Sache habe ich mal
+> weggelassen.
+
+Mmmh, wie w?rs dann mit einem Link zum passenden Keyserver? Das mit der 
+Synchronisierung sollte zwar theoretisch klappen, aber die Praxis zeigt, 
+dass es nicht immer geht. Ich hatte mit MightyTux aus dem Forum ziemlich 
+Probleme, weil jeder von uns seinen Key auf einen anderen Server 
+hochgeladen hatte, die Synchronisation da aber offenbar nicht perfekt 
+geklappt hat.
+Deswegen sollte da imho die Adresse des Keyservers hin, auf dem der 
+Schl?ssel hochgeladen wurde. Nur um eventuelle Missverst?ndnisse zu 
+vermeiden...
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070226/1319cb75/attachment.pgp>
+
+From potrmwn at gmail.com  Mon Feb 26 18:56:29 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Mon, 26 Feb 2007 18:56:29 +0100
+Subject: [Tel-dev]
+	=?iso-8859-1?q?tel_Webseite_wird_nun_=FCber_=09SVN=09ge?=
+	=?iso-8859-1?q?regelt?=
+In-Reply-To: <200702261825.32740.basti.wiesner@gmx.net>
+References: <1172437239.5322.20.camel@rebian.home>
+	<200702261342.07742.basti.wiesner@gmx.net>
+	<1172505927.5189.4.camel@rebian.home>
+	<200702261825.32740.basti.wiesner@gmx.net>
+Message-ID: <1172512589.5189.27.camel@rebian.home>
+
+Am Montag, den 26.02.2007, 18:25 +0100 schrieb Sebastian Wiesner:
+> > > > - Nicht-Webmaster k?nnen auch die Webseite ver?ndern (kann imho ?ber
+> > > > UNIX-Rechte geregelt werden)
+> > >
+> > > kein problem, solange unser projekt klein ist
+> >
+> > Wird aber eins, wenn es gross wird ;-)
+> 
+> Naja, ich denke, wir k?nnen uns in dem Punkt doch erstmal auf darauf 
+> verlassen, dass da niemand dran rummanipuliert. Wer randaliert, fliegt 
+> sowieso wieder raus!
+> Au?erdem kann man auch so genug Schaden anrichten, man braucht ja z.B. nur 
+> einmal im svn Verzeichnis rm -r auszuf?hren.
+Das wird ihn auch nicht weiter bringen. Eher ein svn "rm (-r) *"
+(weiss nicht, ob's da -r gibt)
+und dann nat?rlich noch commiten
+
+Aber auch wenn, dann wird die neueste, funktionierende Revision wieder
+ins Leben gerufen und der Randalierer fliegt ^^
+Aber trotzdem will man/ich das gen?uer unterteilen. Aber das geh?rt
+jetzt (noch) nicht zu den wichtigsten Punkten
+
+> Es w?re ja auch irgendwie unsinnig, weil man sowieso leicht an die Metadaten 
+> kommt. Man muss ja nur einmal einen anonymen SVN-Checkout f?hren, wie auf 
+> der BerliOS Website beschrieben...
+Ok.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070226/eedeb468/attachment.pgp>
+
+From potrmwn at gmail.com  Mon Feb 26 19:00:26 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Mon, 26 Feb 2007 19:00:26 +0100
+Subject: [Tel-dev] Kontaktseite
+In-Reply-To: <200702261837.41187.basti.wiesner@gmx.net>
+References: <200702261401.10835.basti.wiesner@gmx.net>
+	<1172506331.5189.13.camel@rebian.home>
+	<1172508100.5189.20.camel@rebian.home>
+	<200702261837.41187.basti.wiesner@gmx.net>
+Message-ID: <1172512826.5189.31.camel@rebian.home>
+
+Am Montag, den 26.02.2007, 18:37 +0100 schrieb Sebastian Wiesner:
+> > > > Sebastian "lunar" Wiesner
+> > > > Tel-Entwickler
+> > > > basti dot wiesner at gmx dot de
+> >
+> > DOT de oder DOT net?
+> 
+> *sch?m* .net nat?rlich, so schick ich ja die ganze Zeit... Keine Ahnung, 
+> welcher Fehlerteufel da ?ber mich kam :-S
+Nobody's perfekt.
+(Cool, ich kann englisch ^^)
+
+> Mmmh, wie w?rs dann mit einem Link zum passenden Keyserver? Das mit der 
+> Synchronisierung sollte zwar theoretisch klappen, aber die Praxis zeigt, 
+> dass es nicht immer geht. [..]
+> Deswegen sollte da imho die Adresse des Keyservers hin, auf dem der 
+> Schl?ssel hochgeladen wurde. Nur um eventuelle Missverst?ndnisse zu 
+> vermeiden...
+Wusste ich nicht. Dann sicher mal die Adresse des Keyservers
+hinschreiben.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070226/34733599/attachment.pgp>
+
+From basti.wiesner at gmx.net  Mon Feb 26 19:05:56 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Mon, 26 Feb 2007 19:05:56 +0100
+Subject: [Tel-dev] Kontaktseite
+In-Reply-To: <1172512826.5189.31.camel@rebian.home>
+References: <200702261401.10835.basti.wiesner@gmx.net>
+	<200702261837.41187.basti.wiesner@gmx.net>
+	<1172512826.5189.31.camel@rebian.home>
+Message-ID: <200702261906.01237.basti.wiesner@gmx.net>
+
+Remo Wenger hackte folgendes:
+> Am Montag, den 26.02.2007, 18:37 +0100 schrieb Sebastian Wiesner:
+> > > > > Sebastian "lunar" Wiesner
+> > > > > Tel-Entwickler
+> > > > > basti dot wiesner at gmx dot de
+> > >
+> > > DOT de oder DOT net?
+> >
+> > *sch?m* .net nat?rlich, so schick ich ja die ganze Zeit... Keine
+> > Ahnung, welcher Fehlerteufel da ?ber mich kam :-S
+>
+> Nobody's perfekt.
+> (Cool, ich kann englisch ^^)
+
+congratulations ;)
+
+> > Mmmh, wie w?rs dann mit einem Link zum passenden Keyserver? Das mit der
+> > Synchronisierung sollte zwar theoretisch klappen, aber die Praxis
+> > zeigt, dass es nicht immer geht. [..]
+> > Deswegen sollte da imho die Adresse des Keyservers hin, auf dem der
+> > Schl?ssel hochgeladen wurde. Nur um eventuelle Missverst?ndnisse zu
+> > vermeiden...
+>
+> Wusste ich nicht. Dann sicher mal die Adresse des Keyservers
+> hinschreiben.
+
+Bei mir hkp://wwwkeys.eu.pgp.net
+Und vielleicht noch die IDs der Schl?ssel dazu, dass erleichtert doch das 
+Suchen?
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070226/e2593b29/attachment.pgp>
+
+From basti.wiesner at gmx.net  Mon Feb 26 19:11:19 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Mon, 26 Feb 2007 19:11:19 +0100
+Subject: [Tel-dev]
+	=?iso-8859-15?q?tel_Webseite_wird_nun_=FCber_=09SVN=09g?=
+	=?iso-8859-15?q?eregelt?=
+In-Reply-To: <1172512589.5189.27.camel@rebian.home>
+References: <1172437239.5322.20.camel@rebian.home>
+	<200702261825.32740.basti.wiesner@gmx.net>
+	<1172512589.5189.27.camel@rebian.home>
+Message-ID: <200702261911.19692.basti.wiesner@gmx.net>
+
+Remo Wenger hackte folgendes:
+> Am Montag, den 26.02.2007, 18:25 +0100 schrieb Sebastian Wiesner:
+> > > > > - Nicht-Webmaster k?nnen auch die Webseite ver?ndern (kann imho
+> > > > > ?ber UNIX-Rechte geregelt werden)
+> > > >
+> > > > kein problem, solange unser projekt klein ist
+> > >
+> > > Wird aber eins, wenn es gross wird ;-)
+> >
+> > Naja, ich denke, wir k?nnen uns in dem Punkt doch erstmal auf darauf
+> > verlassen, dass da niemand dran rummanipuliert. Wer randaliert, fliegt
+> > sowieso wieder raus!
+> > Au?erdem kann man auch so genug Schaden anrichten, man braucht ja z.B.
+> > nur einmal im svn Verzeichnis rm -r auszuf?hren.
+>
+> Das wird ihn auch nicht weiter bringen. Eher ein svn "rm (-r) *"
+> (weiss nicht, ob's da -r gibt)
+> und dann nat?rlich noch commiten
+
+Nee, ich meine:
+ssh svn.berlios.de
+cd /snvroot/repos/tel
+rm -rf *
+
+(bitte keine copy n paste ;) )
+
+Das kann er ja, weil er dann Mitglied des Entwicklerteams ist...
+Wie will man das dann verhindern?
+
+Deswegen sollten wir auch nur Leute aufnehmen, denen wir vertrauen...
+
+> Aber auch wenn, dann wird die neueste, funktionierende Revision wieder
+> ins Leben gerufen und der Randalierer fliegt ^^
+> Aber trotzdem will man/ich das gen?uer unterteilen. Aber das geh?rt
+> jetzt (noch) nicht zu den wichtigsten Punkten
+
+jo, sehe ich auch so...
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070226/8cc1b061/attachment.pgp>
+
+From potrmwn at gmail.com  Mon Feb 26 20:18:25 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Mon, 26 Feb 2007 20:18:25 +0100
+Subject: [Tel-dev]
+	=?iso-8859-1?q?tel_Webseite_wird_nun_=FCber_=09SVN=09ge?=
+	=?iso-8859-1?q?regelt?=
+In-Reply-To: <200702261911.19692.basti.wiesner@gmx.net>
+References: <1172437239.5322.20.camel@rebian.home>
+	<200702261825.32740.basti.wiesner@gmx.net>
+	<1172512589.5189.27.camel@rebian.home>
+	<200702261911.19692.basti.wiesner@gmx.net>
+Message-ID: <1172517505.5189.34.camel@rebian.home>
+
+Am Montag, den 26.02.2007, 19:11 +0100 schrieb Sebastian Wiesner:
+> > Das wird ihn auch nicht weiter bringen. Eher ein svn "rm (-r) *"
+> > (weiss nicht, ob's da -r gibt)
+> > und dann nat?rlich noch commiten
+> 
+> Nee, ich meine:
+> ssh svn.berlios.de
+> cd /snvroot/repos/tel
+> rm -rf *
+> 
+> (bitte keine copy n paste ;) )
+Mhh.. mal schaun.. Wollte ich immer schon ausprobiern ;-)
+
+Scherz beiseite: Daran habe ich noch garnicht gedacht ..
+
+> Das kann er ja, weil er dann Mitglied des Entwicklerteams ist...
+> Wie will man das dann verhindern?
+Regelm?ssige Backups, die Leute genauer "anschauen" bevor wir sie ins
+Projekt aufnehmen
+
+> Deswegen sollten wir auch nur Leute aufnehmen, denen wir vertrauen...
+Das wird schwer.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070226/339d60ff/attachment.pgp>
+
+From potrmwn at gmail.com  Mon Feb 26 20:21:55 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Mon, 26 Feb 2007 20:21:55 +0100
+Subject: [Tel-dev] Kontaktseite
+In-Reply-To: <200702261906.01237.basti.wiesner@gmx.net>
+References: <200702261401.10835.basti.wiesner@gmx.net>
+	<200702261837.41187.basti.wiesner@gmx.net>
+	<1172512826.5189.31.camel@rebian.home>
+	<200702261906.01237.basti.wiesner@gmx.net>
+Message-ID: <1172517715.5189.37.camel@rebian.home>
+
+Am Montag, den 26.02.2007, 19:05 +0100 schrieb Sebastian Wiesner:
+> Bei mir hkp://wwwkeys.eu.pgp.net
+> Und vielleicht noch die IDs der Schl?ssel dazu, dass erleichtert doch das 
+> Suchen?
+K?nnte man. Oder einfach direkt einen Link zu dieser Seite
+http://gpg-keyserver.de/
+
+bzw direkt zur Suche
+http://gpg-keyserver.de/pks/lookup?search=Remo+Wenger&op=vindex
+
+Leider hab ich da zwei Eintr?ge drinne :-(
+Oder hald zum Key des Keyservers
+http://gpg-keyserver.de/pks/lookup?op=get&search=0x8CBF3C40B6D4FFA0
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070226/9026ac2a/attachment.pgp>
+
+From basti.wiesner at gmx.net  Mon Feb 26 20:35:28 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Mon, 26 Feb 2007 20:35:28 +0100
+Subject: [Tel-dev]
+	=?iso-8859-15?q?tel_Webseite_wird_nun_=FCber_=09SVN=09g?=
+	=?iso-8859-15?q?eregelt?=
+In-Reply-To: <1172517505.5189.34.camel@rebian.home>
+References: <1172437239.5322.20.camel@rebian.home>
+	<200702261911.19692.basti.wiesner@gmx.net>
+	<1172517505.5189.34.camel@rebian.home>
+Message-ID: <200702262035.39028.basti.wiesner@gmx.net>
+
+Remo Wenger hackte folgendes:
+> Am Montag, den 26.02.2007, 19:11 +0100 schrieb Sebastian Wiesner:
+> > > Das wird ihn auch nicht weiter bringen. Eher ein svn "rm (-r) *"
+> > > (weiss nicht, ob's da -r gibt)
+> > > und dann nat?rlich noch commiten
+> >
+> > Nee, ich meine:
+> > ssh svn.berlios.de
+> > cd /snvroot/repos/tel
+> > rm -rf *
+> >
+> > (bitte keine copy n paste ;) )
+>
+> Mhh.. mal schaun.. Wollte ich immer schon ausprobiern ;-)
+>
+> Scherz beiseite: Daran habe ich noch garnicht gedacht ..
+
+Ich wollt dir keine Angst machen ;)
+Pers?nlich sehe ich das nicht so kritisch. Andere Projekte schaffen das ja 
+auch, obwohl sie wesentlich gr??er sind als wir (Gnome, KDE, etc.) Da 
+passiert sowas ja auch nicht.
+
+Wir sollten halt nicht jeden x-beliebigen aufnehmen, sondern eben nur Leute, 
+die wirkliches Interesse zeigen. my 2 cents dazu....
+
+Eigentlich wollte ich dir nur sagen, dass Berechtigungen sich nur auf die 
+Website auswirken. Auf der Shell und im Repo kann jedes Mitglied machen was 
+es will. Da muss man einander zumindest ein bisschen vertrauen (aber das 
+braucht man ja imho sowieso, wenn man zusammen programmiert ;) )
+
+> > Das kann er ja, weil er dann Mitglied des Entwicklerteams ist...
+> > Wie will man das dann verhindern?
+>
+> Regelm?ssige Backups, die Leute genauer "anschauen" bevor wir sie ins
+> Projekt aufnehmen
+>
+> > Deswegen sollten wir auch nur Leute aufnehmen, denen wir vertrauen...
+>
+> Das wird schwer.
+
+Naja, dich kenn ich ja ;)
+sabsirro hat sich auch nicht gerade als der Teufel in Person erwiesen...
+Ich denke damit haben wir kein Problem, andere schaffen das ja auch ;)
+
+Mmh, was aber interessant ist:
+BerliOS bietet auf der Verwaltungsseite den Download eines Night-SVN-Dumps 
+an. Da werden offenbar die repositories aller Projekte einmal t?glich (eher 
+n?chtlich ;) ) gesichert. Diese Sicherung wird dann zum Download 
+angeboten...
+Dieses Wochenende werde ich mir mal ein Skript schreiben, welches diese 
+Sicherung automatisch auf meinen PC l?dt, wenn ich mich anmelde, regelm??ig 
+?berpr?ft, ob die Sicherung ?lter als 24h ist und bei Bedarf die neueste 
+Version l?dt...
+Dann sind wir imho auf der sicheren Seite (auch was Server-Crashs auf 
+Berlios angeht, auch wenn man sowas noch nicht geh?rt hat).
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070226/c7743149/attachment.pgp>
+
+From potrmwn at gmail.com  Mon Feb 26 20:45:22 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Mon, 26 Feb 2007 20:45:22 +0100
+Subject: [Tel-dev]
+	=?iso-8859-1?q?tel_Webseite_wird_nun_=FCber_=09SVN=09ge?=
+	=?iso-8859-1?q?regelt?=
+In-Reply-To: <200702262035.39028.basti.wiesner@gmx.net>
+References: <1172437239.5322.20.camel@rebian.home>
+	<200702261911.19692.basti.wiesner@gmx.net>
+	<1172517505.5189.34.camel@rebian.home>
+	<200702262035.39028.basti.wiesner@gmx.net>
+Message-ID: <1172519122.5189.43.camel@rebian.home>
+
+Am Montag, den 26.02.2007, 20:35 +0100 schrieb Sebastian Wiesner:
+> Ich wollt dir keine Angst machen ;)
+> Pers?nlich sehe ich das nicht so kritisch. Andere Projekte schaffen das ja 
+> auch, obwohl sie wesentlich gr??er sind als wir (Gnome, KDE, etc.) Da 
+> passiert sowas ja auch nicht.
+> 
+> Wir sollten halt nicht jeden x-beliebigen aufnehmen, sondern eben nur Leute, 
+> die wirkliches Interesse zeigen. my 2 cents dazu....
+> 
+> Eigentlich wollte ich dir nur sagen, dass Berechtigungen sich nur auf die 
+> Website auswirken. Auf der Shell und im Repo kann jedes Mitglied machen was 
+> es will. Da muss man einander zumindest ein bisschen vertrauen (aber das 
+> braucht man ja imho sowieso, wenn man zusammen programmiert ;) )
+Ok ^^
+
+> > > Das kann er ja, weil er dann Mitglied des Entwicklerteams ist...
+> > > Wie will man das dann verhindern?
+> >
+> > Regelm?ssige Backups, die Leute genauer "anschauen" bevor wir sie ins
+> > Projekt aufnehmen
+> >
+> > > Deswegen sollten wir auch nur Leute aufnehmen, denen wir vertrauen...
+> >
+> > Das wird schwer.
+> 
+> Naja, dich kenn ich ja ;)
+> sabsirro hat sich auch nicht gerade als der Teufel in Person erwiesen...
+> Ich denke damit haben wir kein Problem, andere schaffen das ja auch ;)
+Dann schaffen wirs auch
+
+> BerliOS bietet auf der Verwaltungsseite den Download eines Night-SVN-Dumps 
+> an. Da werden offenbar die repositories aller Projekte einmal t?glich (eher 
+> n?chtlich ;) ) gesichert. Diese Sicherung wird dann zum Download 
+> angeboten...
+> Dieses Wochenende werde ich mir mal ein Skript schreiben, welches diese 
+> Sicherung automatisch auf meinen PC l?dt, wenn ich mich anmelde, regelm??ig 
+> ?berpr?ft, ob die Sicherung ?lter als 24h ist und bei Bedarf die neueste 
+> Version l?dt...
+Das ist gut. Habe mir schon fast gedacht, dass die sowas machen. Kannst
+mir dann das Skript auch r?berschicken, dann haben wir zwei Sicherungen
+davon ^^
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070226/fa556ca5/attachment.pgp>
+
+From basti.wiesner at gmx.net  Mon Feb 26 20:55:32 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Mon, 26 Feb 2007 20:55:32 +0100
+Subject: [Tel-dev]
+	=?iso-8859-15?q?tel_Webseite_wird_nun_=FCber_=09SVN=09g?=
+	=?iso-8859-15?q?eregelt?=
+In-Reply-To: <1172519122.5189.43.camel@rebian.home>
+References: <1172437239.5322.20.camel@rebian.home>
+	<200702262035.39028.basti.wiesner@gmx.net>
+	<1172519122.5189.43.camel@rebian.home>
+Message-ID: <200702262055.42685.basti.wiesner@gmx.net>
+
+Remo Wenger hackte folgendes:
+> Am Montag, den 26.02.2007, 20:35 +0100 schrieb Sebastian Wiesner:
+> > Ich wollt dir keine Angst machen ;)
+> > Pers?nlich sehe ich das nicht so kritisch. Andere Projekte schaffen das
+> > ja auch, obwohl sie wesentlich gr??er sind als wir (Gnome, KDE, etc.)
+> > Da passiert sowas ja auch nicht.
+> >
+> > Wir sollten halt nicht jeden x-beliebigen aufnehmen, sondern eben nur
+> > Leute, die wirkliches Interesse zeigen. my 2 cents dazu....
+> >
+> > Eigentlich wollte ich dir nur sagen, dass Berechtigungen sich nur auf
+> > die Website auswirken. Auf der Shell und im Repo kann jedes Mitglied
+> > machen was es will. Da muss man einander zumindest ein bisschen
+> > vertrauen (aber das braucht man ja imho sowieso, wenn man zusammen
+> > programmiert ;) )
+>
+> Ok ^^
+>
+> > > > Das kann er ja, weil er dann Mitglied des Entwicklerteams ist...
+> > > > Wie will man das dann verhindern?
+> > >
+> > > Regelm?ssige Backups, die Leute genauer "anschauen" bevor wir sie ins
+> > > Projekt aufnehmen
+> > >
+> > > > Deswegen sollten wir auch nur Leute aufnehmen, denen wir
+> > > > vertrauen...
+> > >
+> > > Das wird schwer.
+> >
+> > Naja, dich kenn ich ja ;)
+> > sabsirro hat sich auch nicht gerade als der Teufel in Person
+> > erwiesen... Ich denke damit haben wir kein Problem, andere schaffen das
+> > ja auch ;)
+>
+> Dann schaffen wirs auch
+>
+> > BerliOS bietet auf der Verwaltungsseite den Download eines
+> > Night-SVN-Dumps an. Da werden offenbar die repositories aller Projekte
+> > einmal t?glich (eher n?chtlich ;) ) gesichert. Diese Sicherung wird
+> > dann zum Download angeboten...
+> > Dieses Wochenende werde ich mir mal ein Skript schreiben, welches diese
+> > Sicherung automatisch auf meinen PC l?dt, wenn ich mich anmelde,
+> > regelm??ig ?berpr?ft, ob die Sicherung ?lter als 24h ist und bei Bedarf
+> > die neueste Version l?dt...
+>
+> Das ist gut. Habe mir schon fast gedacht, dass die sowas machen. Kannst
+> mir dann das Skript auch r?berschicken, dann haben wir zwei Sicherungen
+> davon ^^
+
+Jupp, bin schon ein bisschen am schaun wie ichs mache...
+Schreiben werd ichs aber fr?hestens am donnerstag, daf?r hab ich keine Zeit 
+daf?r...
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070226/020e3279/attachment.pgp>
+
+From potrmwn at gmail.com  Mon Feb 26 23:26:08 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Mon, 26 Feb 2007 23:26:08 +0100
+Subject: [Tel-dev] Bug in 0.1.5: --show fehlerhaft
+Message-ID: <1172528768.15576.4.camel@rebian.home>
+
+Hi,
+
+wollte, nach dem franz?sisch-b?ffeln, endlich die neue Release
+ausprobieren. Da kam auch schon ein Fehler reingerannt ^^
+
+-snip->
+> remo at rebian:~$ ./tel.py --show 1
+> --------------------
+> Traceback (most recent call last):
+>   File "./tel.py", line 1028, in ?
+>     ConsoleIFace().start()
+>   File "./tel.py", line 1022, in start
+>     options.command_function(options, *args)
+>   File "./tel.py", line 835, in _cmd_show
+>     self.print_long_list(entries)
+>   File "./tel.py", line 641, in print_long_list
+>     print entry
+>   File "./tel.py", line 118, in __str__
+>     msg = _('Index:          %(index)s\n'
+> ValueError: unsupported format character '
+> ' (0xa) at index 266
+<-snap-
+
+Wobei --table und --list fehlerlos funktionierten.
+
+So long,
+Pot
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070226/f8815d12/attachment.pgp>
+
+From potrmwn at gmail.com  Tue Feb 27 10:17:20 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Tue, 27 Feb 2007 10:17:20 +0100
+Subject: [Tel-dev]
+	=?iso-8859-1?q?tel_Webseite_wird_nun_=FCber_=09SVN=09ge?=
+	=?iso-8859-1?q?regelt?=
+In-Reply-To: <200702262055.42685.basti.wiesner@gmx.net>
+References: <1172437239.5322.20.camel@rebian.home>
+	<200702262035.39028.basti.wiesner@gmx.net>
+	<1172519122.5189.43.camel@rebian.home>
+	<200702262055.42685.basti.wiesner@gmx.net>
+Message-ID: <1172567840.5156.1.camel@rebian.home>
+
+Am Montag, den 26.02.2007, 20:55 +0100 schrieb Sebastian Wiesner:
+> > > [..] Dieses Wochenende werde ich mir mal ein Skript schreiben, welches diese
+> > > Sicherung automatisch auf meinen PC l?dt, wenn ich mich anmelde,
+> > > regelm??ig ?berpr?ft, ob die Sicherung ?lter als 24h ist und bei Bedarf
+> > > die neueste Version l?dt...
+> >
+> > [..] Kannst mir dann das Skript auch r?berschicken, dann haben wir zwei Sicherungen
+> > davon ^^
+> 
+> Jupp, bin schon ein bisschen am schaun wie ichs mache...
+> Schreiben werd ichs aber fr?hestens am donnerstag, daf?r hab ich keine Zeit 
+> daf?r...
+Ok. Sag mir dann, wenns soweit ist.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070227/f1624f3b/attachment.pgp>
+
+From potrmwn at gmail.com  Tue Feb 27 10:22:48 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Tue, 27 Feb 2007 10:22:48 +0100
+Subject: [Tel-dev] =?iso-8859-1?q?Ide_bzg=2E_der_Release_0=2E1=2E5=3A_Feld?=
+	=?iso-8859-1?q?er-Priorit=E4t?=
+Message-ID: <1172568168.5156.7.camel@rebian.home>
+
+Hi,
+
+f?r Bildschirme, die keine sehr hohe Aufl?sung anzeigen k?nnen, ist es
+M?hsam, wenn man mittels --table eine breite Tabelle ausgeben lassen
+will.
+Ich weiss, dass man mittels -o felder,felder,felder,.. die auszugebenen
+Felder selbst w?hlen kann, doch wenn es eine Standart-Priorit?t gibt (zB
+lastname 0, firstname 1, postcode 2, ..) k?nnte das Skript einfach die
+n?tigsten Felder ausgeben, wenn zuwenig Platz da ist.
+Oder die Felder untereinander, was aber bl?d ist.
+
+Falls diese Idee eingebaut werden sollte, sollte es noch einen Schalter
+geben, bei dem man dieses aufheben kann. zB --ignore-priorities oderso
+(Falls man die vollst?ndige Tabelle zB in eine Datei schreiben will).
+
+Was h?lst du davon?
+
+Greets,
+Pot
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070227/86205792/attachment.pgp>
+
+From potrmwn at gmail.com  Tue Feb 27 10:50:42 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Tue, 27 Feb 2007 10:50:42 +0100
+Subject: [Tel-dev] Website: IE macht uns das Leben schwer
+Message-ID: <1172569842.5156.12.camel@rebian.home>
+
+Hallo
+
+leider musste ich feststellen, als ich an einem Windows XP Computer mit
+Internet Explorer 6 und 7 hockte *graus*, dass der liebe Exploder
+wiedermal _NIX!_ korrekt anzeigt. Zumindest schafft es IE 6 nicht, die
+Website zentriert anzuzeigen, was IE 7 schon kann *oh wunder!*.
+Zudem kann IE die Umlaute _NICHT_ anzeigen, obwohl ich ganz _DEUTSCH_
+und _DEUTLICH_ folgendes angegeben habe:
+
+-snip->
+> <?xml version="1.0" encoding="UTF-8"?>
+<-snap-
+
+Verdammt nochmal, was wollen wir mit diesem unf?higen Riesenbaby anstellen?
+
+Total ver?rgert,
+pot
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070227/c766e869/attachment.pgp>
+
+From potrmwn at gmail.com  Tue Feb 27 10:52:17 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Tue, 27 Feb 2007 10:52:17 +0100
+Subject: [Tel-dev] Website: IE macht uns das Leben schwer
+In-Reply-To: <1172569842.5156.12.camel@rebian.home>
+References: <1172569842.5156.12.camel@rebian.home>
+Message-ID: <1172569937.5156.15.camel@rebian.home>
+
+Am Dienstag, den 27.02.2007, 10:50 +0100 schrieb Remo Wenger:
+> [..] Verdammt nochmal, was wollen wir mit diesem unf?higen Riesenbaby anstellen?
+
+Nachtrag:
+
+Bilder befinden sich auf der Website:
+http://tel.berlios.de/tmp/ie_6.0.png
+http://tel.berlios.de/tmp/ie_7.0.png
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070227/b2d8d339/attachment.pgp>
+
+From potrmwn at gmail.com  Tue Feb 27 11:49:40 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Tue, 27 Feb 2007 11:49:40 +0100
+Subject: [Tel-dev] Website: IE macht uns das Leben schwer
+In-Reply-To: <1172569842.5156.12.camel@rebian.home>
+References: <1172569842.5156.12.camel@rebian.home>
+Message-ID: <1172573380.5156.21.camel@rebian.home>
+
+Das Problem scheint gel?st zu sein, als ich noch folgendes in die
+header.php einf?gte:
+
+header('content-type: text/html; charset=utf-8');
+
+Leider st?rt mich immer noch, dass die Website nicht zentriert
+angezeigt, Inhaltsverzeichnis und Content zu weit auseinander sind und
+dass die Links untereinander im Inhaltsverzeichnis auch zu weit
+auseinander sind.
+
+Bei IE 7 scheint dieses Problem gel?st zu sein.
+
+Arr,
+Pot
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070227/98df3b6f/attachment.pgp>
+
+From potrmwn at gmail.com  Tue Feb 27 12:15:50 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Tue, 27 Feb 2007 12:15:50 +0100
+Subject: [Tel-dev] M$ Excel kann CSV Dateien nicht korrekt behandeln?
+Message-ID: <1172574950.5156.27.camel@rebian.home>
+
+Hi,
+
+habe die Release 0.1.5 unter einer Win-Kiste mit XP Prof. ausprobiert.
+An und f?r sich gings ganz flott (abgesehen vom --show-Bug, den ich
+schon gepostet habe). Jedoch die exportierte CSV-Datei konnte nicht
+korrekt von M$ Office Excel gelesen werden: er schreibt alles in eine
+Zeile.
+OOo 2.0 hingegen kann dies unter der gleichen Windoze-Kiste.
+Ev sollten wir
+> This eases import and export with common spread sheet applications
+> like Microsoft Excel or OpenOffice.org Calc.
+Das verbessern ;-)
+
+Oder die CSV mit einem anderen Seperator versehen, der MS Excel
+versteht. (Ev. ist es nur eine Einstellungssache, jedoch bin ich der
+Meinung, dass Excel selbst herausfinden soll, welcher Seperator genutzt
+wird).
+
+Greets,
+Pot
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070227/fc831248/attachment.pgp>
+
+From basti.wiesner at gmx.net  Tue Feb 27 15:56:58 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Tue, 27 Feb 2007 15:56:58 +0100
+Subject: [Tel-dev] Bug in 0.1.5: --show fehlerhaft
+In-Reply-To: <1172528768.15576.4.camel@rebian.home>
+References: <1172528768.15576.4.camel@rebian.home>
+Message-ID: <200702271557.09522.basti.wiesner@gmx.net>
+
+Remo Wenger hackte folgendes:
+> Hi,
+>
+> wollte, nach dem franz?sisch-b?ffeln, endlich die neue Release
+> ausprobieren. Da kam auch schon ein Fehler reingerannt ^^
+>
+> -snip->
+>
+> > remo at rebian:~$ ./tel.py --show 1
+> > --------------------
+> > Traceback (most recent call last):
+> >   File "./tel.py", line 1028, in ?
+> >     ConsoleIFace().start()
+> >   File "./tel.py", line 1022, in start
+> >     options.command_function(options, *args)
+> >   File "./tel.py", line 835, in _cmd_show
+> >     self.print_long_list(entries)
+> >   File "./tel.py", line 641, in print_long_list
+> >     print entry
+> >   File "./tel.py", line 118, in __str__
+> >     msg = _('Index:          %(index)s\n'
+> > ValueError: unsupported format character '
+> > ' (0xa) at index 266
+>
+> <-snap-
+>
+> Wobei --table und --list fehlerlos funktionierten.
+
+Interessant...
+We sieht den der Eintrag aus, der diesen Fehler verursacht?
+
+Btw, w?re nett, wenn du diesen Fehler noch im Bugmanager eintragen k?nntest. 
+Damit andere sehen, dass der Fehler bereits bekannt ist und verbessert 
+wird!
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070227/794ba2bd/attachment.pgp>
+
+From basti.wiesner at gmx.net  Tue Feb 27 16:00:33 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Tue, 27 Feb 2007 16:00:33 +0100
+Subject: [Tel-dev]
+	=?iso-8859-15?q?Ide_bzg=2E_der_Release_0=2E1=2E5=3A_Fel?=
+	=?iso-8859-15?q?der-Priorit=E4t?=
+In-Reply-To: <1172568168.5156.7.camel@rebian.home>
+References: <1172568168.5156.7.camel@rebian.home>
+Message-ID: <200702271600.33922.basti.wiesner@gmx.net>
+
+Remo Wenger hackte folgendes:
+> Hi,
+>
+> f?r Bildschirme, die keine sehr hohe Aufl?sung anzeigen k?nnen, ist es
+> M?hsam, wenn man mittels --table eine breite Tabelle ausgeben lassen
+> will.
+> Ich weiss, dass man mittels -o felder,felder,felder,.. die auszugebenen
+> Felder selbst w?hlen kann, doch wenn es eine Standart-Priorit?t gibt (zB
+> lastname 0, firstname 1, postcode 2, ..) k?nnte das Skript einfach die
+> n?tigsten Felder ausgeben, wenn zuwenig Platz da ist.
+> Oder die Felder untereinander, was aber bl?d ist.
+>
+> Falls diese Idee eingebaut werden sollte, sollte es noch einen Schalter
+> geben, bei dem man dieses aufheben kann. zB --ignore-priorities oderso
+> (Falls man die vollst?ndige Tabelle zB in eine Datei schreiben will).
+>
+> Was h?lst du davon?
+
+Sogar ziemlich viel, allerdings ist die Umsetzung problematisch... Ich kenne 
+keinen Weg, um die Breite des Terminals _portabal_ zu bestimmen. Unter 
+Linux gibt es zwar Umgebungsvariablen und tty Einstellungen, die man 
+auslesen kann, aber unter Windows??? Ich habe schon ewig nicht mehr mit 
+Windows programmiert...
+
+Stattdessen k?nnte ich im n?chsten Relesae doch eine Konfigurationsdatei 
+implementieren, in der man die Standardeinstellungen festlegen kann.
+Das w?rde auch mehr Flexibilit?t bringen, weil man z.B. die zu 
+durchsuchenden Felder oder die regul?ren Ausdr?cke generell konfigurieren 
+kann...
+
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070227/453d1f67/attachment.pgp>
+
+From basti.wiesner at gmx.net  Tue Feb 27 16:03:47 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Tue, 27 Feb 2007 16:03:47 +0100
+Subject: [Tel-dev] Website: IE macht uns das Leben schwer
+In-Reply-To: <1172573380.5156.21.camel@rebian.home>
+References: <1172569842.5156.12.camel@rebian.home>
+	<1172573380.5156.21.camel@rebian.home>
+Message-ID: <200702271603.48110.basti.wiesner@gmx.net>
+
+Remo Wenger hackte folgendes:
+> Das Problem scheint gel?st zu sein, als ich noch folgendes in die
+> header.php einf?gte:
+>
+> header('content-type: text/html; charset=utf-8');
+>
+> Leider st?rt mich immer noch, dass die Website nicht zentriert
+> angezeigt, Inhaltsverzeichnis und Content zu weit auseinander sind und
+> dass die Links untereinander im Inhaltsverzeichnis auch zu weit
+> auseinander sind.
+>
+> Bei IE 7 scheint dieses Problem gel?st zu sein.
+
+Ich wei?, ich wei? es ist ein bisschen arrogant, aber ich w?rde 
+sagen: "Schei? auf IE". Wenns im IE 7 sowieso gel?st ist, dann ist es 
+erstens nicht so schlimm, weil der wahrscheinlich sowieso bald auf den 
+meisten neueren PCs landet.
+Au?erdem geh?rt dann eben ein "best viewed with firefox" dahin. Ich halte 
+nichts davon eine standard-kompatible Seite zu vermurksen nur um den MS 
+Crap zufrieden zu stellen...
+Wenn wir schon freie Software schreiben, dann sollten wir uns auch an offene 
+Standards halten!
+
+Ganz abgesehen davon, dass die Umstellungen auf dem IE sowieso wieder Testen 
+und Ausprobieren mit sich bringt und die ganze Sache enorm 
+verkompliziert... Dazu bin ich zu faul ;)
+
+my 2 cents
+lunar
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070227/6d6f003b/attachment.pgp>
+
+From basti.wiesner at gmx.net  Tue Feb 27 16:14:05 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Tue, 27 Feb 2007 16:14:05 +0100
+Subject: [Tel-dev] Website: IE macht uns das Leben schwer
+In-Reply-To: <1172569937.5156.15.camel@rebian.home>
+References: <1172569842.5156.12.camel@rebian.home>
+	<1172569937.5156.15.camel@rebian.home>
+Message-ID: <200702271614.15054.basti.wiesner@gmx.net>
+
+Remo Wenger hackte folgendes:
+> Am Dienstag, den 27.02.2007, 10:50 +0100 schrieb Remo Wenger:
+> > [..] Verdammt nochmal, was wollen wir mit diesem unf?higen Riesenbaby
+> > anstellen?
+>
+> Nachtrag:
+>
+> Bilder befinden sich auf der Website:
+> http://tel.berlios.de/tmp/ie_6.0.png
+> http://tel.berlios.de/tmp/ie_7.0.png
+
+Mmmh, warum l?dst du sie nicht auf den FTP Space hoch? Jetzt liegen da 
+Bilder vom IE im Repo rum *schauder* ;)
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070227/271469ee/attachment.pgp>
+
+From basti.wiesner at gmx.net  Tue Feb 27 17:00:03 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Tue, 27 Feb 2007 17:00:03 +0100
+Subject: [Tel-dev] website -> help seite
+Message-ID: <200702271700.20955.basti.wiesner@gmx.net>
+
+Hi,
+
+ich habe die help Seite in Englische ?bersetzt. Dabei habe ich auch gleich 
+die deutsche Version auf Fehler abgeklopft und dabei einige Formulierungen 
+ge?ndert. 
+
+Am wichtigsten ist aber, dass ich die Sache mit der Sprache erstmal 
+rausgenommen habe. Momentan bietet tel noch keine gute Unterst?tzung. Es 
+gibt weder ein Skript, was die "internationalisierbaren" Nachrichten aus 
+tel extrahiert, noch gibt es eine M?glichkeit, die Nachrichtenkataloge mit 
+den ?bersetzungen komfortabel zu installieren.
+Das Schreiben dieses Installationsskripts ist die Hauptaufgabe f?r das 
+n?chste Release.
+Erst wenn quasi "die Infrastruktur" steht, sollten wir tel auch wirklich 
+?bersetzen. Dann kommt das auch wieder auf die Website. Momentan m?sst ich 
+aber noch nicht, wohin mit ?bersetzungen...
+
+Sobald ich (hoffentlich morgen schon) das backup Skript fertig habe, grabe 
+ich mal in meinen Python Snippets. Sowas ?hnliches f?r ?bersetzungen hab' 
+ich schon mal geschrieben, das sollte also schnell gehen. Ich denke, am 
+Wochenende k?nnen wir dann die n?chste Version releasen, die schon mit 
+einfachem Installscript und ?bersetzung daher kommt...
+
+Au?erdem habe ich noch die Projektseite im Inhaltsverzeichnis verlinkt (so 
+brauch ich nur ein Bookmark ;) ) und einige unben?tigte Ordner (toolbars 
+und tmp) gel?scht. Die Bilder vom IE liegen jetzt auf dem ftp space.
+
+F?r dich ist vielleicht noch relevant, dass ich die todo Datei ebenfalls 
+gel?scht habe. BerliOS bietet uns doch mit dem Feature-Manager ein nettes 
+Tool, um alle Aufgaben zentral zu verwalten, sie zu kategorisieren und 
+einzelen Leuten zuzuweisen. Ich finde das sollten wir auch nutzen ;) , 
+weswegen ich die todo Datei in den Feature Manager ?bertragen habe (die 
+Mail d?rftest du ja erhalten haben, oder?)
+Au?erdem kann man so alle Aufgaben auf einen Blick sehen, ohne erst im SVN 
+graben zu m?ssen.
+Ich habe meine TODO Datei auch in den Feature Manager ?bertragen und das 
+auch auf der Help Seite korrigiert.
+
+lunar
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070227/25626877/attachment.pgp>
+
+From potrmwn at gmail.com  Tue Feb 27 17:09:00 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Tue, 27 Feb 2007 17:09:00 +0100
+Subject: [Tel-dev] Bug in 0.1.5: --show fehlerhaft
+In-Reply-To: <200702271557.09522.basti.wiesner@gmx.net>
+References: <1172528768.15576.4.camel@rebian.home>
+	<200702271557.09522.basti.wiesner@gmx.net>
+Message-ID: <1172592540.5151.2.camel@rebian.home>
+
+Am Dienstag, den 27.02.2007, 15:56 +0100 schrieb Sebastian Wiesner:
+> Interessant...
+> We sieht den der Eintrag aus, der diesen Fehler verursacht?
+Habe ich leider nicht mehr :-(
+
+> Btw, w?re nett, wenn du diesen Fehler noch im Bugmanager eintragen k?nntest. 
+> Damit andere sehen, dass der Fehler bereits bekannt ist und verbessert 
+> wird!
+Habe nochmals einen Eintrag erstellt aber dann kam der Fehler nicht
+mehr. Das selbe Problem hatte ich aber auch unter WinXP. Werde, wenn ich
+Zeit habe, dort mal nachschauen.
+Wenn ich den Bug wieder "entdeckt" habe, werde ich den bugreport
+absenden.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070227/d8ff8b3e/attachment.pgp>
+
+From potrmwn at gmail.com  Tue Feb 27 17:14:46 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Tue, 27 Feb 2007 17:14:46 +0100
+Subject: [Tel-dev]
+	=?iso-8859-1?q?Ide_bzg=2E_der_Release_0=2E1=2E5=3A_Feld?=
+	=?iso-8859-1?q?er-Priorit=E4t?=
+In-Reply-To: <200702271600.33922.basti.wiesner@gmx.net>
+References: <1172568168.5156.7.camel@rebian.home>
+	<200702271600.33922.basti.wiesner@gmx.net>
+Message-ID: <1172592886.5151.9.camel@rebian.home>
+
+Am Dienstag, den 27.02.2007, 16:00 +0100 schrieb Sebastian Wiesner:
+> > Was h?lst du davon?
+> 
+> Sogar ziemlich viel, allerdings ist die Umsetzung problematisch... Ich kenne 
+> keinen Weg, um die Breite des Terminals _portabal_ zu bestimmen. Unter 
+> Linux gibt es zwar Umgebungsvariablen und tty Einstellungen, die man 
+> auslesen kann, aber unter Windows??? Ich habe schon ewig nicht mehr mit 
+> Windows programmiert...
+Vergiss Windows. Wenn es f?r die Linux Version f?r dich m?glich w?re,
+was h?lt dich davon ab es nicht zu tun? Dann m?ssen Windows User auf
+diese Feinheit halt verzichten oder zu Linux migrieren ^^
+Ausserdem sind Windows User meistens sowieso an klicki-bunti Fensterchen
+gew?hnt und werden dort wohl selten bis gar nie soetwas wie ein
+Konsolenprogramm geschweige den ein Telefonbuch f?r die Konsole benutzen
+(h?chstens ?ber PuTTY, aber das Ziel wird ja ein Linux sein ;-))
+
+> Stattdessen k?nnte ich im n?chsten Relesae doch eine Konfigurationsdatei 
+> implementieren, in der man die Standardeinstellungen festlegen kann.
+K?nnte man. imho ist das etwas unflexibel, weil wenn man in einem
+Terminal Emulator arbeitet, und die Fenstergr?sse verkleinert... Ok ist
+zwar nur eine Kleinigkeit. Die Idee ist eine gute Alternative.
+
+> Das w?rde auch mehr Flexibilit?t bringen, weil man z.B. die zu 
+> durchsuchenden Felder oder die regul?ren Ausdr?cke generell konfigurieren 
+> kann...
+Wie meinst du das?
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070227/9afb6c68/attachment.pgp>
+
+From potrmwn at gmail.com  Tue Feb 27 17:19:17 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Tue, 27 Feb 2007 17:19:17 +0100
+Subject: [Tel-dev] Website: IE macht uns das Leben schwer
+In-Reply-To: <200702271603.48110.basti.wiesner@gmx.net>
+References: <1172569842.5156.12.camel@rebian.home>
+	<1172573380.5156.21.camel@rebian.home>
+	<200702271603.48110.basti.wiesner@gmx.net>
+Message-ID: <1172593157.5151.14.camel@rebian.home>
+
+Am Dienstag, den 27.02.2007, 16:03 +0100 schrieb Sebastian Wiesner:
+> Ich wei?, ich wei? es ist ein bisschen arrogant, aber ich w?rde 
+> sagen: "Schei? auf IE". Wenns im IE 7 sowieso gel?st ist, dann ist es 
+> erstens nicht so schlimm, weil der wahrscheinlich sowieso bald auf den 
+> meisten neueren PCs landet.
+Ausser wenn Linux drauf is ^^
+
+> Au?erdem geh?rt dann eben ein "best viewed with firefox" dahin.
+Ohja!
+
+> Ich halte nichts davon eine standard-kompatible Seite zu vermurksen nur um den MS 
+> Crap zufrieden zu stellen...
+Das wollte ich eben auch nicht. Nur die Alternative w?re gewesen, ein
+zweites Stylesheet extra f?r M$ IE zu schreiben ..
+
+> Wenn wir schon freie Software schreiben, dann sollten wir uns auch an offene 
+> Standards halten!
+Wegen IE und anderen Drecks Produkten aus diesem Konzern werde ich mich
+_nie_ nicht an die Standards halten.
+
+> Ganz abgesehen davon, dass die Umstellungen auf dem IE sowieso wieder Testen 
+> und Ausprobieren mit sich bringt und die ganze Sache enorm 
+> verkompliziert... Dazu bin ich zu faul ;)
+Darum sollte die Seite ja wirklich sehr einfach und f?r jeden modernen
+Browser korrekt darzustellen sein. Aber das geht ja nicht mal ..
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070227/31c48d3a/attachment.pgp>
+
+From potrmwn at gmail.com  Tue Feb 27 17:20:19 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Tue, 27 Feb 2007 17:20:19 +0100
+Subject: [Tel-dev] Website: IE macht uns das Leben schwer
+In-Reply-To: <200702271614.15054.basti.wiesner@gmx.net>
+References: <1172569842.5156.12.camel@rebian.home>
+	<1172569937.5156.15.camel@rebian.home>
+	<200702271614.15054.basti.wiesner@gmx.net>
+Message-ID: <1172593219.5151.16.camel@rebian.home>
+
+Am Dienstag, den 27.02.2007, 16:14 +0100 schrieb Sebastian Wiesner:
+> Remo Wenger hackte folgendes:
+> > Am Dienstag, den 27.02.2007, 10:50 +0100 schrieb Remo Wenger:
+> > > [..] Verdammt nochmal, was wollen wir mit diesem unf?higen Riesenbaby
+> > > anstellen?
+> >
+> > Nachtrag:
+> >
+> > Bilder befinden sich auf der Website:
+> > http://tel.berlios.de/tmp/ie_6.0.png
+> > http://tel.berlios.de/tmp/ie_7.0.png
+> 
+> Mmmh, warum l?dst du sie nicht auf den FTP Space hoch? Jetzt liegen da 
+> Bilder vom IE im Repo rum *schauder* ;)
+LOL! Wusste die FTP Daten grad nicht und da wars mir Recht dies schnell
+?ber SVN hochzuladen.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070227/e345a7eb/attachment.pgp>
+
+From potrmwn at gmail.com  Tue Feb 27 17:25:32 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Tue, 27 Feb 2007 17:25:32 +0100
+Subject: [Tel-dev] website -> help seite
+In-Reply-To: <200702271700.20955.basti.wiesner@gmx.net>
+References: <200702271700.20955.basti.wiesner@gmx.net>
+Message-ID: <1172593532.5151.22.camel@rebian.home>
+
+Am Dienstag, den 27.02.2007, 17:00 +0100 schrieb Sebastian Wiesner:
+> ich habe die help Seite in Englische ?bersetzt. Dabei habe ich auch gleich 
+> die deutsche Version auf Fehler abgeklopft und dabei einige Formulierungen 
+> ge?ndert. 
+Danke
+
+> Am wichtigsten ist aber, dass ich die Sache mit der Sprache erstmal 
+> rausgenommen habe. Momentan bietet tel noch keine gute Unterst?tzung. Es 
+> gibt weder ein Skript, was die "internationalisierbaren" Nachrichten aus 
+> tel extrahiert, noch gibt es eine M?glichkeit, die Nachrichtenkataloge mit 
+> den ?bersetzungen komfortabel zu installieren.
+> Das Schreiben dieses Installationsskripts ist die Hauptaufgabe f?r das 
+> n?chste Release.
+> Erst wenn quasi "die Infrastruktur" steht, sollten wir tel auch wirklich 
+> ?bersetzen. Dann kommt das auch wieder auf die Website. Momentan m?sst ich 
+> aber noch nicht, wohin mit ?bersetzungen...
+Ok. Eigentlich wollte ich erstmal auf die Website mit den ?bersetzungen
+hinweisen und dann noch das Skript mit einbeziehen denn ich dachte das
+sei keine Grosse Sache mehr.
+
+> Sobald ich (hoffentlich morgen schon) das backup Skript fertig habe, grabe 
+> ich mal in meinen Python Snippets. Sowas ?hnliches f?r ?bersetzungen hab' 
+> ich schon mal geschrieben, das sollte also schnell gehen. Ich denke, am 
+> Wochenende k?nnen wir dann die n?chste Version releasen, die schon mit 
+> einfachem Installscript und ?bersetzung daher kommt...
+Oh, toll! ;-)
+
+> Au?erdem habe ich noch die Projektseite im Inhaltsverzeichnis verlinkt (so 
+> brauch ich nur ein Bookmark ;) )
+Die Projektseite ist auch mit unserer Website verlinkt.
+
+> und einige unben?tigte Ordner (toolbars 
+> und tmp) gel?scht. Die Bilder vom IE liegen jetzt auf dem ftp space.
+Woher toolbars kommt weiss ich nicht. Ich dachte, der stammte von dir
+und hab ihn vorerst mal in Ruhe gelassen.
+
+> F?r dich ist vielleicht noch relevant, dass ich die todo Datei ebenfalls 
+> gel?scht habe. BerliOS bietet uns doch mit dem Feature-Manager ein nettes 
+> Tool, um alle Aufgaben zentral zu verwalten, sie zu kategorisieren und 
+> einzelen Leuten zuzuweisen. Ich finde das sollten wir auch nutzen ;) , 
+> weswegen ich die todo Datei in den Feature Manager ?bertragen habe (die 
+> Mail d?rftest du ja erhalten haben, oder?)
+Achso. Das kannte ich bisher noch nicht, oder nicht realisiert. Nein,
+die Mail habe ich nicht erhalten.
+
+> Au?erdem kann man so alle Aufgaben auf einen Blick sehen, ohne erst im SVN 
+> graben zu m?ssen.
+Dat ist jut
+
+> Ich habe meine TODO Datei auch in den Feature Manager ?bertragen und das 
+> auch auf der Help Seite korrigiert.
+Danke.
+
+Pot
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070227/19c72df4/attachment.pgp>
+
+From sabsirro at arcor.de  Tue Feb 27 20:29:05 2007
+From: sabsirro at arcor.de (sabsirro)
+Date: Tue, 27 Feb 2007 20:29:05 +0100
+Subject: [Tel-dev] Testmail
+Message-ID: <45E48681.3080500@arcor.de>
+
+Hallo alle zusammen.
+
+
+From potrmwn at gmail.com  Tue Feb 27 20:30:45 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Tue, 27 Feb 2007 20:30:45 +0100
+Subject: [Tel-dev] Testmail
+In-Reply-To: <45E48681.3080500@arcor.de>
+References: <45E48681.3080500@arcor.de>
+Message-ID: <1172604645.5151.25.camel@rebian.home>
+
+Am Dienstag, den 27.02.2007, 20:29 +0100 schrieb sabsirro:
+> Hallo alle zusammen.
+Hallo ;-)
+
+Auch unter den Lebenden?
+
+Greets,
+Pot
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070227/40fa701c/attachment.pgp>
+
+From basti.wiesner at gmx.net  Tue Feb 27 21:58:33 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Tue, 27 Feb 2007 21:58:33 +0100
+Subject: [Tel-dev]
+	=?iso-8859-15?q?Ide_bzg=2E_der_Release_0=2E1=2E5=3A_Fel?=
+	=?iso-8859-15?q?der-Priorit=E4t?=
+In-Reply-To: <1172592886.5151.9.camel@rebian.home>
+References: <1172568168.5156.7.camel@rebian.home>
+	<200702271600.33922.basti.wiesner@gmx.net>
+	<1172592886.5151.9.camel@rebian.home>
+Message-ID: <200702272158.38162.basti.wiesner@gmx.net>
+
+Remo Wenger hackte folgendes:
+> Am Dienstag, den 27.02.2007, 16:00 +0100 schrieb Sebastian Wiesner:
+> > > Was h?lst du davon?
+> >
+> > Sogar ziemlich viel, allerdings ist die Umsetzung problematisch... Ich
+> > kenne keinen Weg, um die Breite des Terminals _portabal_ zu bestimmen.
+> > Unter Linux gibt es zwar Umgebungsvariablen und tty Einstellungen, die
+> > man auslesen kann, aber unter Windows??? Ich habe schon ewig nicht mehr
+> > mit Windows programmiert...
+>
+> Vergiss Windows. Wenn es f?r die Linux Version f?r dich m?glich w?re,
+> was h?lt dich davon ab es nicht zu tun? Dann m?ssen Windows User auf
+> diese Feinheit halt verzichten oder zu Linux migrieren ^^
+> Ausserdem sind Windows User meistens sowieso an klicki-bunti Fensterchen
+> gew?hnt und werden dort wohl selten bis gar nie soetwas wie ein
+> Konsolenprogramm geschweige den ein Telefonbuch f?r die Konsole benutzen
+> (h?chstens ?ber PuTTY, aber das Ziel wird ja ein Linux sein ;-))
+
+Ok, gut! Wenn wir Windows keine Priorit?t einr?umen, dann wird auch das mit 
+dem Installskript leichter ;) Man muss sich dann nicht so viel um die 
+ganzen Pfade k?mmern.
+Ich werde mal nach einer L?sung f?r Linux suchen... Kann allerdings etwas 
+dauern, weilich mich da nicht auskenne und andere Sachen imho Priorit?t 
+haben sollten (siehe Feature Manager). Installation, Internationalisierung, 
+Verschl?sselung und der erweiterte Im- und Export sind so Dinge, die mir 
+erstmal richtig wichtig erscheinen. Entsprechend habe ich auch die 
+Priorit?ten im Feature Manager gesetzt. 
+Kannst du diese Sache dann auch dort eintragen? Damit ich meine ganzen 
+Aufgaben so an einem zentralen Platz habe ... 
+
+> > Stattdessen k?nnte ich im n?chsten Relesae doch eine
+> > Konfigurationsdatei implementieren, in der man die
+> > Standardeinstellungen festlegen kann.
+>
+> K?nnte man. imho ist das etwas unflexibel, weil wenn man in einem
+> Terminal Emulator arbeitet, und die Fenstergr?sse verkleinert... Ok ist
+> zwar nur eine Kleinigkeit. Die Idee ist eine gute Alternative.
+
+Jupp! 
+
+> > Das w?rde auch mehr Flexibilit?t bringen, weil man z.B. die zu
+> > durchsuchenden Felder oder die regul?ren Ausdr?cke generell
+> > konfigurieren kann...
+>
+> Wie meinst du das?
+
+Naja, man kann z.B. reinschreiben:
+ignore_case = true
+reg_exp = true
+
+Dadruch wird automatisch immer ohne Ber?cksichtigung der GuK ( ;) ) gesucht 
+und immer mit regul?ren Ausdr?cken...
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070227/bd86fba4/attachment.pgp>
+
+From basti.wiesner at gmx.net  Tue Feb 27 22:02:04 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Tue, 27 Feb 2007 22:02:04 +0100
+Subject: [Tel-dev] website -> help seite
+In-Reply-To: <1172593532.5151.22.camel@rebian.home>
+References: <200702271700.20955.basti.wiesner@gmx.net>
+	<1172593532.5151.22.camel@rebian.home>
+Message-ID: <200702272202.04389.basti.wiesner@gmx.net>
+
+> > Am wichtigsten ist aber, dass ich die Sache mit der Sprache erstmal
+> > rausgenommen habe. Momentan bietet tel noch keine gute Unterst?tzung.
+> > Es gibt weder ein Skript, was die "internationalisierbaren" Nachrichten
+> > aus tel extrahiert, noch gibt es eine M?glichkeit, die
+> > Nachrichtenkataloge mit den ?bersetzungen komfortabel zu installieren.
+> > Das Schreiben dieses Installationsskripts ist die Hauptaufgabe f?r das
+> > n?chste Release.
+> > Erst wenn quasi "die Infrastruktur" steht, sollten wir tel auch
+> > wirklich ?bersetzen. Dann kommt das auch wieder auf die Website.
+> > Momentan m?sst ich aber noch nicht, wohin mit ?bersetzungen...
+>
+> Ok. Eigentlich wollte ich erstmal auf die Website mit den ?bersetzungen
+> hinweisen und dann noch das Skript mit einbeziehen denn ich dachte das
+> sei keine Grosse Sache mehr.
+
+Nee eine gro?e Sache ist es auch nicht! Aber sie muss halt doch erstmal 
+geschrieben werden. Das Problem ist halt, dass f?r jede unterst?tzte 
+Sprache eine Datei dazukommt die irgendwo unter /usr/share/locales 
+installiert werden muss. F?r eine oder zwei Sprachen mag das ja noch ok 
+sein, aber es ist ihmo doch komfortabler, wenn man das gleich sch?n 
+installiert. Dann muss sich der User nicht darum k?mmern...
+
+> > Sobald ich (hoffentlich morgen schon) das backup Skript fertig habe,
+> > grabe ich mal in meinen Python Snippets. Sowas ?hnliches f?r
+> > ?bersetzungen hab' ich schon mal geschrieben, das sollte also schnell
+> > gehen. Ich denke, am Wochenende k?nnen wir dann die n?chste Version
+> > releasen, die schon mit einfachem Installscript und ?bersetzung daher
+> > kommt...
+>
+> Oh, toll! ;-)
+>
+> > Au?erdem habe ich noch die Projektseite im Inhaltsverzeichnis verlinkt
+> > (so brauch ich nur ein Bookmark ;) )
+>
+> Die Projektseite ist auch mit unserer Website verlinkt.
+
+Jupp, aber ich finde das sollte auch umgekehrt sein...
+
+> > und einige unben?tigte Ordner (toolbars
+> > und tmp) gel?scht. Die Bilder vom IE liegen jetzt auf dem ftp space.
+>
+> Woher toolbars kommt weiss ich nicht. Ich dachte, der stammte von dir
+> und hab ihn vorerst mal in Ruhe gelassen.
+>
+> > F?r dich ist vielleicht noch relevant, dass ich die todo Datei
+> > ebenfalls gel?scht habe. BerliOS bietet uns doch mit dem
+> > Feature-Manager ein nettes Tool, um alle Aufgaben zentral zu verwalten,
+> > sie zu kategorisieren und einzelen Leuten zuzuweisen. Ich finde das
+> > sollten wir auch nutzen ;) , weswegen ich die todo Datei in den Feature
+> > Manager ?bertragen habe (die Mail d?rftest du ja erhalten haben, oder?)
+>
+> Achso. Das kannte ich bisher noch nicht, oder nicht realisiert. Nein,
+> die Mail habe ich nicht erhalten.
+
+MMh, ich habe die Sache aus der TODO Datei eigentlich dir zugewiesen... Da 
+solltest du doch eigentlich benachrichtigt werden :-S
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070227/b9b26782/attachment.pgp>
+
+From basti.wiesner at gmx.net  Tue Feb 27 22:02:50 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Tue, 27 Feb 2007 22:02:50 +0100
+Subject: [Tel-dev] Testmail
+In-Reply-To: <45E48681.3080500@arcor.de>
+References: <45E48681.3080500@arcor.de>
+Message-ID: <200702272202.50520.basti.wiesner@gmx.net>
+
+> Hallo alle zusammen.
+
+Tag! Willkommen daheim ;)
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070227/70db6433/attachment.pgp>
+
+From basti.wiesner at gmx.net  Tue Feb 27 22:11:30 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Tue, 27 Feb 2007 22:11:30 +0100
+Subject: [Tel-dev] Website: IE macht uns das Leben schwer
+In-Reply-To: <1172593157.5151.14.camel@rebian.home>
+References: <1172569842.5156.12.camel@rebian.home>
+	<200702271603.48110.basti.wiesner@gmx.net>
+	<1172593157.5151.14.camel@rebian.home>
+Message-ID: <200702272211.30509.basti.wiesner@gmx.net>
+
+Remo Wenger hackte folgendes:
+> Am Dienstag, den 27.02.2007, 16:03 +0100 schrieb Sebastian Wiesner:
+> > Ich wei?, ich wei? es ist ein bisschen arrogant, aber ich w?rde
+> > sagen: "Schei? auf IE". Wenns im IE 7 sowieso gel?st ist, dann ist es
+> > erstens nicht so schlimm, weil der wahrscheinlich sowieso bald auf den
+> > meisten neueren PCs landet.
+>
+> Ausser wenn Linux drauf is ^^
+
+D'oh wie konnt ich das vergessen ;)
+
+> > Ich halte nichts davon eine standard-kompatible Seite zu vermurksen nur
+> > um den MS Crap zufrieden zu stellen...
+>
+> Das wollte ich eben auch nicht. Nur die Alternative w?re gewesen, ein
+> zweites Stylesheet extra f?r M$ IE zu schreiben ..
+
+Ich glaube, dass w?rde nicht gen?gen... Ich kenne mich da zwar nicht so aus, 
+aber iirc hat der IE eine etwas merkw?rdige Auffassung vom XML DOM und 
+wirft xhtml Dokumente deswegen durcheinander...
+Ein Stylesheet kann da nur insofern entgegenwirken, als man mit Trial & 
+Error padding und margin solange rumspielt, bis es einigerma?en passt. Das 
+ist es mir aber ehrlich gesagt nicht wert ;)
+
+Was mir aber grad noch eingefallen ist: Wir k?nnen vielleicht auf den IE 
+verzichten, aber keinesfalls auf Konsolenbrowser! Immerhin ist das ja 
+unsere "Stammclientel" ;)
+Ich habe grad mal ein bisschen lynx und w3m getestet. Funktioniert 
+wunderbar... [e]links w?re noch f?llig, den m?sst' ich aber erst noch 
+installieren. Vielleicht hat den ja schon jemand parat...
+
+> > Wenn wir schon freie Software schreiben, dann sollten wir uns auch an
+> > offene Standards halten!
+>
+> Wegen IE und anderen Drecks Produkten aus diesem Konzern werde ich mich
+> _nie_ nicht an die Standards halten.
+
+Full ack!
+
+> > Ganz abgesehen davon, dass die Umstellungen auf dem IE sowieso wieder
+> > Testen und Ausprobieren mit sich bringt und die ganze Sache enorm
+> > verkompliziert... Dazu bin ich zu faul ;)
+>
+> Darum sollte die Seite ja wirklich sehr einfach und f?r jeden modernen
+> Browser korrekt darzustellen sein. Aber das geht ja nicht mal ..
+
+Doch das geht! Der IE ist kein moderner Browser ^^
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070227/d86d8c37/attachment.pgp>
+
+From basti.wiesner at gmx.net  Tue Feb 27 22:13:36 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Tue, 27 Feb 2007 22:13:36 +0100
+Subject: [Tel-dev] Bug in 0.1.5: --show fehlerhaft
+In-Reply-To: <1172592540.5151.2.camel@rebian.home>
+References: <1172528768.15576.4.camel@rebian.home>
+	<200702271557.09522.basti.wiesner@gmx.net>
+	<1172592540.5151.2.camel@rebian.home>
+Message-ID: <200702272213.36331.basti.wiesner@gmx.net>
+
+Remo Wenger hackte folgendes:
+> Am Dienstag, den 27.02.2007, 15:56 +0100 schrieb Sebastian Wiesner:
+> > Interessant...
+> > We sieht den der Eintrag aus, der diesen Fehler verursacht?
+>
+> Habe ich leider nicht mehr :-(
+
+np. Ich frag nur weil der Fehler offenbar bei der Formatierung des 
+Index-Feldes auftritt... Das komische ist aber, dass das ja automatisch 
+erzeugt wird. Da d?rften eigentlich gar keine ung?ltigen Zeichen 
+vorkommen :-S
+
+> > Btw, w?re nett, wenn du diesen Fehler noch im Bugmanager eintragen
+> > k?nntest. Damit andere sehen, dass der Fehler bereits bekannt ist und
+> > verbessert wird!
+>
+> Habe nochmals einen Eintrag erstellt aber dann kam der Fehler nicht
+> mehr. Das selbe Problem hatte ich aber auch unter WinXP. Werde, wenn ich
+> Zeit habe, dort mal nachschauen.
+> Wenn ich den Bug wieder "entdeckt" habe, werde ich den bugreport
+> absenden.
+
+Jupp, vielleicht erscheint er ja wieder.
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070227/6d647a6e/attachment.pgp>
+
+From potrmwn at gmail.com  Tue Feb 27 22:19:33 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Tue, 27 Feb 2007 22:19:33 +0100
+Subject: [Tel-dev] Bug in 0.1.5: --show fehlerhaft
+In-Reply-To: <200702272213.36331.basti.wiesner@gmx.net>
+References: <1172528768.15576.4.camel@rebian.home>
+	<200702271557.09522.basti.wiesner@gmx.net>
+	<1172592540.5151.2.camel@rebian.home>
+	<200702272213.36331.basti.wiesner@gmx.net>
+Message-ID: <1172611173.5151.27.camel@rebian.home>
+
+Am Dienstag, den 27.02.2007, 22:13 +0100 schrieb Sebastian Wiesner:
+> np. Ich frag nur weil der Fehler offenbar bei der Formatierung des 
+> Index-Feldes auftritt... Das komische ist aber, dass das ja automatisch 
+> erzeugt wird. Da d?rften eigentlich gar keine ung?ltigen Zeichen 
+> vorkommen :-S
+Oder es wurde so importiert, was aber nicht der Fall ist ;-)
+
+> > > Btw, w?re nett, wenn du diesen Fehler noch im Bugmanager eintragen
+> > > k?nntest. Damit andere sehen, dass der Fehler bereits bekannt ist und
+> > > verbessert wird!
+> >
+> > Habe nochmals einen Eintrag erstellt aber dann kam der Fehler nicht
+> > mehr. Das selbe Problem hatte ich aber auch unter WinXP. Werde, wenn ich
+> > Zeit habe, dort mal nachschauen.
+> > Wenn ich den Bug wieder "entdeckt" habe, werde ich den bugreport
+> > absenden.
+> 
+> Jupp, vielleicht erscheint er ja wieder.
+Ist er. Nun ist er eingetragen
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070227/cb254b47/attachment.pgp>
+
+From potrmwn at gmail.com  Tue Feb 27 22:23:27 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Tue, 27 Feb 2007 22:23:27 +0100
+Subject: [Tel-dev]
+	=?iso-8859-1?q?Ide_bzg=2E_der_Release_0=2E1=2E5=3A_Feld?=
+	=?iso-8859-1?q?er-Priorit=E4t?=
+In-Reply-To: <200702272158.38162.basti.wiesner@gmx.net>
+References: <1172568168.5156.7.camel@rebian.home>
+	<200702271600.33922.basti.wiesner@gmx.net>
+	<1172592886.5151.9.camel@rebian.home>
+	<200702272158.38162.basti.wiesner@gmx.net>
+Message-ID: <1172611407.5151.30.camel@rebian.home>
+
+Am Dienstag, den 27.02.2007, 21:58 +0100 schrieb Sebastian Wiesner:
+> [..] Kannst du diese Sache dann auch dort eintragen? Damit ich meine ganzen 
+> Aufgaben so an einem zentralen Platz habe ... 
+Nat?rlich. Werde mich nachher noch darum k?mmern.
+
+> > > Das w?rde auch mehr Flexibilit?t bringen, weil man z.B. die zu
+> > > durchsuchenden Felder oder die regul?ren Ausdr?cke generell
+> > > konfigurieren kann...
+> >
+> > Wie meinst du das?
+> 
+> Naja, man kann z.B. reinschreiben:
+> ignore_case = true
+> reg_exp = true
+> 
+> Dadruch wird automatisch immer ohne Ber?cksichtigung der GuK ( ;) ) gesucht 
+> und immer mit regul?ren Ausdr?cken...
+Also sozusagen wie eine .vimrc oder .bashrc? Du kannst sie ja .telrc
+nennen ^^
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070227/31689ab4/attachment.pgp>
+
+From basti.wiesner at gmx.net  Tue Feb 27 22:25:43 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Tue, 27 Feb 2007 22:25:43 +0100
+Subject: [Tel-dev]
+	=?iso-8859-15?q?Ide_bzg=2E_der_Release_0=2E1=2E5=3A_Fel?=
+	=?iso-8859-15?q?der-Priorit=E4t?=
+In-Reply-To: <1172611407.5151.30.camel@rebian.home>
+References: <1172568168.5156.7.camel@rebian.home>
+	<200702272158.38162.basti.wiesner@gmx.net>
+	<1172611407.5151.30.camel@rebian.home>
+Message-ID: <200702272225.53032.basti.wiesner@gmx.net>
+
+Remo Wenger hackte folgendes:
+> Am Dienstag, den 27.02.2007, 21:58 +0100 schrieb Sebastian Wiesner:
+> > [..] Kannst du diese Sache dann auch dort eintragen? Damit ich meine
+> > ganzen Aufgaben so an einem zentralen Platz habe ...
+>
+> Nat?rlich. Werde mich nachher noch darum k?mmern.
+>
+> > > > Das w?rde auch mehr Flexibilit?t bringen, weil man z.B. die zu
+> > > > durchsuchenden Felder oder die regul?ren Ausdr?cke generell
+> > > > konfigurieren kann...
+> > >
+> > > Wie meinst du das?
+> >
+> > Naja, man kann z.B. reinschreiben:
+> > ignore_case = true
+> > reg_exp = true
+> >
+> > Dadruch wird automatisch immer ohne Ber?cksichtigung der GuK ( ;) )
+> > gesucht und immer mit regul?ren Ausdr?cken...
+>
+> Also sozusagen wie eine .vimrc oder .bashrc? Du kannst sie ja .telrc
+> nennen ^^
+
+Genau! Aber das ist noch ferne Zukunft, es gibt momentan wichtigeres zu 
+tun ...
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070227/8054f2f0/attachment.pgp>
+
+From potrmwn at gmail.com  Tue Feb 27 22:30:02 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Tue, 27 Feb 2007 22:30:02 +0100
+Subject: [Tel-dev] Website: IE macht uns das Leben schwer
+In-Reply-To: <200702272211.30509.basti.wiesner@gmx.net>
+References: <1172569842.5156.12.camel@rebian.home>
+	<200702271603.48110.basti.wiesner@gmx.net>
+	<1172593157.5151.14.camel@rebian.home>
+	<200702272211.30509.basti.wiesner@gmx.net>
+Message-ID: <1172611802.5151.37.camel@rebian.home>
+
+Am Dienstag, den 27.02.2007, 22:11 +0100 schrieb Sebastian Wiesner:
+> > > Ich halte nichts davon eine standard-kompatible Seite zu vermurksen nur
+> > > um den MS Crap zufrieden zu stellen...
+> >
+> > Das wollte ich eben auch nicht. Nur die Alternative w?re gewesen, ein
+> > zweites Stylesheet extra f?r M$ IE zu schreiben ..
+> 
+> Ich glaube, dass w?rde nicht gen?gen... Ich kenne mich da zwar nicht so aus, 
+> aber iirc hat der IE eine etwas merkw?rdige Auffassung vom XML DOM und 
+> wirft xhtml Dokumente deswegen durcheinander...
+> Ein Stylesheet kann da nur insofern entgegenwirken, als man mit Trial & 
+> Error padding und margin solange rumspielt, bis es einigerma?en passt. Das 
+> ist es mir aber ehrlich gesagt nicht wert ;)
+Du sagst es. Also lassen wir mal das Thema IE
+
+> Was mir aber grad noch eingefallen ist: Wir k?nnen vielleicht auf den IE 
+> verzichten, aber keinesfalls auf Konsolenbrowser! Immerhin ist das ja 
+> unsere "Stammclientel" ;)
+> Ich habe grad mal ein bisschen lynx und w3m getestet. Funktioniert 
+> wunderbar... [e]links w?re noch f?llig, den m?sst' ich aber erst noch 
+> installieren. Vielleicht hat den ja schon jemand parat...
+Ich teste auch ap und zu mit w3m. elinks und links kenne ich nicht.
+
+Wegen nem zweiten Stylesheet von vorher.. wir k?nnen diese Idee auch
+nutzen, einfach f?rs Drucken damit wir dem Drucker sagen k?nnen, wie er
+Drucken soll (Grafiken weglassen, unwichtiges entfernen zB IHV, ..) Das
+w?re aber ein neues Topic wert.
+
+> > > Wenn wir schon freie Software schreiben, dann sollten wir uns auch an
+> > > offene Standards halten!
+> >
+> > Wegen IE und anderen Drecks Produkten aus diesem Konzern werde ich mich
+> > _nie_ nicht an die Standards halten.
+> 
+> Full ack!
+;-)
+
+> > > Ganz abgesehen davon, dass die Umstellungen auf dem IE sowieso wieder
+> > > Testen und Ausprobieren mit sich bringt und die ganze Sache enorm
+> > > verkompliziert... Dazu bin ich zu faul ;)
+> >
+> > Darum sollte die Seite ja wirklich sehr einfach und f?r jeden modernen
+> > Browser korrekt darzustellen sein. Aber das geht ja nicht mal ..
+> 
+> Doch das geht! Der IE ist kein moderner Browser ^^
+Achja.. Entschuldigung, da habe ich was vergessen ^^
+
+Ne lassen wir das IE-gemotze. Bringen tuts uns nix und IE-Usern auch
+nicht.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070227/0da9e7b1/attachment.pgp>
+
+From potrmwn at gmail.com  Tue Feb 27 22:33:06 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Tue, 27 Feb 2007 22:33:06 +0100
+Subject: [Tel-dev] website -> help seite
+In-Reply-To: <200702272202.04389.basti.wiesner@gmx.net>
+References: <200702271700.20955.basti.wiesner@gmx.net>
+	<1172593532.5151.22.camel@rebian.home>
+	<200702272202.04389.basti.wiesner@gmx.net>
+Message-ID: <1172611986.5151.40.camel@rebian.home>
+
+Am Dienstag, den 27.02.2007, 22:02 +0100 schrieb Sebastian Wiesner:
+
+> > Nein, die Mail habe ich nicht erhalten.
+> 
+> MMh, ich habe die Sache aus der TODO Datei eigentlich dir zugewiesen... Da 
+> solltest du doch eigentlich benachrichtigt werden :-S
+Jetzt habe ich eine E-Mail bekommen (als ich das favicon-Todo
+eingetragen habe). Bugs bekomm' ich auch.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070227/0b753dc4/attachment.pgp>
+
+From sabsirro at arcor.de  Tue Feb 27 22:58:19 2007
+From: sabsirro at arcor.de (sabsirro)
+Date: Tue, 27 Feb 2007 22:58:19 +0100
+Subject: [Tel-dev] =?iso-8859-15?q?Grafische_Oberfl=E4che?=
+Message-ID: <45E4A97B.6010507@arcor.de>
+
+Hallo
+
+Ich bin gerade dabei mir das PDF "byteofpython" durchzulesen. Bin ca.
+zur h?lfte durch und muss sagen..wow. Also man kann den Code ja
+scheinbar auch ohne Weiteres durch eine optionale GUI erg?nzen.
+
+Ich w?r daf?r dass wir das auch umsetzten, wenn der Rest mal komplett
+laufen sollte.
+
+
+
+From basti.wiesner at gmx.net  Tue Feb 27 23:03:20 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Tue, 27 Feb 2007 23:03:20 +0100
+Subject: [Tel-dev] =?iso-8859-15?q?Grafische_Oberfl=E4che?=
+In-Reply-To: <45E4A97B.6010507@arcor.de>
+References: <45E4A97B.6010507@arcor.de>
+Message-ID: <200702272303.26582.basti.wiesner@gmx.net>
+
+sabsirro hackte folgendes:
+> Hallo
+>
+> Ich bin gerade dabei mir das PDF "byteofpython" durchzulesen. Bin ca.
+> zur h?lfte durch und muss sagen..wow. Also man kann den Code ja
+> scheinbar auch ohne Weiteres durch eine optionale GUI erg?nzen.
+>
+> Ich w?r daf?r dass wir das auch umsetzten, wenn der Rest mal komplett
+> laufen sollte.
+
+Klar, aber schau mal in den Feature Manager von BerliOS...
+Da steht noch einiges drinnen, was zuerst kommen sollte... deutsche sprache, 
+einfache installation...
+
+Au?erdem sollten wir uns das GUI Toolkit gut ?berlegen! Tk ist zwar insofern 
+nett, als es dabei ist, aber es sieht unter Linux nicht gut aus und 
+integriert sich auch nicht gut in den Desktop!
+Da k?nnten wir eventuell eher auf die GTK Bindings f?r Python 
+zur?ckgreifen...
+
+Au?erdem sollten wir erstmal eine GUI f?r die Konsole schreiben (so wie 
+aptitude). Iirc gibt es da auch ein Python-Modul (welches allerdings nicht 
+standardm??ig dabei ist).
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070227/efd9c6a3/attachment.pgp>
+
+From sabsirro at arcor.de  Tue Feb 27 23:08:03 2007
+From: sabsirro at arcor.de (sabsirro)
+Date: Tue, 27 Feb 2007 23:08:03 +0100
+Subject: [Tel-dev] =?iso-8859-15?q?Grafische_Oberfl=E4che?=
+Message-ID: <45E4ABC3.1030206@arcor.de>
+
+> Da steht noch einiges drinnen, was zuerst kommen sollte... deutsche sprache, 
+> einfache installation...
+>
+> Au?erdem sollten wir uns das GUI Toolkit gut ?berlegen! Tk ist zwar insofern 
+> nett, als es dabei ist, aber es sieht unter Linux nicht gut aus und 
+> integriert sich auch nicht gut in den Desktop!
+> Da k?nnten wir eventuell eher auf die GTK Bindings f?r Python 
+> zur?ckgreifen...
+>
+> Au?erdem sollten wir erstmal eine GUI f?r die Konsole schreiben (so wie 
+> aptitude). Iirc gibt es da auch ein Python-Modul (welches allerdings nicht 
+> standardm??ig dabei ist).
+Jo schon klar dass es noch einiges Anderes zu tun gibt,,,ist mir nur gerade in 's Auge gesprungen. :-O
+
+MfG Sab.
+
+
+
+From potrmwn at gmail.com  Wed Feb 28 12:10:49 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Wed, 28 Feb 2007 12:10:49 +0100
+Subject: [Tel-dev] =?iso-8859-1?q?Grafische_Oberfl=E4che?=
+In-Reply-To: <45E4A97B.6010507@arcor.de>
+References: <45E4A97B.6010507@arcor.de>
+Message-ID: <1172661049.5164.1.camel@rebian.home>
+
+Am Dienstag, den 27.02.2007, 22:58 +0100 schrieb sabsirro:
+> Ich bin gerade dabei mir das PDF "byteofpython" durchzulesen. Bin ca.
+> zur h?lfte durch und muss sagen..wow. Also man kann den Code ja
+> scheinbar auch ohne Weiteres durch eine optionale GUI erg?nzen.
+Klingt interessant.
+
+> Ich w?r daf?r dass wir das auch umsetzten, wenn der Rest mal komplett
+> laufen sollte.
+Wann w?re das? Bei der Version 1.0.0?
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070228/fc4a1788/attachment.pgp>
+
+From potrmwn at gmail.com  Wed Feb 28 12:13:31 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Wed, 28 Feb 2007 12:13:31 +0100
+Subject: [Tel-dev] =?iso-8859-1?q?Grafische_Oberfl=E4che?=
+In-Reply-To: <200702272303.26582.basti.wiesner@gmx.net>
+References: <45E4A97B.6010507@arcor.de>
+	<200702272303.26582.basti.wiesner@gmx.net>
+Message-ID: <1172661211.5164.5.camel@rebian.home>
+
+Am Dienstag, den 27.02.2007, 23:03 +0100 schrieb Sebastian Wiesner:
+> Klar, aber schau mal in den Feature Manager von BerliOS...
+> Da steht noch einiges drinnen, was zuerst kommen sollte... deutsche sprache, 
+> einfache installation...
+Ideen kann man ja trotzdem vorschlagen ;-)
+
+> Au?erdem sollten wir uns das GUI Toolkit gut ?berlegen! Tk ist zwar insofern 
+> nett, als es dabei ist, aber es sieht unter Linux nicht gut aus und 
+> integriert sich auch nicht gut in den Desktop!
+Hast du ein Screenshot? Ich kenne micht mit dem nicht aus. Wieso l?sst
+es sich nicht gut in den Desktop intergrieren?
+
+> Au?erdem sollten wir erstmal eine GUI f?r die Konsole schreiben (so wie 
+> aptitude).
+Meinst du eine semigrafische Oberfl?che?
+
+> Iirc gibt es da auch ein Python-Modul (welches allerdings nicht 
+> standardm??ig dabei ist).
+Wenn es zu einer GUI kommen sollte, sollte das im Projekt "tel" arbeiten
+oder als ein extra Projekt registriert werden? Wie machen das andere? Es
+sollte ja schliesslich wirklich nur optional sein und man k?nnte die GUI
+ja auch durch eine andere ersetzen, wenn es eine andere g?be ;-)
+Oder die Standard-GUI mit tel im selben Projekt?
+
+Greets,
+Pot
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070228/3b7e53b3/attachment.pgp>
+
+From potrmwn at gmail.com  Wed Feb 28 12:22:51 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Wed, 28 Feb 2007 12:22:51 +0100
+Subject: [Tel-dev] Tabulatorenabstand von Lunar nur halb so gross
+Message-ID: <1172661771.5164.9.camel@rebian.home>
+
+Hi,
+
+ich wollte mal ein bisschen weiter in tel.py reinschnuppern und dabei
+ist mir aufgefallen, dass deine (lunar) Tablulatorenabst?nde nur halb so
+gross wie meine sind.
+Da wir hier von Python Code reden kann und wird dies Probleme
+verursachen, da ja der Interpreter das korrekte Einr?cken _erzwingt_!
+Zudem ist korrektes Einr?cken sowieso besser leserlich ^^
+
+Was machen wir da? Ist das eine Einstellung von vim? Du nutzt ja emacs.
+
+Greets,
+Pot
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070228/15572607/attachment.pgp>
+
+From basti.wiesner at gmx.net  Wed Feb 28 12:32:55 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Wed, 28 Feb 2007 12:32:55 +0100
+Subject: [Tel-dev] =?iso-8859-15?q?Grafische_Oberfl=E4che?=
+In-Reply-To: <1172661211.5164.5.camel@rebian.home>
+References: <45E4A97B.6010507@arcor.de>
+	<200702272303.26582.basti.wiesner@gmx.net>
+	<1172661211.5164.5.camel@rebian.home>
+Message-ID: <200702281233.11371.basti.wiesner@gmx.net>
+
+Remo Wenger hackte folgendes:
+> Am Dienstag, den 27.02.2007, 23:03 +0100 schrieb Sebastian Wiesner:
+> > Klar, aber schau mal in den Feature Manager von BerliOS...
+> > Da steht noch einiges drinnen, was zuerst kommen sollte... deutsche
+> > sprache, einfache installation...
+>
+> Ideen kann man ja trotzdem vorschlagen ;-)
+
+Klar, immer her damit ;)
+Allerdings sollten wir auch mit der Implementierung hinterherkommen ;)
+
+> > Au?erdem sollten wir uns das GUI Toolkit gut ?berlegen! Tk ist zwar
+> > insofern nett, als es dabei ist, aber es sieht unter Linux nicht gut
+> > aus und integriert sich auch nicht gut in den Desktop!
+>
+> Hast du ein Screenshot? Ich kenne micht mit dem nicht aus. Wieso l?sst
+> es sich nicht gut in den Desktop intergrieren?
+
+Ich habe mal auf dem FTP Server drei Screenshots von IDLE, einer Python-IDE, 
+hochgeladen. Die ist standardm??ig bei Python dabei, stammt auch von der 
+Python-Foundation und ist in TK geschrieben... Sie sieht halt aus wie 
+uralte Motif-Programme, kein Vergleich zu GTK+/Gnome oder QT/KDE...
+
+> > Au?erdem sollten wir erstmal eine GUI f?r die Konsole schreiben (so wie
+> > aptitude).
+>
+> Meinst du eine semigrafische Oberfl?che?
+
+MMmh, hast du mal aptitude auf der Konsole ausgef?hrt? Sowas schwebt mir 
+vor. Das w?re halt ein UI f?r die Konsole, was evtl komfortabler zu 
+benutzen w?re als das mit den argumenten.
+
+> > Iirc gibt es da auch ein Python-Modul (welches allerdings nicht
+> > standardm??ig dabei ist).
+>
+> Wenn es zu einer GUI kommen sollte, sollte das im Projekt "tel" arbeiten
+> oder als ein extra Projekt registriert werden? Wie machen das andere? Es
+> sollte ja schliesslich wirklich nur optional sein und man k?nnte die GUI
+> ja auch durch eine andere ersetzen, wenn es eine andere g?be ;-)
+> Oder die Standard-GUI mit tel im selben Projekt?
+
+Ich w?rde die CUI (console user interface, siehe oben) auf jeden Fall noch 
+ins Projekt aufnehmen. Bei einer GUI... Naja ich wei? nicht, wir schreiben 
+ja immerhin ein "konsolen-telefon buch". Au?erdem gibts graphische 
+Oberfl?chen ja zur gen?ge. Da w?rde imho eher ein verbesserter Im- und 
+Export helfen, damit man besser synchronisieren kann!
+Aber dar?ber k?nnen wir ja nochmal diskutieren, wenns soweit ist. Momentan 
+ist das ja imho noch Zukunftsmusik, oder? ;)
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070228/2d0091e2/attachment.pgp>
+
+From basti.wiesner at gmx.net  Wed Feb 28 12:47:37 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Wed, 28 Feb 2007 12:47:37 +0100
+Subject: [Tel-dev] Tabulatorenabstand von Lunar nur halb so gross
+In-Reply-To: <1172661771.5164.9.camel@rebian.home>
+References: <1172661771.5164.9.camel@rebian.home>
+Message-ID: <200702281247.42268.basti.wiesner@gmx.net>
+
+Remo Wenger hackte folgendes:
+> Hi,
+>
+> ich wollte mal ein bisschen weiter in tel.py reinschnuppern und dabei
+> ist mir aufgefallen, dass deine (lunar) Tablulatorenabst?nde nur halb so
+> gross wie meine sind.
+
+Ich habe keine Tabulatoren verwendet. Tabulatoren und somit die Einr?ckung 
+sind ja Einstellungssache und so w?rde der Code von den Einstellungen 
+abh?ngen. Das gef?llt mir nicht... Au?erdem gibt es einen Python Style 
+Guide, den PEP 8 http://www.python.org/dev/peps/pep-0008/, und der sagt:
+
+> For new projects, spaces-only are strongly recommended over tabs.  Most
+> editors have features that make this easy to do.
+
+Deswegen verwende ich vier Leerzeichen f?r jede Einr?ckungsebene.
+
+> Da wir hier von Python Code reden kann und wird dies Probleme
+> verursachen, da ja der Interpreter das korrekte Einr?cken _erzwingt_!
+> Zudem ist korrektes Einr?cken sowieso besser leserlich ^^
+
+ack, deswegen vier Leerzeichen. 
+
+> Was machen wir da? Ist das eine Einstellung von vim? Du nutzt ja emacs.
+
+Mmh, es scheint, dass vi automatisch immer Tabulatoren verwendet.
+Das m?sstest du auf vier Leerzeichen umstellen. Im Code von tel ist kein 
+Tabulator drinnen, sondern nur Leerzeichen.
+
+Zum Thema Vim und Python kannst du dir mal den Artikel im Python Wiki 
+durchlesen, da wird auch erkl?rt, wie du vim konfigurierst:
+http://wiki.python.de/Python-Programmieren_mit_Vim?highlight=%28vim%29
+
+hope it helps
+lunar
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070228/41ffd996/attachment.pgp>
+
+From potrmwn at gmail.com  Wed Feb 28 13:43:04 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Wed, 28 Feb 2007 13:43:04 +0100
+Subject: [Tel-dev] Tabulatorenabstand von Lunar nur halb so gross
+In-Reply-To: <200702281247.42268.basti.wiesner@gmx.net>
+References: <1172661771.5164.9.camel@rebian.home>
+	<200702281247.42268.basti.wiesner@gmx.net>
+Message-ID: <1172666584.5164.12.camel@rebian.home>
+
+Am Mittwoch, den 28.02.2007, 12:47 +0100 schrieb Sebastian Wiesner:
+> Mmh, es scheint, dass vi automatisch immer Tabulatoren verwendet.
+> Das m?sstest du auf vier Leerzeichen umstellen. Im Code von tel ist kein 
+> Tabulator drinnen, sondern nur Leerzeichen.
+> 
+> Zum Thema Vim und Python kannst du dir mal den Artikel im Python Wiki 
+> durchlesen, da wird auch erkl?rt, wie du vim konfigurierst:
+> http://wiki.python.de/Python-Programmieren_mit_Vim?highlight=%28vim%29
+> 
+> hope it helps
+jop hat geholfen.
+Bin jetzt auch nur noch mit Leerzeichen unterwegs ^^
+
+Thx
+Pot
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070228/1a6be052/attachment.pgp>
+
+From potrmwn at gmail.com  Wed Feb 28 16:08:36 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Wed, 28 Feb 2007 16:08:36 +0100
+Subject: [Tel-dev] =?iso-8859-1?q?=5B_Feature_Request_=233176_=5D_Sorting?=
+	=?iso-8859-1?q?=3A_local_options_mit_print=5Fshort=5Flist_verkn=FC?=
+	=?iso-8859-1?q?pfen?=
+Message-ID: <1172675316.5164.22.camel@rebian.home>
+
+Hi,
+
+bin gerade dabei mit meinen sehr eingeschr?nkten Python Kenntnissen
+(darf man das schon Kenntnisse nennen?) die zusatz Option --sort/-s
+hinzuzuf?gen (Feature Request #3176).
+
+Die Option --sort habe ich schon eingef?gt:
+
+> make_option('-s', '--sort', action='store', dest='sort',
+> 	type='string',
+> 	help=_('supports sorting of output'))
+
+So weit, so gut: es scheint zu funktionieren (--help zeigt --sort
+korrekt an).
+
+Nun will ich das mal beim Aufruf von --list auch nutzen. Also gehe ich
+zur Funktion print_short_list und f?ge ein drittes Argument an:
+
+> def print_short_list(self, entries, sort):
+> 	"""Prints all `entries` in a short format:"""
+> 	print
+> 	print sort
+> 	for entry in entries:
+> 		print repr(entry)
+
+Da kommt aber ne Fehlermeldung:
+> remo at rebian:~/tel/trunk$ ./tel.py --list --sort=Mdf
+> Traceback (most recent call last):
+>   File "./tel.py", line 1032, in ?
+>     ConsoleIFace().start()
+>   File "./tel.py", line 1026, in start
+>     options.command_function(options, *args)
+>   File "./tel.py", line 828, in _cmd_list
+>     self.print_short_list(entries)
+> TypeError: print_short_list() takes exactly 3 arguments (2 given)
+
+Der Grund ist f?r mich klar: Er kennt die Variable "sort" (noch) nicht.
+Wie also kann ich --short mit dieser Funktion verkn?pfen? Hab schon ein
+bisschen im Code rumgeschn?ffelt aber bin nicht schlau geworden.
+
+Greets,
+Pot
+
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070228/d34e5693/attachment.pgp>
+
+From potrmwn at gmail.com  Wed Feb 28 16:49:36 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Wed, 28 Feb 2007 16:49:36 +0100
+Subject: [Tel-dev] =?iso-8859-1?q?Grafische_Oberfl=E4che?=
+In-Reply-To: <200702281233.11371.basti.wiesner@gmx.net>
+References: <45E4A97B.6010507@arcor.de>
+	<200702272303.26582.basti.wiesner@gmx.net>
+	<1172661211.5164.5.camel@rebian.home>
+	<200702281233.11371.basti.wiesner@gmx.net>
+Message-ID: <1172677776.5164.31.camel@rebian.home>
+
+Am Mittwoch, den 28.02.2007, 12:32 +0100 schrieb Sebastian Wiesner:
+> > Ideen kann man ja trotzdem vorschlagen ;-)
+> 
+> Klar, immer her damit ;)
+> Allerdings sollten wir auch mit der Implementierung hinterherkommen ;)
+Keine Angst, ich bin ja an der --sort dran, und hab alles (eigentlich
+nichts) im Griff ^^
+
+> > > Au?erdem sollten wir uns das GUI Toolkit gut ?berlegen! Tk ist zwar
+> > > insofern nett, als es dabei ist, aber es sieht unter Linux nicht gut
+> > > aus und integriert sich auch nicht gut in den Desktop!
+> >
+> > Hast du ein Screenshot? Ich kenne micht mit dem nicht aus. Wieso l?sst
+> > es sich nicht gut in den Desktop intergrieren?
+> 
+> Ich habe mal auf dem FTP Server drei Screenshots von IDLE, einer Python-IDE, 
+> hochgeladen. Die ist standardm??ig bei Python dabei, stammt auch von der 
+> Python-Foundation und ist in TK geschrieben... Sie sieht halt aus wie 
+> uralte Motif-Programme, kein Vergleich zu GTK+/Gnome oder QT/KDE...
+F?r mich sieht das ein bisschen Win-95 ?hnlich aus ^^
+Nein ist wirklich nicht sehr sch?n ..
+
+> > > Au?erdem sollten wir erstmal eine GUI f?r die Konsole schreiben (so wie
+> > > aptitude).
+> >
+> > Meinst du eine semigrafische Oberfl?che?
+> 
+> MMmh, hast du mal aptitude auf der Konsole ausgef?hrt? Sowas schwebt mir 
+> vor. Das w?re halt ein UI f?r die Konsole, was evtl komfortabler zu 
+> benutzen w?re als das mit den argumenten.
+Ja, finde ich auch. Vorallem f?r Konsolenfreaks die tel ?ber ssh nutzen
+wollen ^^
+
+> Ich w?rde die CUI (console user interface, siehe oben) auf jeden Fall noch 
+> ins Projekt aufnehmen.
+Bin ich auch der Meinung.
+
+> Bei einer GUI... Naja ich wei? nicht, wir schreiben 
+> ja immerhin ein "konsolen-telefon buch". Au?erdem gibts graphische 
+> Oberfl?chen ja zur gen?ge.
+Aber nicht f?r tel ^^
+Naja es bleibt ja auch ein Konsolen Telefonbuch. Nur eben mit ner
+optionalen GUI ;-)
+
+> Da w?rde imho eher ein verbesserter Im- und 
+> Export helfen, damit man besser synchronisieren kann!
+Ja dann mach das mal... Heieiei, immer noch net fertig? *scherz*
+
+> Aber dar?ber k?nnen wir ja nochmal diskutieren, wenns soweit ist. Momentan 
+> ist das ja imho noch Zukunftsmusik, oder? ;)
+Ist es. Aber wir k?nnten uns jetzt schon Gedanken machen, wie wir das
+dann machen wollen. Welche Sprache, GTK/QT, .. Damit man sich auch
+darauf vorbereiten kann ;-)
+Sab und ich wurden auch ins kalte Python-Wasser geschmissen, wenn du
+weisst, was ich meine ^^
+
+So long,
+Pot
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070228/13020d4d/attachment.pgp>
+
+From potrmwn at gmail.com  Wed Feb 28 17:03:06 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Wed, 28 Feb 2007 17:03:06 +0100
+Subject: [Tel-dev] Bug in 0.1.5: --show fehlerhaft
+In-Reply-To: <200702272213.36331.basti.wiesner@gmx.net>
+References: <1172528768.15576.4.camel@rebian.home>
+	<200702271557.09522.basti.wiesner@gmx.net>
+	<1172592540.5151.2.camel@rebian.home>
+	<200702272213.36331.basti.wiesner@gmx.net>
+Message-ID: <1172678586.5164.34.camel@rebian.home>
+
+Warum wurde der Bug wieder aus berliOS entfernt? Ich habe dieses
+st?rende Teil immernoch und kann daher dort auch nicht mit --sort
+auspr?beln :-(
+
+Auch das L?schen der ~/.tel/phonebook.csv bringt nichts.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070228/3645bad2/attachment.pgp>
+
+From basti.wiesner at gmx.net  Wed Feb 28 17:15:57 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Wed, 28 Feb 2007 17:15:57 +0100
+Subject: [Tel-dev] Bug in 0.1.5: --show fehlerhaft
+In-Reply-To: <1172678586.5164.34.camel@rebian.home>
+References: <1172528768.15576.4.camel@rebian.home>
+	<200702272213.36331.basti.wiesner@gmx.net>
+	<1172678586.5164.34.camel@rebian.home>
+Message-ID: <200702281716.02838.basti.wiesner@gmx.net>
+
+Remo Wenger hackte folgendes:
+> Warum wurde der Bug wieder aus berliOS entfernt? Ich habe dieses
+> st?rende Teil immernoch und kann daher dort auch nicht mit --sort
+> auspr?beln :-(
+
+Keine Ahnung... Ich habe den Bug ge?ffnet und wollte ihn noch mir zuweisen, 
+damit ich ihn auf meiner pers?nlichen Seite sehe. Nach einem kurzen Besuch 
+im WebSVN war der Bug pl?tzlich weg :(
+Vielleicht ein Bug im Bugmanager ^^
+
+> Auch das L?schen der ~/.tel/phonebook.csv bringt nichts.
+
+Der Fehler ist im svn mittlerweile beseitigt... svn update sollte dir die 
+neueste Version einspielen...
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070228/46bee580/attachment.pgp>
+
+From basti.wiesner at gmx.net  Wed Feb 28 17:42:36 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Wed, 28 Feb 2007 17:42:36 +0100
+Subject: [Tel-dev]
+	=?iso-8859-15?q?=5B_Feature_Request_=233176_=5D_Sorting?=
+	=?iso-8859-15?q?=3A_local_options_mit_print=5Fshort=5Flist_verkn?=
+	=?iso-8859-15?q?=FCpfen?=
+In-Reply-To: <1172675316.5164.22.camel@rebian.home>
+References: <1172675316.5164.22.camel@rebian.home>
+Message-ID: <200702281742.54692.basti.wiesner@gmx.net>
+
+Remo Wenger hackte folgendes:
+> Hi,
+>
+> bin gerade dabei mit meinen sehr eingeschr?nkten Python Kenntnissen
+> (darf man das schon Kenntnisse nennen?) die zusatz Option --sort/-s
+> hinzuzuf?gen (Feature Request #3176).
+>
+> Die Option --sort habe ich schon eingef?gt:
+> > make_option('-s', '--sort', action='store', dest='sort',
+> > 	type='string',
+> > 	help=_('supports sorting of output'))
+>
+> So weit, so gut: es scheint zu funktionieren (--help zeigt --sort
+> korrekt an).
+>
+> Nun will ich das mal beim Aufruf von --list auch nutzen. Also gehe ich
+>
+> zur Funktion print_short_list und f?ge ein drittes Argument an:
+> > def print_short_list(self, entries, sort):
+> > 	"""Prints all `entries` in a short format:"""
+> > 	print
+> > 	print sort
+> > 	for entry in entries:
+> > 		print repr(entry)
+
+Die print-Funktionen sind nur Helfer-Funktionen. Dadurch kann man sie 
+unabh?ngig von Kommando mehrfach verwenden. Das ist der Grund, warum die 
+Tabelle bei --table und --search gleich aussieht ;)
+Die eigentliche Arbeit passiert woanders...
+
+>
+> Da kommt aber ne Fehlermeldung:
+> > remo at rebian:~/tel/trunk$ ./tel.py --list --sort=Mdf
+> > Traceback (most recent call last):
+> >   File "./tel.py", line 1032, in ?
+> >     ConsoleIFace().start()
+> >   File "./tel.py", line 1026, in start
+> >     options.command_function(options, *args)
+> >   File "./tel.py", line 828, in _cmd_list
+> >     self.print_short_list(entries)
+> > TypeError: print_short_list() takes exactly 3 arguments (2 given)
+>
+> Der Grund ist f?r mich klar: Er kennt die Variable "sort" (noch) nicht.
+> Wie also kann ich --short mit dieser Funktion verkn?pfen? Hab schon ein
+> bisschen im Code rumgeschn?ffelt aber bin nicht schlau geworden.
+
+Kurz gesagt: Um --list sortieren zu lassen, musst du in 
+ConsoleIFace._cmd_list das Attribut "sort" aus dem Objekt "options" 
+auslesen und an die Funktion print_short_list ?bergeben...
+
+Lang gesagt (oder anders: der Hintergrund dazu):
+Es gibt bei tel eigentlich drei Arten von Optionen (sieht man ja auch in der 
+Hilfe):
+- parser_options: Zeug wie das Ausgeben der Lizenz, der Hilfe oder der  
+Autoren
+- command_options: Alle Kommandos, die etwas bewirken, z.B. Ausgabe, oder 
+Editieren
+- local_options: Optionen, die das Verhalten dieser Kommandos ver?ndern
+
+Kommandos sind wie folgt implementiert:
+Sie werden zur Liste command_options hinzugef?gt (nicht wirklich wichtig, 
+bewirkt nur die Gruppierung der Optionen in der Hilfe-Ausgabe). Viel 
+wichtiger ist aber, dass eine Kommandooption einen bestimmten Callback 
+aufruft: Die Funktion "cb_cmd_opt"
+
+Diese Funktion macht ?berpr?ft nur, dass nicht mehrere Kommandos 
+gleichzeitig ?bergeben wurden. Dann speichert sie die Kommandooption in der 
+Variable "parser.values.command". Das Objekt "parser.values" wird sp?ter 
+von der Methode "parser.parse_args", welche die Argumente parst, 
+zur?ckgegeben, und zwar erstes Element eines Tupels (im Code hei?t die 
+Variable "options").
+Dies geschieht in der Methode ConsoleIFace.parse_args (ganz unten im Code). 
+Hier wird nun das Attribut "options.command", welches die angegebene 
+Kommandooption in String-Form enth?lt, an die Methode 
+ConsoleIFace._get_cmd_function ?bergeben.
+
+Hier passiert nun das Wichtige: Die Kommandooption (z.B. --table) wird nun 
+umgeformt. Zuerst werden die zwei f?hrenden Striche entfernt [1] (--table 
+wird zu table). Dann werden noch alle anderen Striche durch Unterstriche 
+ersetzt (Python Funktionen erlauben keine Striche im Namen, das w?re ja ein 
+Minus-Operator). Zuguterletzt wird das Prefix _cmd_ hinzugef?gt. 
+Aus --table wird also _cmd_table. Wenn du dir den Code genau angeschaut 
+hast, dann weist du, dass es da eine Methode mit diesem Namen gibt. Diese 
+Methode wird nun ?ber die Funktion "getattr" zur?ckgegeben, die im 
+aktuellen Objekt ein Attribut mit diesem Namen sucht. Diese Methode wird 
+dann an den Aufrufer zur?ckgegeben.
+
+Dieses System f?hrt dazu, dass es f?r jedes Kommando eine entsprechende 
+Methode in der Klasse ConsoleIFace gibt:
+--table -> _cmd_table
+--show -> _cmd_show
+--edit -> _cmd_edit
+usw...
+
+Jede dieser Kommandofunktionen erh?lt ein Argument: "options".
+Dieses Argument ist dasselbe, in "store" bei optparse seine Werte ablegt 
+(parser.values). Zum anderen kann die Funktion das Argument *args annehmen. 
+Darin werden alle ?bergebenen Kommandozeilenargumente abgelegt. Table nutzt 
+das z.B. um die Liste der anzuzeigenden Indices zu erlangen.
+
+Ich hoffe, dass hilft dir jetzt ein bisschen...
+
+[1] Dieses Codest?cke habe ich gerade noch mal umgeschrieben. Die If-Abfrage 
+kann man sich auch sparen... Der Code kommt noch ins svn!
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070228/63157da7/attachment.pgp>
+
+From potrmwn at gmail.com  Wed Feb 28 18:08:15 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Wed, 28 Feb 2007 18:08:15 +0100
+Subject: [Tel-dev] Bug in 0.1.5: --show fehlerhaft
+In-Reply-To: <200702281716.02838.basti.wiesner@gmx.net>
+References: <1172528768.15576.4.camel@rebian.home>
+	<200702272213.36331.basti.wiesner@gmx.net>
+	<1172678586.5164.34.camel@rebian.home>
+	<200702281716.02838.basti.wiesner@gmx.net>
+Message-ID: <1172682495.5164.37.camel@rebian.home>
+
+Am Mittwoch, den 28.02.2007, 17:15 +0100 schrieb Sebastian Wiesner:
+> Remo Wenger hackte folgendes:
+> > Warum wurde der Bug wieder aus berliOS entfernt? Ich habe dieses
+> > st?rende Teil immernoch und kann daher dort auch nicht mit --sort
+> > auspr?beln :-(
+> 
+> Keine Ahnung... Ich habe den Bug ge?ffnet und wollte ihn noch mir zuweisen, 
+> damit ich ihn auf meiner pers?nlichen Seite sehe. Nach einem kurzen Besuch 
+> im WebSVN war der Bug pl?tzlich weg :(
+> Vielleicht ein Bug im Bugmanager ^^
+Habs herausgefunden als ich meine pers?nliche Seite besuchte. Unter my
+Bugs stand da der --show-Bug aber f?rs Projekt KeyJnoteGUI ^^
+
+> > Auch das L?schen der ~/.tel/phonebook.csv bringt nichts.
+> 
+> Der Fehler ist im svn mittlerweile beseitigt... svn update sollte dir die 
+> neueste Version einspielen...
+Ok
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070228/c446b928/attachment.pgp>
+
+From basti.wiesner at gmx.net  Wed Feb 28 18:24:15 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Wed, 28 Feb 2007 18:24:15 +0100
+Subject: [Tel-dev] Bug in 0.1.5: --show fehlerhaft
+In-Reply-To: <1172682495.5164.37.camel@rebian.home>
+References: <1172528768.15576.4.camel@rebian.home>
+	<200702281716.02838.basti.wiesner@gmx.net>
+	<1172682495.5164.37.camel@rebian.home>
+Message-ID: <200702281824.20533.basti.wiesner@gmx.net>
+
+Remo Wenger hackte folgendes:
+> Am Mittwoch, den 28.02.2007, 17:15 +0100 schrieb Sebastian Wiesner:
+> > Remo Wenger hackte folgendes:
+> > > Warum wurde der Bug wieder aus berliOS entfernt? Ich habe dieses
+> > > st?rende Teil immernoch und kann daher dort auch nicht mit --sort
+> > > auspr?beln :-(
+> >
+> > Keine Ahnung... Ich habe den Bug ge?ffnet und wollte ihn noch mir
+> > zuweisen, damit ich ihn auf meiner pers?nlichen Seite sehe. Nach einem
+> > kurzen Besuch im WebSVN war der Bug pl?tzlich weg :(
+> > Vielleicht ein Bug im Bugmanager ^^
+>
+> Habs herausgefunden als ich meine pers?nliche Seite besuchte. Unter my
+> Bugs stand da der --show-Bug aber f?rs Projekt KeyJnoteGUI ^^
+
+Och n??? :(
+Dann hab cih den versehentlich verschoben... *sch?m*...
+
+Ich habs r?ckg?ngig gemacht...
+Darf ich dich dann noch bitten, die Log Meldung f?r r71 zu ?ndern. Ich hab 
+da die Bugnummer nicht integriert. Mach bitte folgendes draus:
+
+Fixed 010514: formatting exception on --show
+
+Danke!
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070228/e7d4c47a/attachment.pgp>
+
+From potrmwn at gmail.com  Wed Feb 28 18:43:41 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Wed, 28 Feb 2007 18:43:41 +0100
+Subject: [Tel-dev] Bug in 0.1.5: --show fehlerhaft
+In-Reply-To: <200702281824.20533.basti.wiesner@gmx.net>
+References: <1172528768.15576.4.camel@rebian.home>
+	<200702281716.02838.basti.wiesner@gmx.net>
+	<1172682495.5164.37.camel@rebian.home>
+	<200702281824.20533.basti.wiesner@gmx.net>
+Message-ID: <1172684621.5164.40.camel@rebian.home>
+
+Am Mittwoch, den 28.02.2007, 18:24 +0100 schrieb Sebastian Wiesner:
+> Och n??? :(
+> Dann hab cih den versehentlich verschoben... *sch?m*...
+> 
+> Ich habs r?ckg?ngig gemacht...
+> Darf ich dich dann noch bitten, die Log Meldung f?r r71 zu ?ndern. Ich hab 
+> da die Bugnummer nicht integriert. Mach bitte folgendes draus:
+> 
+> Fixed 010514: formatting exception on --show
+Done
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070228/70051b89/attachment.pgp>
+
+From potrmwn at gmail.com  Wed Feb 28 20:26:03 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Wed, 28 Feb 2007 20:26:03 +0100
+Subject: [Tel-dev]
+	=?iso-8859-1?q?=5B_Feature_Request_=233176_=5D_Sorting?=
+	=?iso-8859-1?q?=3A_local_options_mit_print=5Fshort=5Flist_verkn=FC?=
+	=?iso-8859-1?q?pfen?=
+In-Reply-To: <200702281742.54692.basti.wiesner@gmx.net>
+References: <1172675316.5164.22.camel@rebian.home>
+	<200702281742.54692.basti.wiesner@gmx.net>
+Message-ID: <1172690763.19663.8.camel@rebian.home>
+
+Am Mittwoch, den 28.02.2007, 17:42 +0100 schrieb Sebastian Wiesner:
+> [..]
+> Ich hoffe, dass hilft dir jetzt ein bisschen...
+
+Danke f?r deine ausf?hrliche Antwort. Jetzt versteh ich tel schon ein
+bissl mehr ^^
+Also ich hab jetzt geschafft dass die Variable sort in der Methode
+print_long_list habe. Jetzt muss ich es irgendwie hinkriegen, dass ich
+weiss welcher Eintrag zu welcher Rubrik geh?rt. Bspw. "Remo" geh?rt ja
+zu Vorname. Wenn das Skript das weiss, kann es "Remo" ja irgendwie nach
+dieser Rubrik sortieren und dann ausgeben.
+Doch: Woher kenne ich die Rubrik ;-)
+
+Diese Eintr?ge bekommt print_long_list ja direkt von _cmd_show, diese
+wiederum von parse_indices(*args) ODER von phonebook
+
+Was ich bei _cmd_show nicht verstehe:
+
+if args:
+	...
+else:
+	...
+
+Was will denn args beinhalten? Wer gibt hier die Argumente an, woher
+kommen die? Was genau entscheidet es, ob jetzt parse_indices oder
+phonebook benutzt wird?
+
+Greets,
+Pot
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070228/96c40068/attachment.pgp>
+

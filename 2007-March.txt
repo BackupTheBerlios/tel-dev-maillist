@@ -1,0 +1,2994 @@
+From basti.wiesner at gmx.net  Thu Mar  1 00:13:18 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Thu, 1 Mar 2007 00:13:18 +0100
+Subject: [Tel-dev]
+	=?iso-8859-15?q?=5B_Feature_Request_=233176_=5D_Sorting?=
+	=?iso-8859-15?q?=3A_local_options_mit_print=5Fshort=5Flist_verkn?=
+	=?iso-8859-15?q?=FCpfen?=
+In-Reply-To: <1172690763.19663.8.camel@rebian.home>
+References: <1172675316.5164.22.camel@rebian.home>
+	<200702281742.54692.basti.wiesner@gmx.net>
+	<1172690763.19663.8.camel@rebian.home>
+Message-ID: <200703010013.31952.basti.wiesner@gmx.net>
+
+Remo Wenger hackte folgendes:
+> Am Mittwoch, den 28.02.2007, 17:42 +0100 schrieb Sebastian Wiesner:
+> > [..]
+> > Ich hoffe, dass hilft dir jetzt ein bisschen...
+>
+> Danke f?r deine ausf?hrliche Antwort. Jetzt versteh ich tel schon ein
+> bissl mehr ^^
+
+np
+
+> Also ich hab jetzt geschafft dass die Variable sort in der Methode
+> print_long_list habe. Jetzt muss ich es irgendwie hinkriegen, dass ich
+> weiss welcher Eintrag zu welcher Rubrik geh?rt. Bspw. "Remo" geh?rt ja
+> zu Vorname. Wenn das Skript das weiss, kann es "Remo" ja irgendwie nach
+> dieser Rubrik sortieren und dann ausgeben.
+> Doch: Woher kenne ich die Rubrik ;-)
+
+Verstehe nicht ganz, was du meinst...
+Die --sort-by (ich hab sie umbenannt, so ists imho deutlicher) Option erh?lt 
+ja ein Feldnamen (wie auch --fields oder --output) als Parameter. Nach dem 
+Inhalt dieses Feldes muss das Telefonbuch sortiert werden...
+
+MMh, ich hatte heute abend (nacht ^^) noch ein bisschen Zeit! Deswegen hab 
+ich mich jetzt selbst mal an die Implementierung gemacht und bin auch 
+fertig geworden. Tschuldigung, dass ich dir die ?bung versaut habe :-( aber 
+ich konnte einfach meine Finger nicht von lassen ;)
+
+Ich bin die ganze Sache letztendlich anders angegangen: --sort ruft jetzt 
+einen callback auf, der den ?bergebenen Wert parst (feldname und 
+sortierreihenfolge bestimmt) und diese zwei Werte in parser.values ablegt.
+Den Kommandos steht also options.sortby und options.descending zur 
+Verf?gung. Diese werden an die print Methoden weitergegeben, welche dann 
+sortieren.
+Das eigentliche Sortieren findet in der neuen sorted Methode der Phonebook 
+Klasse statt.
+Schau dir einfach mal das diff an:
+svn diff -r 72:74
+Dann siehst du alles, was von mir kommt...
+
+> Diese Eintr?ge bekommt print_long_list ja direkt von _cmd_show, diese
+> wiederum von parse_indices(*args) ODER von phonebook
+>
+> Was ich bei _cmd_show nicht verstehe:
+>
+> if args:
+> 	...
+> else:
+> 	...
+>
+> Was will denn args beinhalten? Wer gibt hier die Argumente an, woher
+> kommen die? Was genau entscheidet es, ob jetzt parse_indices oder
+> phonebook benutzt wird?
+
+--show akzeptiert doch beliebig viele Indices als Angabe:
+python tel.py --show 0-3 8 20
+Das zeigt jetzt die Eintr?ge 0,1,2,3,8,20 an. Diese Indices landen in args 
+(und zwar so wie sie auf der Kommanozeile angegeben werden). Gibt es nun 
+Indices (args ist also nicht leer), dann wird parse_indices aufgerufen. 
+Diese Methode anaylisiert die Indexangaben, die ja immer noch in Stringform 
+sind, und erzeugt anhand dieser Angaben eine Liste mit den gew?nschten 
+Eintr?gen.
+Wurden dagegen keine Indices angegeben, wird einfach das ganze Telefonbuch 
+angezeigt.
+
+lunar
+
+PS: das backup skript hab ich nochmal vom ftp entfernt. Ich bastel noch 
+schnell eine Cleanup Funktion rein, die alle Backups ?lter als 30 Tage (ist 
+konfigurierbar, kannst auch 5 oder 1000 nehmen) l?scht.
+Die neue Version kommt morgen auf den ftp.
+Danach fang ich mal damit an, ein Installationsskript f?r linux zu schreiben 
+und die ersten ?bersetzungen zu bewerkstelligen (damit tel endlich auch mal 
+deutsch spricht)...
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070301/76372981/attachment.pgp>
+
+From basti.wiesner at gmx.net  Thu Mar  1 00:19:14 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Thu, 1 Mar 2007 00:19:14 +0100
+Subject: [Tel-dev]
+	=?iso-8859-15?q?=5B_Feature_Request_=233176_=5D_Sorting?=
+	=?iso-8859-15?q?=3A_local_options_mit_print=5Fshort=5Flist_verkn?=
+	=?iso-8859-15?q?=FCpfen?=
+In-Reply-To: <200703010013.31952.basti.wiesner@gmx.net>
+References: <1172675316.5164.22.camel@rebian.home>
+	<1172690763.19663.8.camel@rebian.home>
+	<200703010013.31952.basti.wiesner@gmx.net>
+Message-ID: <200703010019.15187.basti.wiesner@gmx.net>
+
+Sebastian Wiesner hackte folgendes:
+> Remo Wenger hackte folgendes:
+>
+> MMh, ich hatte heute abend (nacht ^^) noch ein bisschen Zeit! Deswegen
+> hab ich mich jetzt selbst mal an die Implementierung gemacht und bin auch
+> fertig geworden. Tschuldigung, dass ich dir die ?bung versaut habe :-(
+> aber ich konnte einfach meine Finger nicht von lassen ;)
+>
+> Ich bin die ganze Sache letztendlich anders angegangen: --sort ruft jetzt
+> einen callback auf, der den ?bergebenen Wert parst (feldname und
+> sortierreihenfolge bestimmt) und diese zwei Werte in parser.values
+> ablegt. Den Kommandos steht also options.sortby und options.descending
+> zur Verf?gung. Diese werden an die print Methoden weitergegeben, welche
+> dann sortieren.
+> Das eigentliche Sortieren findet in der neuen sorted Methode der
+> Phonebook Klasse statt.
+> Schau dir einfach mal das diff an:
+> svn diff -r 72:74
+> Dann siehst du alles, was von mir kommt...
+
+Nachtrag: Du musst noch ein bisschen lernen... ;) Die Art wie du das Feld 
+geparst hast, war relativ umst?ndlich... Schau dir mal an, wie kurz das 
+eigentlich geht: in parser_defaults die richtigen Standardwerte gesetzt, 
+dann muss man im callback cb_sort nur noch die Abweichung vom Standard 
+?berpr?fen...
+
+Wenn du Fragen hast, immer her damit...
+Eventuell k?nnen wir uns morgen nachmittag (ich bin ab 16 uhr zu hause) im 
+Jabber treffen und den Code zum Sortieren (sowohl deinen Anfang als auch 
+meine Durchf?hrung) mal Schritt f?r Schritt durchgehen, wie w?rs?
+
+lunar
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070301/bdfc59ff/attachment.pgp>
+
+From potrmwn at gmail.com  Thu Mar  1 06:54:38 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Thu, 01 Mar 2007 06:54:38 +0100
+Subject: [Tel-dev]
+	=?iso-8859-1?q?=5B_Feature_Request_=233176_=5D_Sorting?=
+	=?iso-8859-1?q?=3A_local_options_mit_print=5Fshort=5Flist_verkn=FC?=
+	=?iso-8859-1?q?pfen?=
+In-Reply-To: <200703010019.15187.basti.wiesner@gmx.net>
+References: <1172675316.5164.22.camel@rebian.home>
+	<1172690763.19663.8.camel@rebian.home>
+	<200703010013.31952.basti.wiesner@gmx.net>
+	<200703010019.15187.basti.wiesner@gmx.net>
+Message-ID: <1172728478.5614.0.camel@rebian.home>
+
+Am Donnerstag, den 01.03.2007, 00:19 +0100 schrieb Sebastian Wiesner:
+> Wenn du Fragen hast, immer her damit...
+> Eventuell k?nnen wir uns morgen nachmittag (ich bin ab 16 uhr zu hause) im 
+> Jabber treffen und den Code zum Sortieren (sowohl deinen Anfang als auch 
+> meine Durchf?hrung) mal Schritt f?r Schritt durchgehen, wie w?rs?
+Jo w?r gut. Hab dann Zeit. Deine andere E-Mail les ich dann heute
+Nachmittag noch ^^
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070301/9333bc10/attachment.pgp>
+
+From potrmwn at gmail.com  Thu Mar  1 13:54:29 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Thu, 01 Mar 2007 13:54:29 +0100
+Subject: [Tel-dev]
+	=?iso-8859-1?q?=5B_Feature_Request_=233176_=5D_Sorting?=
+	=?iso-8859-1?q?=3A_local_options_mit_print=5Fshort=5Flist_verkn=FC?=
+	=?iso-8859-1?q?pfen?=
+In-Reply-To: <200703010013.31952.basti.wiesner@gmx.net>
+References: <1172675316.5164.22.camel@rebian.home>
+	<200702281742.54692.basti.wiesner@gmx.net>
+	<1172690763.19663.8.camel@rebian.home>
+	<200703010013.31952.basti.wiesner@gmx.net>
+Message-ID: <1172753669.5184.4.camel@rebian.home>
+
+Am Donnerstag, den 01.03.2007, 00:13 +0100 schrieb Sebastian Wiesner:
+> MMh, ich hatte heute abend (nacht ^^) noch ein bisschen Zeit! Deswegen hab 
+> ich mich jetzt selbst mal an die Implementierung gemacht und bin auch 
+> fertig geworden. Tschuldigung, dass ich dir die ?bung versaut habe :-( aber 
+> ich konnte einfach meine Finger nicht von lassen ;)
+Arrh b?ses Kind ^^
+
+> Ich bin die ganze Sache letztendlich anders angegangen: --sort ruft jetzt 
+> einen callback auf, der den ?bergebenen Wert parst (feldname und 
+> sortierreihenfolge bestimmt) und diese zwei Werte in parser.values ablegt.
+> Den Kommandos steht also options.sortby und options.descending zur 
+> Verf?gung. Diese werden an die print Methoden weitergegeben, welche dann 
+> sortieren.
+> Das eigentliche Sortieren findet in der neuen sorted Methode der Phonebook 
+> Klasse statt.
+> Schau dir einfach mal das diff an:
+> svn diff -r 72:74
+> Dann siehst du alles, was von mir kommt...
+Ok.. hast du meine war wieder weggemacht? Habs eben noch commited weil
+ich nicht wieder von vorne beginnen wollte, wenn du was neues
+raufgeladen h?ttest.
+
+> --show akzeptiert doch beliebig viele Indices als Angabe:
+> python tel.py --show 0-3 8 20
+> Das zeigt jetzt die Eintr?ge 0,1,2,3,8,20 an. Diese Indices landen in args 
+> (und zwar so wie sie auf der Kommanozeile angegeben werden). Gibt es nun 
+> Indices (args ist also nicht leer), dann wird parse_indices aufgerufen. 
+> Diese Methode anaylisiert die Indexangaben, die ja immer noch in Stringform 
+> sind, und erzeugt anhand dieser Angaben eine Liste mit den gew?nschten 
+> Eintr?gen.
+> Wurden dagegen keine Indices angegeben, wird einfach das ganze Telefonbuch 
+> angezeigt.
+Ahaa..
+
+> 
+> PS: das backup skript hab ich nochmal vom ftp entfernt. Ich bastel noch 
+> schnell eine Cleanup Funktion rein, die alle Backups ?lter als 30 Tage (ist 
+> konfigurierbar, kannst auch 5 oder 1000 nehmen) l?scht.
+> Die neue Version kommt morgen auf den ftp.
+Was ev. besser w?re ist, wenn man angeben k?nnte dass alle
+telrepos-Backups zusammen kleiner als xMB sein m?ssen, damit das ?lteste
+nicht gel?scht wird.
+Das darum, weil ja das Backup immer gr?sser wird.
+
+> Danach fang ich mal damit an, ein Installationsskript f?r linux zu schreiben 
+> und die ersten ?bersetzungen zu bewerkstelligen (damit tel endlich auch mal 
+> deutsch spricht)...
+Cen hat sich mal bei mir gemeldet und will auch mithelfen. Er erw?hnte
+dabei Dokumentation, Manpage und ?bersetzung. Du kannst ja mal mit ihm
+kontakt aufnehmen. Ich hab' ihm gesagt er solle sich hier in der
+Mailingliste registrieren.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070301/2a63fa11/attachment.pgp>
+
+From basti.wiesner at gmx.net  Thu Mar  1 16:08:33 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Thu, 1 Mar 2007 16:08:33 +0100
+Subject: [Tel-dev]
+	=?iso-8859-15?q?=5B_Feature_Request_=233176_=5D_Sorting?=
+	=?iso-8859-15?q?=3A_local_options_mit_print=5Fshort=5Flist_verkn?=
+	=?iso-8859-15?q?=FCpfen?=
+In-Reply-To: <1172753669.5184.4.camel@rebian.home>
+References: <1172675316.5164.22.camel@rebian.home>
+	<200703010013.31952.basti.wiesner@gmx.net>
+	<1172753669.5184.4.camel@rebian.home>
+Message-ID: <200703011608.45293.basti.wiesner@gmx.net>
+
+Remo Wenger hackte folgendes:
+> Am Donnerstag, den 01.03.2007, 00:13 +0100 schrieb Sebastian Wiesner:
+> > MMh, ich hatte heute abend (nacht ^^) noch ein bisschen Zeit! Deswegen
+> > hab ich mich jetzt selbst mal an die Implementierung gemacht und bin
+> > auch fertig geworden. Tschuldigung, dass ich dir die ?bung versaut habe
+> > :-( aber ich konnte einfach meine Finger nicht von lassen ;)
+>
+> Arrh b?ses Kind ^^
+
+*sch?m*
+
+> > Ich bin die ganze Sache letztendlich anders angegangen: --sort ruft
+> > jetzt einen callback auf, der den ?bergebenen Wert parst (feldname und
+> > sortierreihenfolge bestimmt) und diese zwei Werte in parser.values
+> > ablegt. Den Kommandos steht also options.sortby und options.descending
+> > zur Verf?gung. Diese werden an die print Methoden weitergegeben, welche
+> > dann sortieren.
+> > Das eigentliche Sortieren findet in der neuen sorted Methode der
+> > Phonebook Klasse statt.
+> > Schau dir einfach mal das diff an:
+> > svn diff -r 72:74
+> > Dann siehst du alles, was von mir kommt...
+>
+> Ok.. hast du meine war wieder weggemacht? Habs eben noch commited weil
+> ich nicht wieder von vorne beginnen wollte, wenn du was neues
+> raufgeladen h?ttest.
+
+Ja, ich habe sorting ganz anders implmentiert...
+
+> > PS: das backup skript hab ich nochmal vom ftp entfernt. Ich bastel noch
+> > schnell eine Cleanup Funktion rein, die alle Backups ?lter als 30 Tage
+> > (ist konfigurierbar, kannst auch 5 oder 1000 nehmen) l?scht.
+> > Die neue Version kommt morgen auf den ftp.
+>
+> Was ev. besser w?re ist, wenn man angeben k?nnte dass alle
+> telrepos-Backups zusammen kleiner als xMB sein m?ssen, damit das ?lteste
+> nicht gel?scht wird.
+> Das darum, weil ja das Backup immer gr?sser wird.
+
+Mmmh, aber irgendwelche backups muss ich doch l?schen, damit das nicht 
+endlos w?chst. Da ist die beste Option lat?rnich das ?lteste (sonst w?re 
+ein backup ja irgendwie sinnlos ^^). Deswegen kann ich doch auch gleich 
+?ber das Alter gehen. Als Default hatte ich 30 Tage im Sinn. Da kann man 
+dann schon mit dem L?schen anfangen... Wenn irgendwas schieft geht, wollen 
+wir ja nicht beim Stand vor einem Monat anfangen, oder? Wof?r braucht man 
+die alten Backups also?
+Da das backup immer vom _gesamten_ Repo erstellt wird, ist der 
+Versionsgeschichte auch im neuesten vorhanden.
+Ich warte jetzt mal, bis du dich meldest... Damit ich nicht umsonst arbeite 
+(mir ists egal, bei 160 GB fallen die paar MBs auch nicht ins Gewicht ^^ )
+
+> > Danach fang ich mal damit an, ein Installationsskript f?r linux zu
+> > schreiben und die ersten ?bersetzungen zu bewerkstelligen (damit tel
+> > endlich auch mal deutsch spricht)...
+>
+> Cen hat sich mal bei mir gemeldet und will auch mithelfen. Er erw?hnte
+> dabei Dokumentation, Manpage und ?bersetzung. Du kannst ja mal mit ihm
+> kontakt aufnehmen. Ich hab' ihm gesagt er solle sich hier in der
+> Mailingliste registrieren.
+
+Klar. Dokumentation und Manpage w?ren echt cool! F?r die ?bersetzung sollten 
+wir noch warten, bis es ein Installationsskript gibt... Die Message 
+Kataloge bei der Installation selbst zu kopieren ist imho nicht die L?sung, 
+oder? ^^
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070301/6d5955c0/attachment.pgp>
+
+From potrmwn at gmail.com  Thu Mar  1 16:12:41 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Thu, 01 Mar 2007 16:12:41 +0100
+Subject: [Tel-dev]
+	=?iso-8859-1?q?=5B_Feature_Request_=233176_=5D_Sorting?=
+	=?iso-8859-1?q?=3A_local_options_mit_print=5Fshort=5Flist_verkn=FC?=
+	=?iso-8859-1?q?pfen?=
+In-Reply-To: <200703011608.45293.basti.wiesner@gmx.net>
+References: <1172675316.5164.22.camel@rebian.home>
+	<200703010013.31952.basti.wiesner@gmx.net>
+	<1172753669.5184.4.camel@rebian.home>
+	<200703011608.45293.basti.wiesner@gmx.net>
+Message-ID: <1172761961.8131.1.camel@rebian.home>
+
+Am Donnerstag, den 01.03.2007, 16:08 +0100 schrieb Sebastian Wiesner:
+> Mmmh, aber irgendwelche backups muss ich doch l?schen, damit das nicht 
+> endlos w?chst. Da ist die beste Option lat?rnich das ?lteste (sonst w?re 
+> ein backup ja irgendwie sinnlos ^^). Deswegen kann ich doch auch gleich 
+> ?ber das Alter gehen. Als Default hatte ich 30 Tage im Sinn. Da kann man 
+> dann schon mit dem L?schen anfangen... Wenn irgendwas schieft geht, wollen 
+> wir ja nicht beim Stand vor einem Monat anfangen, oder? Wof?r braucht man 
+> die alten Backups also?
+> Da das backup immer vom _gesamten_ Repo erstellt wird, ist der 
+> Versionsgeschichte auch im neuesten vorhanden.
+> Ich warte jetzt mal, bis du dich meldest... Damit ich nicht umsonst arbeite 
+> (mir ists egal, bei 160 GB fallen die paar MBs auch nicht ins Gewicht ^^ )
+Stimmt. Im Prinzip k?nntest du gerade das alle Backups l?schen, wenn ein
+neues dazukommt. Aber die Anzahl zu w?hlen ist hier wohl wirklich besser
+
+> > > Danach fang ich mal damit an, ein Installationsskript f?r linux zu
+> > > schreiben und die ersten ?bersetzungen zu bewerkstelligen (damit tel
+> > > endlich auch mal deutsch spricht)...
+> >
+> > Cen hat sich mal bei mir gemeldet und will auch mithelfen. Er erw?hnte
+> > dabei Dokumentation, Manpage und ?bersetzung. Du kannst ja mal mit ihm
+> > kontakt aufnehmen. Ich hab' ihm gesagt er solle sich hier in der
+> > Mailingliste registrieren.
+> 
+> Klar. Dokumentation und Manpage w?ren echt cool! F?r die ?bersetzung sollten 
+> wir noch warten, bis es ein Installationsskript gibt... Die Message 
+> Kataloge bei der Installation selbst zu kopieren ist imho nicht die L?sung, 
+> oder? ^^
+Ne ^^
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070301/48c60879/attachment.pgp>
+
+From basti.wiesner at gmx.net  Thu Mar  1 16:20:21 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Thu, 1 Mar 2007 16:20:21 +0100
+Subject: [Tel-dev]
+	=?iso-8859-15?q?=5B_Feature_Request_=233176_=5D_Sorting?=
+	=?iso-8859-15?q?=3A_local_options_mit_print=5Fshort=5Flist_verkn?=
+	=?iso-8859-15?q?=FCpfen?=
+In-Reply-To: <1172761961.8131.1.camel@rebian.home>
+References: <1172675316.5164.22.camel@rebian.home>
+	<200703011608.45293.basti.wiesner@gmx.net>
+	<1172761961.8131.1.camel@rebian.home>
+Message-ID: <200703011620.27206.basti.wiesner@gmx.net>
+
+Remo Wenger hackte folgendes:
+>  Prinzip k?nntest du gerade das alle Backups l?schen, wenn ein
+> neues dazukommt. Aber die Anzahl zu w?hlen ist hier wohl wirklich besser
+
+Gut, dann mach ich das heute noch...
+Wenns fertig ist, schreib ich ne Mail an die Liste mit Download Pfad und 
+kleiner Anleitung...
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070301/d2c379ac/attachment.pgp>
+
+From basti.wiesner at gmx.net  Thu Mar  1 19:49:28 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Thu, 1 Mar 2007 19:49:28 +0100
+Subject: [Tel-dev] Backup
+Message-ID: <200703011949.34260.basti.wiesner@gmx.net>
+
+Hi @all
+
+BerliOS ist so freundlich und erstellt t?glich ein Backup des kompletten 
+Repositories f?r uns [1]. Dieses Backup wird aber leider nicht f?r uns 
+zugreifbar gespeichert, sondern nur zum Download [2] angeboten. Dabei wird 
+immer nur das aktuellste Backup verwendet, dass Backup des Vortages geht 
+also verloren.
+
+Es liegt also in unserer Verantwortung, daf?r zu sorgen, dass wir die 
+Backups parat haben. Damit man nicht jeden Tag daran denken muss, das 
+neueste Backup herunterzuladen, habe ich ein kleines Skript geschrieben 
+(nat?rlich in Python ^^), welches die Datei automatisch herunterl?dt. 
+Dieses Skript ist auf dem FTP Server unseres Projekts zu finden [3].
+
+Um dieses Skript zu benutzen, muss man es einmal manuell aufrufen. Es 
+?berpr?ft dann, ob seine Konfigurationsdatei vorhanden ist (standardm??ig 
+~/.telbackuprc). Ist dies nicht der Fall, stellt das Skript einige Fragen 
+zu Konfiguration und l?dt das erste Backup herunter. M?chte man eine andere 
+Konfigurationsdatei verwenden, so muss man diese bei _jedem_ Aufruf des 
+Skripts ?bergeben:
+
+--> telbackup.py /pfad/zu/meiner/configdatei
+
+Hat man das Skript konfiguriert, so l?dt es weitere backups (falls n?tig) 
+bei der erneuten Ausf?hrung des Skripts automatisch herunter. Es eignet 
+sich also prima f?r cronjobs oder ?hnliches.
+Ich z.B. habe den Aufruf des Skripts in meinen KDE Autostartordner 
+eingef?gt. Dadurch ?berpr?ft das Skript bei jedem Einloggen, ob ein backup 
+n?tig ist (die backups werden ja nur all 24h neu erstellt, also muss nicht 
+jedesmal heruntergeladen werden) und l?dt es ggf herunter. Das passiert nun 
+ohne das eine weitere Eingabe erforderlich w?re.
+
+Probiert es einfach aus!
+Je mehr Leute ein backup haben, desto sicherer ist es ^^
+
+lunar
+
+---
+[1] [Download Your Nightly SVN Tree Dump] - 
+https://developer.berlios.de/project/admin/?group_id=8132
+[2] http://download.berlios.de/svndumps/tel-repos.gz
+[3] ftp://ftp.berlios.de/pub/tel/telbackup.py
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070301/4a216f74/attachment.pgp>
+
+From potrmwn at gmail.com  Thu Mar  1 20:01:29 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Thu, 01 Mar 2007 20:01:29 +0100
+Subject: [Tel-dev] Backup
+In-Reply-To: <200703011949.34260.basti.wiesner@gmx.net>
+References: <200703011949.34260.basti.wiesner@gmx.net>
+Message-ID: <1172775689.15181.2.camel@rebian.home>
+
+Am Donnerstag, den 01.03.2007, 19:49 +0100 schrieb Sebastian Wiesner:
+> Probiert es einfach aus!
+> Je mehr Leute ein backup haben, desto sicherer ist es ^^
+Cool ;-)
+Nun ist es offiziell ^^
+
+Danke f?r deine M?hen. Werde das Script baldm?glichst als cronjob
+einrichten
+
+MfG,
+Pot
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070301/0b9d2ffd/attachment.pgp>
+
+From potrmwn at gmail.com  Thu Mar  1 21:35:16 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Thu, 01 Mar 2007 21:35:16 +0100
+Subject: [Tel-dev] tel Homepage
+In-Reply-To: <200702241554.06110.basti.wiesner@gmx.net>
+References: <1172314042.10089.16.camel@rebian.home>
+	<200702241318.51963.basti.wiesner@gmx.net>
+	<1172321729.10089.56.camel@rebian.home>
+	<200702241554.06110.basti.wiesner@gmx.net>
+Message-ID: <1172781316.15181.6.camel@rebian.home>
+
+Am Samstag, den 24.02.2007, 15:54 +0100 schrieb Sebastian Wiesner:
+> Dann kommen vielleicht noch ein paar Screenshots der Highlights:
+> - Einmal das Editieren von Eintr?gen...
+> - Die Suche mit Ausgabe als Tabelle
+> - ...
+Das Editieren habe ich mal hinzugef?gt, wie du bereits bemerkt hast.
+Hoffe das war so etwa in deinem Sinne ;-) Andere Screenshots mache ich
+sp?ter noch.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070301/5773b104/attachment.pgp>
+
+From potrmwn at gmail.com  Thu Mar  1 23:06:10 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Thu, 01 Mar 2007 23:06:10 +0100
+Subject: [Tel-dev] Es weht smarty Wind
+Message-ID: <1172786770.24236.4.camel@rebian.home>
+
+Hi @ all
+
+so habs nun geschafft mit smarty. Beim letzten Versuch schlug es fehl,
+da ich n Bockmist zusammenkopiert habe :-)
+
+So auf jedenfall will ich jetzt mit smarty PHP-Code, HTML und Sprache
+korrekt trennen. Als Vorbild nehme ich PHPbb, das Forum. Wie ich die
+Sprachentrennung einrichten will, weiss ich noch nicht. Ich lass mich
+gerne beraten ;-)
+
+Sobald alles meinen W?nschen entsprechen k?nnen gerne andere Ideen oder
+Kritikpunkte vorgeschlagen werden. Wenn alles l?uft, wie abgesprochen,
+werde ich noch eine kleine "Dokumentation" schreiben, der den ganzen
+Ablauf und die "Syntax" wenn man so will erl?utert.
+
+Wenns soweit ist meld ich mich ^^
+
+Gr?sse,
+Pot
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070301/89f0c2ed/attachment.pgp>
+
+From basti.wiesner at gmx.net  Fri Mar  2 12:43:29 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Fri, 2 Mar 2007 12:43:29 +0100
+Subject: [Tel-dev] Es weht smarty Wind
+In-Reply-To: <1172786770.24236.4.camel@rebian.home>
+References: <1172786770.24236.4.camel@rebian.home>
+Message-ID: <200703021243.35080.basti.wiesner@gmx.net>
+
+Remo Wenger hackte folgendes:
+> Hi @ all
+>
+> so habs nun geschafft mit smarty. Beim letzten Versuch schlug es fehl,
+> da ich n Bockmist zusammenkopiert habe :-)
+>
+> So auf jedenfall will ich jetzt mit smarty PHP-Code, HTML und Sprache
+> korrekt trennen. Als Vorbild nehme ich PHPbb, das Forum. Wie ich die
+> Sprachentrennung einrichten will, weiss ich noch nicht. Ich lass mich
+> gerne beraten ;-)
+
+W?rd' ich gerne, kann ich leider nicht :( Vom PHP hab ich in etwa so viel 
+Ahnung wie du von Python ;)
+
+> Sobald alles meinen W?nschen entsprechen k?nnen gerne andere Ideen oder
+> Kritikpunkte vorgeschlagen werden. Wenn alles l?uft, wie abgesprochen,
+> werde ich noch eine kleine "Dokumentation" schreiben, der den ganzen
+> Ablauf und die "Syntax" wenn man so will erl?utert.
+>
+> Wenns soweit ist meld ich mich ^^
+
+Jo...
+
+Dann geh ich mal wieder an die Arbeit zur?ck... Das Installskript ist grad 
+in der Entwicklung ;)
+
+lunar
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070302/310c867c/attachment.pgp>
+
+From potrmwn at gmail.com  Fri Mar  2 18:31:42 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Fri, 02 Mar 2007 18:31:42 +0100
+Subject: [Tel-dev] Es weht smarty Wind
+In-Reply-To: <200703021243.35080.basti.wiesner@gmx.net>
+References: <1172786770.24236.4.camel@rebian.home>
+	<200703021243.35080.basti.wiesner@gmx.net>
+Message-ID: <1172856702.5529.0.camel@rebian.home>
+
+Am Freitag, den 02.03.2007, 12:43 +0100 schrieb Sebastian Wiesner:
+> Remo Wenger hackte folgendes:
+> > Hi @ all
+> >
+> > so habs nun geschafft mit smarty. Beim letzten Versuch schlug es fehl,
+> > da ich n Bockmist zusammenkopiert habe :-)
+> >
+> > So auf jedenfall will ich jetzt mit smarty PHP-Code, HTML und Sprache
+> > korrekt trennen. Als Vorbild nehme ich PHPbb, das Forum. Wie ich die
+> > Sprachentrennung einrichten will, weiss ich noch nicht. Ich lass mich
+> > gerne beraten ;-)
+> 
+> W?rd' ich gerne, kann ich leider nicht :( Vom PHP hab ich in etwa so viel 
+> Ahnung wie du von Python ;)
+Nee schon n' bissl mehr.. sonst h?ttest du das lang=xy nicht geschafft
+^^
+> > Wenns soweit ist meld ich mich ^^
+> 
+> Jo...
+> 
+> Dann geh ich mal wieder an die Arbeit zur?ck... Das Installskript ist grad 
+> in der Entwicklung ;)
+Darauf freu ich mich schon ;-)
+
+Pot
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070302/2ba53115/attachment.pgp>
+
+From basti.wiesner at gmx.net  Fri Mar  2 20:00:03 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Fri, 2 Mar 2007 20:00:03 +0100
+Subject: [Tel-dev] Feature Request 003193: fields priority
+Message-ID: <200703022000.08213.basti.wiesner@gmx.net>
+
+Hi @all (besonders Remo):
+
+Im Feature-Request 003193 [1] schreibst
+
+> Ich weiss, dass man mittels -o felder,felder,felder,.. die auszugebenen 
+> Felder selbst w?hlen kann,
+
+Das ist mir gerade aufgefallen, als ich deinen Kommentar ins Englische 
+?bersetzen wollte. 
+Die Tatsache, dass du nur -o feld1,feld2 erw?hnst, legt den Schluss nahe, 
+dass du den netten Trick, den ich eingebaut habe, gar nicht kennst. Ebenso 
+wie --sort unterst?tzt --output das Minuszeichen (aber nicht das 
+Pluszeichen, das war unn?tig):
+
+python tel.py --table -o -index,-tags,-birthdate
+
+Zeigt _alle_ Felder _bis auf_ index, tags und birthdate an. Damit kann man 
+auch mit wenig Aufwand eine Tabelle an die Zeilenl?nge anpassen.
+
+[1] 
+https://developer.berlios.de/feature/?func=detailfeature&group_id=8132&feature_id=3193
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070302/e9ff13d9/attachment.pgp>
+
+From potrmwn at gmail.com  Fri Mar  2 23:17:14 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Fri, 02 Mar 2007 23:17:14 +0100
+Subject: [Tel-dev] Feature Request 003193: fields priority
+In-Reply-To: <200703022000.08213.basti.wiesner@gmx.net>
+References: <200703022000.08213.basti.wiesner@gmx.net>
+Message-ID: <1172873834.6687.1.camel@rebian.home>
+
+Am Freitag, den 02.03.2007, 20:00 +0100 schrieb Sebastian Wiesner:
+> Im Feature-Request 003193 [1] schreibst
+> 
+> > Ich weiss, dass man mittels -o felder,felder,felder,.. die auszugebenen 
+> > Felder selbst w?hlen kann,
+> 
+> Das ist mir gerade aufgefallen, als ich deinen Kommentar ins Englische 
+> ?bersetzen wollte. 
+> Die Tatsache, dass du nur -o feld1,feld2 erw?hnst, legt den Schluss nahe, 
+> dass du den netten Trick, den ich eingebaut habe, gar nicht kennst.
+> 
+> python tel.py --table -o -index,-tags,-birthdate
+> 
+> Zeigt _alle_ Felder _bis auf_ index, tags und birthdate an. Damit kann man 
+> auch mit wenig Aufwand eine Tabelle an die Zeilenl?nge anpassen.
+Mh.. soviel ich weiss steht das ja nicht in der --help oder? Da w?re
+eine manpage doch ganz praktisch ;-)
+
+Greets,
+Pot
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070302/ece19810/attachment.pgp>
+
+From basti.wiesner at gmx.net  Sat Mar  3 09:56:41 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Sat, 3 Mar 2007 09:56:41 +0100
+Subject: [Tel-dev] Feature Request 003193: fields priority
+In-Reply-To: <1172873834.6687.1.camel@rebian.home>
+References: <200703022000.08213.basti.wiesner@gmx.net>
+	<1172873834.6687.1.camel@rebian.home>
+Message-ID: <200703030956.46899.basti.wiesner@gmx.net>
+
+Remo Wenger hackte folgendes:
+> Am Freitag, den 02.03.2007, 20:00 +0100 schrieb Sebastian Wiesner:
+> > Im Feature-Request 003193 [1] schreibst
+> >
+> > > Ich weiss, dass man mittels -o felder,felder,felder,.. die
+> > > auszugebenen Felder selbst w?hlen kann,
+> >
+> > Das ist mir gerade aufgefallen, als ich deinen Kommentar ins Englische
+> > ?bersetzen wollte.
+> > Die Tatsache, dass du nur -o feld1,feld2 erw?hnst, legt den Schluss
+> > nahe, dass du den netten Trick, den ich eingebaut habe, gar nicht
+> > kennst.
+> >
+> > python tel.py --table -o -index,-tags,-birthdate
+> >
+> > Zeigt _alle_ Felder _bis auf_ index, tags und birthdate an. Damit kann
+> > man auch mit wenig Aufwand eine Tabelle an die Zeilenl?nge anpassen.
+>
+> Mh.. soviel ich weiss steht das ja nicht in der --help oder? Da w?re
+> eine manpage doch ganz praktisch ;-)
+
+Eigentlich stehts schon drinnen (bei der Hilfe zu -o/--output):
+
+> specifies the fields to show. Takes a comma-separated
+> list of internal names as printed by --help-fields.
+> Fields prefixed with "-" are hidden.
+
+Nur vielleicht nicht so deutlich...
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070303/4c8b1b81/attachment.pgp>
+
+From basti.wiesner at gmx.net  Sat Mar  3 16:32:23 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Sat, 3 Mar 2007 16:32:23 +0100
+Subject: [Tel-dev] Preview 0.1.6
+Message-ID: <200703031632.30281.basti.wiesner@gmx.net>
+
+Hi @all interested
+
+ich habe jetzt ein Installationsskript f?r tel geschrieben. Dieses Skript 
+bietet Unterst?tzung f?r Internationalisierungsdateien (message Kataloge). 
+tel.py spricht also zum ersten Mal Deutsch! Diese Skript installiert tel 
+nach folgendem Muster:
+
+Die Quelldateien (momentan nur tel.py) wandern nach $PREFIX/share/tel/
+Um tel ohne Angabe eines Pfades ausf?hren zu k?nnen, wird ein symbolischer 
+Link erzeugt, der von PREFIX/bin/tel nach $PREFIX/share/tel/tel.py zeigt. 
+Au?erdem werden die message Kataloge unter $PREFIX/share/locale 
+installiert, und zwar nach folgendem Muster:
+$PREFIX/share/locale/$SPRACHE/LC_MESSAGE/tel.mo
+
+$PREFIX steht dabei f?r das Installationsprefix, welches standardm??ig /usr 
+ist. Allerdings kann man es mittels der --prefix Option auch umstellen, 
+z.B. auf /usr/local.
+
+Au?erdem erleichtert das Setupskript das Erstellen eines Releases, da das 
+Packen in ein Archiv mit allen ben?tigen Dateien von einem komfortablen 
+Befehl ?bernommen wird (python setup.py sdist).
+
+Ich habe ein Preview auf den FTP Server [1] hochgeladen. Bitte probiert es 
+aus, bevor wir ein neues Release erstellen. Ich habe es zwar schon etwas 
+getestet, aber man wei? ja nie...
+
+Die Installation ist ganz einfach. Das Archiv entpacken, in den Ordner 
+wechseln und folgendes ausf?hren:
+    
+    python setup.py install
+
+Jetzt wird tel unter /usr installiert. Wer sich sein Prefix selbst nehmen 
+m?chte, verwendet
+
+    python setup.py install --prefix /usr/local
+
+Beide Befehl ben?tigen Root Rechte. Wer meiner Programmierkunst nicht so 
+traut ^^ und lieber erstmal langsam anf?ngt, kann das root verzeichnis 
+umbiegen:
+
+    python setup.py install --root ~/test
+
+Dieses Kommando installiert alle Dateien unter ~/test. Die ausf?hrbare Datei 
+ist also unter ~/test/usr/bin/tel zu finden.
+
+Have fun!
+lunar
+
+[1] ftp://ftp.berlios.de/pub/tel/tel-0.1.6-pre.tar.gz
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070303/878f6d55/attachment.pgp>
+
+From potrmwn at gmail.com  Sat Mar  3 17:47:27 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Sat, 03 Mar 2007 17:47:27 +0100
+Subject: [Tel-dev] Preview 0.1.6
+In-Reply-To: <200703031632.30281.basti.wiesner@gmx.net>
+References: <200703031632.30281.basti.wiesner@gmx.net>
+Message-ID: <1172940447.5290.7.camel@rebian.home>
+
+Am Samstag, den 03.03.2007, 16:32 +0100 schrieb Sebastian Wiesner:
+> Ich habe ein Preview auf den FTP Server [1] hochgeladen. Bitte probiert es 
+> aus, bevor wir ein neues Release erstellen. Ich habe es zwar schon etwas 
+> getestet, aber man wei? ja nie...
+Np, is besser so als voreilig ein Release machen und dann geht (fast)
+nix ;-)
+
+> Have fun!
+Thx
+
+
+So habe das setup.py mal installiert:
+
+> rebian:/home/remo/tmp/tel-0.1.6-pre# tel --help
+> usage: tel [global options] command [arguments]
+> 
+> tel is a little address book program for your terminal.
+> [..]
+>   --version             show program's version number and exit
+>   -h, --help            show this help message and exit
+Noch nicht ganz Deutsch ;-) Der Rest ist i.O.
+
+
+> rebian:/home/remo/tmp/tel-0.1.6-pre# tel --license
+> Copyright (c) 2007 Sebastian Wiesner
+> 
+> Permission is hereby granted, free of charge, to any person obtaining a
+> copy of this software and associated documentation files (the "Software"),
+> to deal in the Software without restriction, including without limitation
+> the rights to use, copy, modify, merge, publish, distribute, sublicense,
+> and/or sell copies of the Software, and to permit persons to whom the
+> Software is furnished to do so, subject to the following conditions:
+> 
+> The above copyright notice and this permission notice shall be included in
+> all copies or substantial portions of the Software.
+> 
+> THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+> IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+> FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+> THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+> LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+> FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+> DEALINGS IN THE SOFTWARE.
+Ev. sollte man hier den deutschen Text [1] f?r dumme Leute wie mich nehmen ;-)
+
+
+>   Kommandos:
+>     Kommandos, um das Telefonbuch zu ver?ndern, oder Eintr?ge zu suchen
+>     oder auszugeben.
+Ev lieber: Kommandos, um das Telefonbcuh zu ver?ndern, Eintr?ge zu suchen
+oder auszugeben
+
+>   eMail                  - email
+Das ist mir vorher schon aufgefallen: WIeso eMail? Korrekt w?re ja E-Mail.
+
+MfG,
+Pot
+
+[1] http://de.wikipedia.org/wiki/MIT-Lizenz
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070303/36366e58/attachment.pgp>
+
+From basti.wiesner at gmx.net  Sat Mar  3 18:20:29 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Sat, 3 Mar 2007 18:20:29 +0100
+Subject: [Tel-dev] Preview 0.1.6
+In-Reply-To: <1172940447.5290.7.camel@rebian.home>
+References: <200703031632.30281.basti.wiesner@gmx.net>
+	<1172940447.5290.7.camel@rebian.home>
+Message-ID: <200703031820.35049.basti.wiesner@gmx.net>
+
+Remo Wenger hackte folgendes:
+> Am Samstag, den 03.03.2007, 16:32 +0100 schrieb Sebastian Wiesner:
+> > Ich habe ein Preview auf den FTP Server [1] hochgeladen. Bitte probiert
+> > es aus, bevor wir ein neues Release erstellen. Ich habe es zwar schon
+> > etwas getestet, aber man wei? ja nie...
+>
+> Np, is besser so als voreilig ein Release machen und dann geht (fast)
+> nix ;-)
+>
+> > Have fun!
+>
+> Thx
+>
+> So habe das setup.py mal installiert:
+> > rebian:/home/remo/tmp/tel-0.1.6-pre# tel --help
+> > usage: tel [global options] command [arguments]
+> >
+> > tel is a little address book program for your terminal.
+> > [..]
+> >   --version             show program's version number and exit
+> >   -h, --help            show this help message and exit
+>
+> Noch nicht ganz Deutsch ;-) Der Rest ist i.O.
+
+Sonst ist der Rest auf Deutsch?
+
+--version und --help sind deswegen Englisch, weil die von optparse selbst 
+erstellt werden. Das kann man aber leicht beheben, indem man die Optionen 
+im Code explizit erzeugt. Das hab ich aber vergessen *sch?m*
+
+> > rebian:/home/remo/tmp/tel-0.1.6-pre# tel --license
+> > Copyright (c) 2007 Sebastian Wiesner
+> >
+> > Permission is hereby granted, free of charge, to any person obtaining a
+> > copy of this software and associated documentation files (the
+> > "Software"), to deal in the Software without restriction, including
+> > without limitation the rights to use, copy, modify, merge, publish,
+> > distribute, sublicense, and/or sell copies of the Software, and to
+> > permit persons to whom the Software is furnished to do so, subject to
+> > the following conditions:
+> >
+> > The above copyright notice and this permission notice shall be included
+> > in all copies or substantial portions of the Software.
+> >
+> > THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+> > OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+> > MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+> > IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+> > CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+> > TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+> > SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+>
+> Ev. sollte man hier den deutschen Text [1] f?r dumme Leute wie mich
+> nehmen ;-)
+
+Das ist aus rechtlichen Gr?nden schwierig. Ich wei? nicht, ob die Lizenz so 
+zweisprachig gelten kann. Davor sollten wir jemanden fragen, der sich damit 
+auskennt! Alternativ k?nnte man die Lizenz zweisprachig ausgeben lassen mit 
+dem expliziten Hinweis, dass nur der englische Text gilt und Fehler in der 
+deutschen ?bersetzung sich nicht auf die Lizenzierung der Software 
+auswirken.
+
+> >   Kommandos:
+> >     Kommandos, um das Telefonbuch zu ver?ndern, oder Eintr?ge zu suchen
+> >     oder auszugeben.
+>
+> Ev lieber: Kommandos, um das Telefonbcuh zu ver?ndern, Eintr?ge zu suchen
+> oder auszugeben
+
+Gute Idee! Hab ich ge?ndert!
+
+> >   eMail                  - email
+>
+> Das ist mir vorher schon aufgefallen: WIeso eMail? Korrekt w?re ja
+> E-Mail.
+
+Sicher? Ich hab keine Ahnung... Was sagt denn der Duden dazu? ^^
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070303/3ec971d4/attachment.pgp>
+
+From potrmwn at gmail.com  Sat Mar  3 18:41:31 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Sat, 03 Mar 2007 18:41:31 +0100
+Subject: [Tel-dev] Preview 0.1.6
+In-Reply-To: <200703031820.35049.basti.wiesner@gmx.net>
+References: <200703031632.30281.basti.wiesner@gmx.net>
+	<1172940447.5290.7.camel@rebian.home>
+	<200703031820.35049.basti.wiesner@gmx.net>
+Message-ID: <1172943691.5290.11.camel@rebian.home>
+
+Am Samstag, den 03.03.2007, 18:20 +0100 schrieb Sebastian Wiesner:
+> > So habe das setup.py mal installiert:
+> > > rebian:/home/remo/tmp/tel-0.1.6-pre# tel --help
+> > > usage: tel [global options] command [arguments]
+> > >
+> > > tel is a little address book program for your terminal.
+> > > [..]
+> > >   --version             show program's version number and exit
+> > >   -h, --help            show this help message and exit
+> >
+> > Noch nicht ganz Deutsch ;-) Der Rest ist i.O.
+> 
+> Sonst ist der Rest auf Deutsch?
+I think so.
+
+> > Ev. sollte man hier den deutschen Text [1] f?r dumme Leute wie mich
+> > nehmen ;-)
+> 
+> Das ist aus rechtlichen Gr?nden schwierig. Ich wei? nicht, ob die Lizenz so 
+> zweisprachig gelten kann. Davor sollten wir jemanden fragen, der sich damit 
+> auskennt! Alternativ k?nnte man die Lizenz zweisprachig ausgeben lassen mit 
+> dem expliziten Hinweis, dass nur der englische Text gilt und Fehler in der 
+> deutschen ?bersetzung sich nicht auf die Lizenzierung der Software 
+> auswirken.
+K?nnte man. Allerdings ist es ja erlaubt, die Lizenz so wie du willst
+abzu?ndern. Aber deine Idee ist so eine gute L?sung.
+
+> > >   eMail                  - email
+> >
+> > Das ist mir vorher schon aufgefallen: WIeso eMail? Korrekt w?re ja
+> > E-Mail.
+> 
+> Sicher? Ich hab keine Ahnung... Was sagt denn der Duden dazu? ^^
+E-Mail (e.) [ih mehl], die; -, -s: "elektronische Post", Daten- und
+Nachrichtenaustausch ?ber Computernetze
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070303/0bfb5b7f/attachment.pgp>
+
+From potrmwn at gmail.com  Sat Mar  3 18:52:30 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Sat, 03 Mar 2007 18:52:30 +0100
+Subject: [Tel-dev] Lizenz auf Webcode?
+Message-ID: <1172944350.5290.14.camel@rebian.home>
+
+Hi @ all
+
+Ich ?berlege mir gerade, ob ich eine Lizenz auf _jede_ Datei der Website
+lege.
+
+Was steht daf?r/dagegen?
+Wieso soll das geschehen?
+Wenn ja, welche Lizenz?
+
+Any Ideas?
+
+Greets,
+Pot
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070303/187be38d/attachment.pgp>
+
+From basti.wiesner at gmx.net  Sat Mar  3 20:12:19 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Sat, 3 Mar 2007 20:12:19 +0100
+Subject: [Tel-dev] Preview 0.1.6
+In-Reply-To: <1172943691.5290.11.camel@rebian.home>
+References: <200703031632.30281.basti.wiesner@gmx.net>
+	<200703031820.35049.basti.wiesner@gmx.net>
+	<1172943691.5290.11.camel@rebian.home>
+Message-ID: <200703032012.24904.basti.wiesner@gmx.net>
+
+Remo Wenger hackte folgendes:
+> > > Ev. sollte man hier den deutschen Text [1] f?r dumme Leute wie mich
+> > > nehmen ;-)
+> >
+> > Das ist aus rechtlichen Gr?nden schwierig. Ich wei? nicht, ob die
+> > Lizenz so zweisprachig gelten kann. Davor sollten wir jemanden fragen,
+> > der sich damit auskennt! Alternativ k?nnte man die Lizenz zweisprachig
+> > ausgeben lassen mit dem expliziten Hinweis, dass nur der englische Text
+> > gilt und Fehler in der deutschen ?bersetzung sich nicht auf die
+> > Lizenzierung der Software auswirken.
+>
+> K?nnte man. Allerdings ist es ja erlaubt, die Lizenz so wie du willst
+> abzu?ndern. Aber deine Idee ist so eine gute L?sung.
+
+Es geht nicht darum, dass man die Lizenz beliebig ?ndern kann. Es geht 
+darum, dass zwei verschiedensprachige Lizenzen eigentlich auch zwei 
+Lizenzen sind. Wir br?uchten eine rechtlich _einwandfreie_ 1:1 ?bersetzung, 
+ansonsten kann es eben passieren, dass es im Deutschen anders lizensiert 
+ist als im Englischen...
+Au?erdem frage ich mich, ob wir die Lizenz wirklich ?bersetzen m?ssen! Das 
+macht afaik kein anderes Programm. Auch die ganzen KDE Programme zeigen sie 
+trotz deutscher Lokalisierung auf Englisch an, eben aufgrund der Tatsache, 
+dass eine ?bersetzung unter Umst?nden Bedingungen verf?lschen kann!
+Imho sollten wir es bei der englischen Lizenz belassen und lieber auf auf 
+der Website erkl?ren, was die Lizenz genau bedeutet.
+
+> > > >   eMail                  - email
+> > >
+> > > Das ist mir vorher schon aufgefallen: WIeso eMail? Korrekt w?re ja
+> > > E-Mail.
+> >
+> > Sicher? Ich hab keine Ahnung... Was sagt denn der Duden dazu? ^^
+>
+> E-Mail (e.) [ih mehl], die; -, -s: "elektronische Post", Daten- und
+> Nachrichtenaustausch ?ber Computernetze
+
+Uiiii :-O, du hast tats?chlich nachgeschaut?! Das war eher als Scherz 
+gedacht! Aber da der Duden nun "E-Mail" sagt, werde ich das auch so 
+umsetzen!
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070303/2a88fd52/attachment.pgp>
+
+From basti.wiesner at gmx.net  Sat Mar  3 20:14:56 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Sat, 3 Mar 2007 20:14:56 +0100
+Subject: [Tel-dev] Lizenz auf Webcode?
+In-Reply-To: <1172944350.5290.14.camel@rebian.home>
+References: <1172944350.5290.14.camel@rebian.home>
+Message-ID: <200703032014.57107.basti.wiesner@gmx.net>
+
+Remo Wenger hackte folgendes:
+> Hi @ all
+>
+> Ich ?berlege mir gerade, ob ich eine Lizenz auf _jede_ Datei der Website
+> lege.
+
+Warum nicht?
+
+> Was steht daf?r/dagegen?
+
+Daf?r steht, dass man damit den Code deiner Website weiterverwenden kann. 
+Ohne Lizenzheader ist das n?mlich problematisch, weil eine Datei ohne 
+Lizenz dem Urheberrecht unterliegt, was eine Weiterverbreitung untersagt.
+
+> Wieso soll das geschehen?
+
+s.o.
+
+> Wenn ja, welche Lizenz?
+
+MIT w?rde ich vorschlagen. Au?er f?rs Icon, cen hat es aus GPL Icons 
+zusammengebaut, deswegen ist sein Icon ebenfalls GPL.
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070303/7176c08a/attachment.pgp>
+
+From basti.wiesner at gmx.net  Sat Mar  3 20:15:57 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Sat, 3 Mar 2007 20:15:57 +0100
+Subject: [Tel-dev] Feature Request 003193: fields priority
+In-Reply-To: <200703030956.46899.basti.wiesner@gmx.net>
+References: <200703022000.08213.basti.wiesner@gmx.net>
+	<1172873834.6687.1.camel@rebian.home>
+	<200703030956.46899.basti.wiesner@gmx.net>
+Message-ID: <200703032015.57374.basti.wiesner@gmx.net>
+
+Sebastian Wiesner hackte folgendes:
+> Remo Wenger hackte folgendes:
+> > Am Freitag, den 02.03.2007, 20:00 +0100 schrieb Sebastian Wiesner:
+> > > Im Feature-Request 003193 [1] schreibst
+> > >
+> > > > Ich weiss, dass man mittels -o felder,felder,felder,.. die
+> > > > auszugebenen Felder selbst w?hlen kann,
+> > >
+> > > Das ist mir gerade aufgefallen, als ich deinen Kommentar ins
+> > > Englische ?bersetzen wollte.
+> > > Die Tatsache, dass du nur -o feld1,feld2 erw?hnst, legt den Schluss
+> > > nahe, dass du den netten Trick, den ich eingebaut habe, gar nicht
+> > > kennst.
+> > >
+> > > python tel.py --table -o -index,-tags,-birthdate
+> > >
+> > > Zeigt _alle_ Felder _bis auf_ index, tags und birthdate an. Damit
+> > > kann man auch mit wenig Aufwand eine Tabelle an die Zeilenl?nge
+> > > anpassen.
+> >
+> > Mh.. soviel ich weiss steht das ja nicht in der --help oder? Da w?re
+> > eine manpage doch ganz praktisch ;-)
+>
+> Eigentlich stehts schon drinnen (bei der Hilfe zu -o/--output):
+> > specifies the fields to show. Takes a comma-separated
+> > list of internal names as printed by --help-fields.
+> > Fields prefixed with "-" are hidden.
+>
+> Nur vielleicht nicht so deutlich...
+
+Reicht dir das jetzt eigentlich? Dann k?nnte man den Feature Request n?mlich 
+als closed markieren... oder soll ich das einbauen (was nicht so leicht 
+ist)
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070303/a21cbce6/attachment.pgp>
+
+From potrmwn at gmail.com  Sat Mar  3 20:29:45 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Sat, 03 Mar 2007 20:29:45 +0100
+Subject: [Tel-dev] Feature Request 003193: fields priority
+In-Reply-To: <200703032015.57374.basti.wiesner@gmx.net>
+References: <200703022000.08213.basti.wiesner@gmx.net>
+	<1172873834.6687.1.camel@rebian.home>
+	<200703030956.46899.basti.wiesner@gmx.net>
+	<200703032015.57374.basti.wiesner@gmx.net>
+Message-ID: <1172950185.5290.17.camel@rebian.home>
+
+Am Samstag, den 03.03.2007, 20:15 +0100 schrieb Sebastian Wiesner:
+> Sebastian Wiesner hackte folgendes:
+> > Remo Wenger hackte folgendes:
+> > > Am Freitag, den 02.03.2007, 20:00 +0100 schrieb Sebastian Wiesner:
+> > > > Im Feature-Request 003193 [1] schreibst
+> > > >
+> > > > > Ich weiss, dass man mittels -o felder,felder,felder,.. die
+> > > > > auszugebenen Felder selbst w?hlen kann,
+> > > >
+> > > > Das ist mir gerade aufgefallen, als ich deinen Kommentar ins
+> > > > Englische ?bersetzen wollte.
+> > > > Die Tatsache, dass du nur -o feld1,feld2 erw?hnst, legt den Schluss
+> > > > nahe, dass du den netten Trick, den ich eingebaut habe, gar nicht
+> > > > kennst.
+> > > >
+> > > > python tel.py --table -o -index,-tags,-birthdate
+> > > >
+> > > > Zeigt _alle_ Felder _bis auf_ index, tags und birthdate an. Damit
+> > > > kann man auch mit wenig Aufwand eine Tabelle an die Zeilenl?nge
+> > > > anpassen.
+> > >
+> > > Mh.. soviel ich weiss steht das ja nicht in der --help oder? Da w?re
+> > > eine manpage doch ganz praktisch ;-)
+> >
+> > Eigentlich stehts schon drinnen (bei der Hilfe zu -o/--output):
+> > > specifies the fields to show. Takes a comma-separated
+> > > list of internal names as printed by --help-fields.
+> > > Fields prefixed with "-" are hidden.
+> >
+> > Nur vielleicht nicht so deutlich...
+> 
+> Reicht dir das jetzt eigentlich? Dann k?nnte man den Feature Request n?mlich 
+> als closed markieren... oder soll ich das einbauen (was nicht so leicht 
+> ist)
+Mh.. das ist ja dir ?berlassen. Es ist eig. schon nicht dasselbe.
+Eine Alternative w?re, dass man standartm?ssig (in einer configdatei)
+das -o -feld,-feld,.. w?hlen kann. Und mit einer Option (wie schon in
+der Request steht) diese Option wieder deaktivieren.
+
+Und sonst stellst du's auf closed ;-)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070303/d8c46072/attachment.pgp>
+
+From potrmwn at gmail.com  Sat Mar  3 20:32:24 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Sat, 03 Mar 2007 20:32:24 +0100
+Subject: [Tel-dev] Preview 0.1.6
+In-Reply-To: <200703032012.24904.basti.wiesner@gmx.net>
+References: <200703031632.30281.basti.wiesner@gmx.net>
+	<200703031820.35049.basti.wiesner@gmx.net>
+	<1172943691.5290.11.camel@rebian.home>
+	<200703032012.24904.basti.wiesner@gmx.net>
+Message-ID: <1172950344.5290.21.camel@rebian.home>
+
+Am Samstag, den 03.03.2007, 20:12 +0100 schrieb Sebastian Wiesner:
+> > K?nnte man. Allerdings ist es ja erlaubt, die Lizenz so wie du willst
+> > abzu?ndern. Aber deine Idee ist so eine gute L?sung.
+> 
+> Es geht nicht darum, dass man die Lizenz beliebig ?ndern kann. Es geht 
+> darum, dass zwei verschiedensprachige Lizenzen eigentlich auch zwei 
+> Lizenzen sind. Wir br?uchten eine rechtlich _einwandfreie_ 1:1 ?bersetzung, 
+> ansonsten kann es eben passieren, dass es im Deutschen anders lizensiert 
+> ist als im Englischen...
+> Au?erdem frage ich mich, ob wir die Lizenz wirklich ?bersetzen m?ssen! Das 
+> macht afaik kein anderes Programm. Auch die ganzen KDE Programme zeigen sie 
+> trotz deutscher Lokalisierung auf Englisch an, eben aufgrund der Tatsache, 
+> dass eine ?bersetzung unter Umst?nden Bedingungen verf?lschen kann!
+> Imho sollten wir es bei der englischen Lizenz belassen und lieber auf auf 
+> der Website erkl?ren, was die Lizenz genau bedeutet.
+Dann m?sste der User erst mal wissen, wo er die Seite erreicht (falls er
+Google nicht kennt). Afaik steht das nirgens alleine im Programm
+(abgesehen vom neuen Installationsscript).
+
+> > > > >   eMail                  - email
+> > > >
+> > > > Das ist mir vorher schon aufgefallen: WIeso eMail? Korrekt w?re ja
+> > > > E-Mail.
+> > >
+> > > Sicher? Ich hab keine Ahnung... Was sagt denn der Duden dazu? ^^
+> >
+> > E-Mail (e.) [ih mehl], die; -, -s: "elektronische Post", Daten- und
+> > Nachrichtenaustausch ?ber Computernetze
+> 
+> Uiiii :-O, du hast tats?chlich nachgeschaut?! Das war eher als Scherz 
+> gedacht! Aber da der Duden nun "E-Mail" sagt, werde ich das auch so 
+> umsetzen!
+'T?rlich ^^
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070303/c6a00f43/attachment.pgp>
+
+From potrmwn at gmail.com  Sat Mar  3 20:35:06 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Sat, 03 Mar 2007 20:35:06 +0100
+Subject: [Tel-dev] Lizenz auf Webcode?
+In-Reply-To: <200703032014.57107.basti.wiesner@gmx.net>
+References: <1172944350.5290.14.camel@rebian.home>
+	<200703032014.57107.basti.wiesner@gmx.net>
+Message-ID: <1172950506.5290.25.camel@rebian.home>
+
+Am Samstag, den 03.03.2007, 20:14 +0100 schrieb Sebastian Wiesner:
+> > Ich ?berlege mir gerade, ob ich eine Lizenz auf _jede_ Datei der Website
+> > lege. Was steht daf?r/dagegen?
+> 
+> Daf?r steht, dass man damit den Code deiner Website weiterverwenden kann. 
+> Ohne Lizenzheader ist das n?mlich problematisch, weil eine Datei ohne 
+> Lizenz dem Urheberrecht unterliegt, was eine Weiterverbreitung untersagt.
+> 
+> > Wenn ja, welche Lizenz?
+> 
+> MIT w?rde ich vorschlagen. Au?er f?rs Icon, cen hat es aus GPL Icons 
+> zusammengebaut, deswegen ist sein Icon ebenfalls GPL.
+K. Wie soll ich die bin?ren Dateien lizenzieren? In einer Datei eine
+Liste der bin?ren Dateien mit der lizenz dazu?
+
+Wo soll ich die Lizenz reinschreiben? Jeweils so, dass man es ?ber HTTP
+im Quelltext lesen kann, oder so, dass der User das im SVN Repo sehen
+kann?
+
+Greets,
+Pot
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070303/53efc20d/attachment.pgp>
+
+From basti.wiesner at gmx.net  Sat Mar  3 20:37:06 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Sat, 3 Mar 2007 20:37:06 +0100
+Subject: [Tel-dev] Feature Request 003193: fields priority
+In-Reply-To: <1172950185.5290.17.camel@rebian.home>
+References: <200703022000.08213.basti.wiesner@gmx.net>
+	<200703032015.57374.basti.wiesner@gmx.net>
+	<1172950185.5290.17.camel@rebian.home>
+Message-ID: <200703032037.11595.basti.wiesner@gmx.net>
+
+Remo Wenger hackte folgendes:
+> Am Samstag, den 03.03.2007, 20:15 +0100 schrieb Sebastian Wiesner:
+> > Sebastian Wiesner hackte folgendes:
+> > > Remo Wenger hackte folgendes:
+> > > > Am Freitag, den 02.03.2007, 20:00 +0100 schrieb Sebastian Wiesner:
+> > > > > Im Feature-Request 003193 [1] schreibst
+> > > > >
+> > > > > > Ich weiss, dass man mittels -o felder,felder,felder,.. die
+> > > > > > auszugebenen Felder selbst w?hlen kann,
+> > > > >
+> > > > > Das ist mir gerade aufgefallen, als ich deinen Kommentar ins
+> > > > > Englische ?bersetzen wollte.
+> > > > > Die Tatsache, dass du nur -o feld1,feld2 erw?hnst, legt den
+> > > > > Schluss nahe, dass du den netten Trick, den ich eingebaut habe,
+> > > > > gar nicht kennst.
+> > > > >
+> > > > > python tel.py --table -o -index,-tags,-birthdate
+> > > > >
+> > > > > Zeigt _alle_ Felder _bis auf_ index, tags und birthdate an. Damit
+> > > > > kann man auch mit wenig Aufwand eine Tabelle an die Zeilenl?nge
+> > > > > anpassen.
+> > > >
+> > > > Mh.. soviel ich weiss steht das ja nicht in der --help oder? Da
+> > > > w?re eine manpage doch ganz praktisch ;-)
+> > >
+> > > Eigentlich stehts schon drinnen (bei der Hilfe zu -o/--output):
+> > > > specifies the fields to show. Takes a comma-separated
+> > > > list of internal names as printed by --help-fields.
+> > > > Fields prefixed with "-" are hidden.
+> > >
+> > > Nur vielleicht nicht so deutlich...
+> >
+> > Reicht dir das jetzt eigentlich? Dann k?nnte man den Feature Request
+> > n?mlich als closed markieren... oder soll ich das einbauen (was nicht
+> > so leicht ist)
+>
+> Mh.. das ist ja dir ?berlassen. Es ist eig. schon nicht dasselbe.
+> Eine Alternative w?re, dass man standartm?ssig (in einer configdatei)
+> das -o -feld,-feld,.. w?hlen kann. Und mit einer Option (wie schon in
+> der Request steht) diese Option wieder deaktivieren.
+
+Das ist definitiv einfacher als die Bestimmung der Gr??e des Terminals.
+Ich werde mal schauen, ob sich da was machen l?sst!
+
+> Und sonst stellst du's auf closed ;-)
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070303/b5c59fdb/attachment.pgp>
+
+From basti.wiesner at gmx.net  Sat Mar  3 20:41:56 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Sat, 3 Mar 2007 20:41:56 +0100
+Subject: [Tel-dev] Preview 0.1.6
+In-Reply-To: <1172950344.5290.21.camel@rebian.home>
+References: <200703031632.30281.basti.wiesner@gmx.net>
+	<200703032012.24904.basti.wiesner@gmx.net>
+	<1172950344.5290.21.camel@rebian.home>
+Message-ID: <200703032041.57048.basti.wiesner@gmx.net>
+
+Remo Wenger hackte folgendes:
+> Am Samstag, den 03.03.2007, 20:12 +0100 schrieb Sebastian Wiesner:
+> > > K?nnte man. Allerdings ist es ja erlaubt, die Lizenz so wie du willst
+> > > abzu?ndern. Aber deine Idee ist so eine gute L?sung.
+> >
+> > Es geht nicht darum, dass man die Lizenz beliebig ?ndern kann. Es geht
+> > darum, dass zwei verschiedensprachige Lizenzen eigentlich auch zwei
+> > Lizenzen sind. Wir br?uchten eine rechtlich _einwandfreie_ 1:1
+> > ?bersetzung, ansonsten kann es eben passieren, dass es im Deutschen
+> > anders lizensiert ist als im Englischen...
+> > Au?erdem frage ich mich, ob wir die Lizenz wirklich ?bersetzen m?ssen!
+> > Das macht afaik kein anderes Programm. Auch die ganzen KDE Programme
+> > zeigen sie trotz deutscher Lokalisierung auf Englisch an, eben aufgrund
+> > der Tatsache, dass eine ?bersetzung unter Umst?nden Bedingungen
+> > verf?lschen kann! Imho sollten wir es bei der englischen Lizenz
+> > belassen und lieber auf auf der Website erkl?ren, was die Lizenz genau
+> > bedeutet.
+>
+> Dann m?sste der User erst mal wissen, wo er die Seite erreicht (falls er
+> Google nicht kennt). Afaik steht das nirgens alleine im Programm
+> (abgesehen vom neuen Installationsscript).
+
+Stimmt! Aber trotzdem mag ich es nicht, die Lizenz zu ?bersetzen! 
+In der Ausgabe des Programms ist es ?berfl?ssig, da es dort sowieso keiner 
+liest ;) Daf?r hat man dann halt die ganze Lizenz in den Sprachdateien, was 
+die Sache extrem un?bersichtlich macht und au?erdem jeden ?bersetzer 
+zwingt, diese Lizenz zu lesen. Au?erdem k?nnen kleine ?bersetzungsfehler 
+katastrophale Folgen haben, wenn tel pl?tzlich im spanischen unter einer 
+ganz anderen Lizenz steht ^^
+
+Lieber verweise ich noch in der COPYING Datei auf Wikipedia:
+
+Unofficial translations, which do not affect the license status of this 
+program, can be found at Wikipedia!
+
+oder so ?hnlich! 
+Die Lizenz zu ?bersetzen, traue ich mir nicht zu und auch Wikipedia vertraue 
+ich da nicht genug!
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070303/e6b14e47/attachment.pgp>
+
+From basti.wiesner at gmx.net  Sat Mar  3 20:43:26 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Sat, 3 Mar 2007 20:43:26 +0100
+Subject: [Tel-dev] Lizenz auf Webcode?
+In-Reply-To: <1172950506.5290.25.camel@rebian.home>
+References: <1172944350.5290.14.camel@rebian.home>
+	<200703032014.57107.basti.wiesner@gmx.net>
+	<1172950506.5290.25.camel@rebian.home>
+Message-ID: <200703032043.26264.basti.wiesner@gmx.net>
+
+Remo Wenger hackte folgendes:
+> Am Samstag, den 03.03.2007, 20:14 +0100 schrieb Sebastian Wiesner:
+> > > Ich ?berlege mir gerade, ob ich eine Lizenz auf _jede_ Datei der
+> > > Website lege. Was steht daf?r/dagegen?
+> >
+> > Daf?r steht, dass man damit den Code deiner Website weiterverwenden
+> > kann. Ohne Lizenzheader ist das n?mlich problematisch, weil eine Datei
+> > ohne Lizenz dem Urheberrecht unterliegt, was eine Weiterverbreitung
+> > untersagt.
+> >
+> > > Wenn ja, welche Lizenz?
+> >
+> > MIT w?rde ich vorschlagen. Au?er f?rs Icon, cen hat es aus GPL Icons
+> > zusammengebaut, deswegen ist sein Icon ebenfalls GPL.
+>
+> K. Wie soll ich die bin?ren Dateien lizenzieren? In einer Datei eine
+> Liste der bin?ren Dateien mit der lizenz dazu?
+
+Mmmh, gute Frage... Muss ich mal dr?ber nachdenken...
+
+> Wo soll ich die Lizenz reinschreiben? Jeweils so, dass man es ?ber HTTP
+> im Quelltext lesen kann, oder so, dass der User das im SVN Repo sehen
+> kann?
+
+Als Kommentar in der jeweiligen HTML Datei!
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070303/d5adea1a/attachment.pgp>
+
+From potrmwn at gmail.com  Sat Mar  3 21:01:13 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Sat, 03 Mar 2007 21:01:13 +0100
+Subject: [Tel-dev] Preview 0.1.6
+In-Reply-To: <200703032041.57048.basti.wiesner@gmx.net>
+References: <200703031632.30281.basti.wiesner@gmx.net>
+	<200703032012.24904.basti.wiesner@gmx.net>
+	<1172950344.5290.21.camel@rebian.home>
+	<200703032041.57048.basti.wiesner@gmx.net>
+Message-ID: <1172952073.5290.27.camel@rebian.home>
+
+Am Samstag, den 03.03.2007, 20:41 +0100 schrieb Sebastian Wiesner:
+> > Dann m?sste der User erst mal wissen, wo er die Seite erreicht (falls er
+> > Google nicht kennt). Afaik steht das nirgens alleine im Programm
+> > (abgesehen vom neuen Installationsscript).
+> 
+> Stimmt! Aber trotzdem mag ich es nicht, die Lizenz zu ?bersetzen! 
+> In der Ausgabe des Programms ist es ?berfl?ssig, da es dort sowieso keiner 
+> liest ;) Daf?r hat man dann halt die ganze Lizenz in den Sprachdateien, was 
+> die Sache extrem un?bersichtlich macht und au?erdem jeden ?bersetzer 
+> zwingt, diese Lizenz zu lesen. Au?erdem k?nnen kleine ?bersetzungsfehler 
+> katastrophale Folgen haben, wenn tel pl?tzlich im spanischen unter einer 
+> ganz anderen Lizenz steht ^^
+> 
+> Lieber verweise ich noch in der COPYING Datei auf Wikipedia:
+> 
+> Unofficial translations, which do not affect the license status of this 
+> program, can be found at Wikipedia!
+> 
+> oder so ?hnlich! 
+> Die Lizenz zu ?bersetzen, traue ich mir nicht zu und auch Wikipedia vertraue 
+> ich da nicht genug!
+OK kann ich verstehen.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070303/7121f2a0/attachment.pgp>
+
+From potrmwn at gmail.com  Sat Mar  3 21:02:19 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Sat, 03 Mar 2007 21:02:19 +0100
+Subject: [Tel-dev] Lizenz auf Webcode?
+In-Reply-To: <200703032043.26264.basti.wiesner@gmx.net>
+References: <1172944350.5290.14.camel@rebian.home>
+	<200703032014.57107.basti.wiesner@gmx.net>
+	<1172950506.5290.25.camel@rebian.home>
+	<200703032043.26264.basti.wiesner@gmx.net>
+Message-ID: <1172952139.5290.29.camel@rebian.home>
+
+Am Samstag, den 03.03.2007, 20:43 +0100 schrieb Sebastian Wiesner:
+> Remo Wenger hackte folgendes:
+> > Am Samstag, den 03.03.2007, 20:14 +0100 schrieb Sebastian Wiesner:
+> > > > Ich ?berlege mir gerade, ob ich eine Lizenz auf _jede_ Datei der
+> > > > Website lege. Was steht daf?r/dagegen?
+> > >
+> > > Daf?r steht, dass man damit den Code deiner Website weiterverwenden
+> > > kann. Ohne Lizenzheader ist das n?mlich problematisch, weil eine Datei
+> > > ohne Lizenz dem Urheberrecht unterliegt, was eine Weiterverbreitung
+> > > untersagt.
+> > >
+> > > > Wenn ja, welche Lizenz?
+> > >
+> > > MIT w?rde ich vorschlagen. Au?er f?rs Icon, cen hat es aus GPL Icons
+> > > zusammengebaut, deswegen ist sein Icon ebenfalls GPL.
+> >
+> > K. Wie soll ich die bin?ren Dateien lizenzieren? In einer Datei eine
+> > Liste der bin?ren Dateien mit der lizenz dazu?
+> 
+> Mmmh, gute Frage... Muss ich mal dr?ber nachdenken...
+> 
+> > Wo soll ich die Lizenz reinschreiben? Jeweils so, dass man es ?ber HTTP
+> > im Quelltext lesen kann, oder so, dass der User das im SVN Repo sehen
+> > kann?
+> 
+> Als Kommentar in der jeweiligen HTML Datei!
+Dann sind die PHP Dateien nicht lizenziert? Also.. richtige HTML Dateien
+gibt es ja da nicht.
+Und bald gibt es nur noch PHP und TPL's
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070303/50981a04/attachment.pgp>
+
+From potrmwn at gmail.com  Sat Mar  3 21:07:25 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Sat, 03 Mar 2007 21:07:25 +0100
+Subject: [Tel-dev] Es weht smarty Wind
+In-Reply-To: <200703021243.35080.basti.wiesner@gmx.net>
+References: <1172786770.24236.4.camel@rebian.home>
+	<200703021243.35080.basti.wiesner@gmx.net>
+Message-ID: <1172952445.5290.35.camel@rebian.home>
+
+Also es ist momentan so, dass jeder Text in der
+lang/SPRACHKUERZEL/main.php in einem Array festgehalten werden muss und
+in der jeweiligen .php an die .tpl ?bergeben werden muss 
+
+$smarty->assign(lang, $lang);
+
+wobei $lang f?r den Array steht, der von der lang/SPRACHKUERZEL/main.php
+kommt.
+
+Und in der TPL muss dann mit {$lang.bla} gearbeitet werden.
+
+{$lang.bla} bedeutet so viel wie "text", wenn in der main.php stehen
+w?rde:
+$lang['bla'] = 'text';
+
+
+Ich selbst finde es so viel! zu umst?ndich. Da bin ich mit der L?sung,
+pro Sprache eine extra Seite viel besser bedient. Also:
+
+lang/de/home.tpl
+lang/en/home.tpl
+
+Was meint ihr?
+
+MfG,
+Pot
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070303/1ba4b268/attachment.pgp>
+
+From basti.wiesner at gmx.net  Sun Mar  4 16:42:53 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Sun, 4 Mar 2007 16:42:53 +0100
+Subject: [Tel-dev] Es weht smarty Wind
+In-Reply-To: <1172952445.5290.35.camel@rebian.home>
+References: <1172786770.24236.4.camel@rebian.home>
+	<200703021243.35080.basti.wiesner@gmx.net>
+	<1172952445.5290.35.camel@rebian.home>
+Message-ID: <200703041642.58698.basti.wiesner@gmx.net>
+
+Remo Wenger hackte folgendes:
+> Also es ist momentan so, dass jeder Text in der
+> lang/SPRACHKUERZEL/main.php in einem Array festgehalten werden muss und
+> in der jeweiligen .php an die .tpl ?bergeben werden muss
+>
+> $smarty->assign(lang, $lang);
+>
+> wobei $lang f?r den Array steht, der von der lang/SPRACHKUERZEL/main.php
+> kommt.
+>
+> Und in der TPL muss dann mit {$lang.bla} gearbeitet werden.
+>
+> {$lang.bla} bedeutet so viel wie "text", wenn in der main.php stehen
+> w?rde:
+> $lang['bla'] = 'text';
+>
+>
+> Ich selbst finde es so viel! zu umst?ndich. Da bin ich mit der L?sung,
+> pro Sprache eine extra Seite viel besser bedient. Also:
+>
+> lang/de/home.tpl
+> lang/en/home.tpl
+>
+> Was meint ihr?
+
+Ich w?rde auch eher zur letzteren L?sung mit separaten Dateien tendieren. 
+Das ist ?bersichtlicher... Au?erdem hab ich mich schon dran gew?hnt ;)
+
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070304/c846707a/attachment.pgp>
+
+From basti.wiesner at gmx.net  Sun Mar  4 16:45:34 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Sun, 4 Mar 2007 16:45:34 +0100
+Subject: [Tel-dev] Lizenz auf Webcode?
+In-Reply-To: <1172952139.5290.29.camel@rebian.home>
+References: <1172944350.5290.14.camel@rebian.home>
+	<200703032043.26264.basti.wiesner@gmx.net>
+	<1172952139.5290.29.camel@rebian.home>
+Message-ID: <200703041645.34607.basti.wiesner@gmx.net>
+
+Remo Wenger hackte folgendes:
+> Am Samstag, den 03.03.2007, 20:43 +0100 schrieb Sebastian Wiesner:
+> > Remo Wenger hackte folgendes:
+> > > Am Samstag, den 03.03.2007, 20:14 +0100 schrieb Sebastian Wiesner:
+> > > > > Ich ?berlege mir gerade, ob ich eine Lizenz auf _jede_ Datei der
+> > > > > Website lege. Was steht daf?r/dagegen?
+> > > >
+> > > > Daf?r steht, dass man damit den Code deiner Website weiterverwenden
+> > > > kann. Ohne Lizenzheader ist das n?mlich problematisch, weil eine
+> > > > Datei ohne Lizenz dem Urheberrecht unterliegt, was eine
+> > > > Weiterverbreitung untersagt.
+> > > >
+> > > > > Wenn ja, welche Lizenz?
+> > > >
+> > > > MIT w?rde ich vorschlagen. Au?er f?rs Icon, cen hat es aus GPL
+> > > > Icons zusammengebaut, deswegen ist sein Icon ebenfalls GPL.
+> > >
+> > > K. Wie soll ich die bin?ren Dateien lizenzieren? In einer Datei eine
+> > > Liste der bin?ren Dateien mit der lizenz dazu?
+> >
+> > Mmmh, gute Frage... Muss ich mal dr?ber nachdenken...
+> >
+> > > Wo soll ich die Lizenz reinschreiben? Jeweils so, dass man es ?ber
+> > > HTTP im Quelltext lesen kann, oder so, dass der User das im SVN Repo
+> > > sehen kann?
+> >
+> > Als Kommentar in der jeweiligen HTML Datei!
+>
+> Dann sind die PHP Dateien nicht lizenziert? Also.. richtige HTML Dateien
+> gibt es ja da nicht.
+> Und bald gibt es nur noch PHP und TPL's
+
+Am Kopf jeder Datei sollte ein Lizenzkommentar stehen. In den PHP Dateien 
+ein PHP Kommentar /* */ und in dem TPL Dateien ein normaler HTML Kommentar 
+<!-- -->. Dadurch ist jede Datei lizensiert, und  der Browser kriegt in den 
+HTML Dateien nur _eine_ Lizenz zu sehen, weil die PHP Kommentare ja auf dem 
+Server "verloren" gehen.
+
+lunar
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070304/6de53cde/attachment.pgp>
+
+From potrmwn at gmail.com  Sun Mar  4 22:07:09 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Sun, 04 Mar 2007 22:07:09 +0100
+Subject: [Tel-dev] Lizenz auf Webcode?
+In-Reply-To: <200703041645.34607.basti.wiesner@gmx.net>
+References: <1172944350.5290.14.camel@rebian.home>
+	<200703032043.26264.basti.wiesner@gmx.net>
+	<1172952139.5290.29.camel@rebian.home>
+	<200703041645.34607.basti.wiesner@gmx.net>
+Message-ID: <1173042429.11168.15.camel@rebian.home>
+
+Am Sonntag, den 04.03.2007, 16:45 +0100 schrieb Sebastian Wiesner:
+> > > > Wo soll ich die Lizenz reinschreiben? Jeweils so, dass man es ?ber
+> > > > HTTP im Quelltext lesen kann, oder so, dass der User das im SVN Repo
+> > > > sehen kann?
+> > >
+> > > Als Kommentar in der jeweiligen HTML Datei!
+> >
+> > Dann sind die PHP Dateien nicht lizenziert? Also.. richtige HTML Dateien
+> > gibt es ja da nicht.
+> > Und bald gibt es nur noch PHP und TPL's
+> 
+> Am Kopf jeder Datei sollte ein Lizenzkommentar stehen. In den PHP Dateien 
+> ein PHP Kommentar /* */ und in dem TPL Dateien ein normaler HTML Kommentar 
+> <!-- -->. Dadurch ist jede Datei lizensiert, und  der Browser kriegt in den 
+> HTML Dateien nur _eine_ Lizenz zu sehen, weil die PHP Kommentare ja auf dem 
+> Server "verloren" gehen.
+Mhh, so ist es gut gel?st, wenn Smarty die Website regiert ^^
+Dann werde ich also erst die neue Smarty Website mit der MIT-Lizenz
+lizenzieren.
+
+Gr?sse,
+Pot
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070304/c1b800b6/attachment.pgp>
+
+From potrmwn at gmail.com  Mon Mar  5 18:54:27 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Mon, 05 Mar 2007 18:54:27 +0100
+Subject: [Tel-dev] =?iso-8859-1?q?Hinweis_bez=FCglich_der_Changes_von_Rele?=
+	=?iso-8859-1?q?ase_0=2E1=2E6?=
+Message-ID: <1173117267.5638.3.camel@rebian.home>
+
+Hi ^^
+
+Muss schonwieder meckern:
+In den Changes des Releases 0.1.6 [1] steht da
+> added --sort option to sort output
+Eigentlich sollte da ja --sort-by gemeint sein.
+
+Ge?ndert habe ich dieses "Fehlerchen" nicht, da
+ich nicht weiss wie ^^ Deshalb diese Mail
+
+Btw: Wieso schon bzip2-komprimiert? Ist tel
+schon so gross? ;-)
+
+[1] http://developer.berlios.de/project/shownotes.php?release_id=12371
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070305/da63f41a/attachment.pgp>
+
+From basti.wiesner at gmx.net  Mon Mar  5 21:51:45 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Mon, 5 Mar 2007 21:51:45 +0100
+Subject: [Tel-dev]
+	=?iso-8859-15?q?Hinweis_bez=FCglich_der_Changes_von_Rel?=
+	=?iso-8859-15?q?ease_0=2E1=2E6?=
+In-Reply-To: <1173117267.5638.3.camel@rebian.home>
+References: <1173117267.5638.3.camel@rebian.home>
+Message-ID: <200703052151.51022.basti.wiesner@gmx.net>
+
+> Muss schonwieder meckern:
+
+Klar doch!
+
+> In den Changes des Releases 0.1.6 [1] steht da
+>
+> > added --sort option to sort output
+>
+> Eigentlich sollte da ja --sort-by gemeint sein.
+>
+> Ge?ndert habe ich dieses "Fehlerchen" nicht, da
+> ich nicht weiss wie ^^ Deshalb diese Mail
+
+Thx!
+
+> Btw: Wieso schon bzip2-komprimiert? Ist tel
+> schon so gross? ;-)
+
+Mmmmh, ist halt Standard... F?r Leute, die bzip2 sch?ner finden ;)
+Das Setupskript erstellt halt (so wie ich es konfiguriert habe) sowohl gz 
+als auch bz2 Archive.
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070305/7353440f/attachment.pgp>
+
+From potrmwn at gmail.com  Tue Mar  6 17:14:38 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Tue, 06 Mar 2007 17:14:38 +0100
+Subject: [Tel-dev] Preview 0.1.6
+In-Reply-To: <200703031632.30281.basti.wiesner@gmx.net>
+References: <200703031632.30281.basti.wiesner@gmx.net>
+Message-ID: <1173197678.5691.1.camel@rebian.home>
+
+Es betrifft hier die Release 0.1.6 und nicht die Preview, ist aber
+nebensache:
+
+War das in deinem Sinne, dass setup.py nicht f?r Windows Platformen
+lauff?hig ist? Habe es mal ausprobiert.
+
+Greets,
+Pot
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070306/50596c70/attachment.pgp>
+
+From basti.wiesner at gmx.net  Tue Mar  6 19:16:16 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Tue, 6 Mar 2007 19:16:16 +0100
+Subject: [Tel-dev] Preview 0.1.6
+In-Reply-To: <1173197678.5691.1.camel@rebian.home>
+References: <200703031632.30281.basti.wiesner@gmx.net>
+	<1173197678.5691.1.camel@rebian.home>
+Message-ID: <200703061916.21973.basti.wiesner@gmx.net>
+
+Remo Wenger hackte folgendes:
+> Es betrifft hier die Release 0.1.6 und nicht die Preview, ist aber
+> nebensache:
+>
+> War das in deinem Sinne, dass setup.py nicht f?r Windows Platformen
+> lauff?hig ist? Habe es mal ausprobiert.
+
+Ich sags mal so: Ich habe es nicht mit R?cksicht auf Windows geschrieben ;) 
+Ich w?re ?berrascht gewesen, wenn es ohne Probleme auf Windows laufen 
+w?rde...
+Wenn wir Windows wirklich unterst?tzen wollen, dann sollten wir stattdessen 
+py2exe nehmen. Das packt alles ben?tigte (samt Python) in eine ausf?hrbare 
+Datei... Mangels Interesse kenne ich mich da aber nicht so aus (ich bin 
+halt ein Linuxer ;) )
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070306/ec1b97d8/attachment.pgp>
+
+From potrmwn at gmail.com  Tue Mar  6 20:11:31 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Tue, 06 Mar 2007 20:11:31 +0100
+Subject: [Tel-dev] Preview 0.1.6
+In-Reply-To: <200703061916.21973.basti.wiesner@gmx.net>
+References: <200703031632.30281.basti.wiesner@gmx.net>
+	<1173197678.5691.1.camel@rebian.home>
+	<200703061916.21973.basti.wiesner@gmx.net>
+Message-ID: <1173208291.10403.0.camel@rebian.home>
+
+Am Dienstag, den 06.03.2007, 19:16 +0100 schrieb Sebastian Wiesner:
+> Ich sags mal so: Ich habe es nicht mit R?cksicht auf Windows geschrieben ;) 
+> Ich w?re ?berrascht gewesen, wenn es ohne Probleme auf Windows laufen 
+> w?rde...
+> Wenn wir Windows wirklich unterst?tzen wollen, dann sollten wir stattdessen 
+> py2exe nehmen. Das packt alles ben?tigte (samt Python) in eine ausf?hrbare 
+> Datei... Mangels Interesse kenne ich mich da aber nicht so aus (ich bin 
+> halt ein Linuxer ;) )
+In eine Datei? Also ohne umzuschreiben?
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070306/c6118390/attachment.pgp>
+
+From basti.wiesner at gmx.net  Wed Mar  7 14:10:33 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Wed, 7 Mar 2007 14:10:33 +0100
+Subject: [Tel-dev] Preview 0.1.6
+In-Reply-To: <1173208291.10403.0.camel@rebian.home>
+References: <200703031632.30281.basti.wiesner@gmx.net>
+	<200703061916.21973.basti.wiesner@gmx.net>
+	<1173208291.10403.0.camel@rebian.home>
+Message-ID: <200703071410.38314.basti.wiesner@gmx.net>
+
+Remo Wenger hackte folgendes:
+> Am Dienstag, den 06.03.2007, 19:16 +0100 schrieb Sebastian Wiesner:
+> > Ich sags mal so: Ich habe es nicht mit R?cksicht auf Windows
+> > geschrieben ;) Ich w?re ?berrascht gewesen, wenn es ohne Probleme auf
+> > Windows laufen w?rde...
+> > Wenn wir Windows wirklich unterst?tzen wollen, dann sollten wir
+> > stattdessen py2exe nehmen. Das packt alles ben?tigte (samt Python) in
+> > eine ausf?hrbare Datei... Mangels Interesse kenne ich mich da aber
+> > nicht so aus (ich bin halt ein Linuxer ;) )
+>
+> In eine Datei? Also ohne umzuschreiben?
+
+Ja, so wie ich die Beschreibung von py2exe verstanden habe, kann man damit 
+exe Dateien aus Python Programmen machen (aber nur unter Win). Schau mal 
+auf http://keyjnote.sourceforge.net vorbei. Der Autor dieses Programms 
+erstellt so die Windowsversion.
+Aber wie gesagt, ich programmiere nicht mehr unter Windows und kenne mich da 
+nicht so aus. Aber im Prinzip sollte es gehen, ohne das man gro? was am 
+Quellcode ?ndern muss.
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070307/ba4643da/attachment.pgp>
+
+From potrmwn at gmail.com  Thu Mar  8 22:55:45 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Thu, 08 Mar 2007 22:55:45 +0100
+Subject: [Tel-dev] Tel Logo
+Message-ID: <1173390945.25226.7.camel@rebian.home>
+
+Hi @ all
+
+Langsam wird es Zeit, ein gutes Logo in die Welt zu setzen. Da wir in
+unseren Kreisen keine grossen Grafik-K?nstler sind (nehme ich an),
+k?nnten wir gemeinsam an einem Logo feilen.
+Da gibt es ja in Inkscape das "Whiteboard" was afaik ?ber Jabber l?uft.
+Wie w?rs?
+
+Ich denke, das Logo sollte nicht allzu gross sein. Ein gutes Beispiel
+w?re das von OpenOffice.org [1].
+Was gibt es f?r Kriterien? Hat jemand gute Ideen f?r ein Logo? Kennt
+sich jemand in der Grafikwelt gut aus, oder kennt jemand jemand, der
+sowas kann? ^^
+
+Immer her mit den Informationen ;-)
+
+Greets,
+Pot
+
+[1] http://de.openoffice.org/branding/images/logonew.gif
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070308/3e3f5a39/attachment.pgp>
+
+From basti.wiesner at gmx.net  Fri Mar  9 14:48:19 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Fri, 9 Mar 2007 14:48:19 +0100
+Subject: [Tel-dev] Tel Logo
+In-Reply-To: <1173390945.25226.7.camel@rebian.home>
+References: <1173390945.25226.7.camel@rebian.home>
+Message-ID: <200703091448.24324.basti.wiesner@gmx.net>
+
+Remo Wenger hackte folgendes:
+> Hi @ all
+>
+> Langsam wird es Zeit, ein gutes Logo in die Welt zu setzen. Da wir in
+> unseren Kreisen keine grossen Grafik-K?nstler sind (nehme ich an),
+> k?nnten wir gemeinsam an einem Logo feilen.
+
+ack. ;)
+
+> Da gibt es ja in Inkscape das "Whiteboard" was afaik ?ber Jabber l?uft.
+> Wie w?rs?
+
+Erkl?r mal, was das ist... Ich habe noch nicht so viel mit Inkscape gemacht.
+
+> Ich denke, das Logo sollte nicht allzu gross sein. Ein gutes Beispiel
+> w?re das von OpenOffice.org [1].
+> Was gibt es f?r Kriterien? Hat jemand gute Ideen f?r ein Logo? Kennt
+> sich jemand in der Grafikwelt gut aus, oder kennt jemand jemand, der
+> sowas kann? ^^
+>
+> Immer her mit den Informationen ;-)
+>
+> Greets,
+> Pot
+>
+> [1] http://de.openoffice.org/branding/images/logonew.gif
+
+Wir haben doch schon zwei Vorschl?ge... Warum brauchen wir denn noch ein 
+neues? Ich finde cen's Logo gar nicht schlecht...
+
+Wenn es als SVG Datei vorliegt, dann kann ja auch sehr einfach ein Favicon 
+draus machen...
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070309/71fa536e/attachment.pgp>
+
+From potrmwn at gmail.com  Fri Mar  9 17:17:05 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Fri, 09 Mar 2007 17:17:05 +0100
+Subject: [Tel-dev] Tel Logo
+In-Reply-To: <200703091448.24324.basti.wiesner@gmx.net>
+References: <1173390945.25226.7.camel@rebian.home>
+	<200703091448.24324.basti.wiesner@gmx.net>
+Message-ID: <1173457025.5305.13.camel@rebian.home>
+
+Am Freitag, den 09.03.2007, 14:48 +0100 schrieb Sebastian Wiesner:
+> > Da gibt es ja in Inkscape das "Whiteboard" was afaik ?ber Jabber l?uft.
+> > Wie w?rs?
+> 
+> Erkl?r mal, was das ist... Ich habe noch nicht so viel mit Inkscape gemacht.
+Ich kenne Inkscape auch erst seit ein paar Tagen ^^ mawe hat mich dazu
+bewegt.
+Ich nehme an, dass man damit gemeinsam an einer Grafik ?ber Jabber
+arbeiten kann. Leider kratzt Inkscape immer, wenn ich versuche micht bei
+Gmail einzuloggen :-( (ev. keine Unterst?tzung daf?r)
+Wenn ich da falsch liege: meckern erlaubt ^^
+
+> > Ich denke, das Logo sollte nicht allzu gross sein. Ein gutes Beispiel
+> > w?re das von OpenOffice.org [1].
+> > Was gibt es f?r Kriterien? Hat jemand gute Ideen f?r ein Logo? Kennt
+> > sich jemand in der Grafikwelt gut aus, oder kennt jemand jemand, der
+> > sowas kann? ^^
+> >
+> > Immer her mit den Informationen ;-)
+> >
+> > Greets,
+> > Pot
+> >
+> > [1] http://de.openoffice.org/branding/images/logonew.gif
+> 
+> Wir haben doch schon zwei Vorschl?ge... Warum brauchen wir denn noch ein 
+> neues? Ich finde cen's Logo gar nicht schlecht...
+Wie gesagt, meine Meinung ist, dass es ein bisschen zu gross ist. Ich
+will den header der Website nicht so gross (verkleinern des jetztigen
+Logos ist dumm, lieber eine gr?ssere Breite, daf?r eine geringere H?he,
+ev. so wie OO.os Logo).
+BTW: Cen hat sowieso vor, noch ein Logo zu basteln und sogar ein neues
+Design zu kreieren ^^
+
+> Wenn es als SVG Datei vorliegt, dann kann ja auch sehr einfach ein Favicon 
+> draus machen...
+Wenn man das Favicon auch erkennt. Wikipedias Favicon ist ein gutes
+Beispiel [1].
+
+Greets,
+Pot
+
+[1] http://de.wikipedia.org/wiki/Bild:Favicon_konqueror.png
+-- 
+Hacker bauen Dinge auf, Cracker zerst?ren sie.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070309/abf6660d/attachment.pgp>
+
+From basti.wiesner at gmx.net  Sun Mar 11 15:05:01 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Sun, 11 Mar 2007 15:05:01 +0100
+Subject: [Tel-dev] Tel Logo
+In-Reply-To: <1173457025.5305.13.camel@rebian.home>
+References: <1173390945.25226.7.camel@rebian.home>
+	<200703091448.24324.basti.wiesner@gmx.net>
+	<1173457025.5305.13.camel@rebian.home>
+Message-ID: <200703111505.01213.basti.wiesner@gmx.net>
+
+Remo Wenger hackte folgendes:
+> Am Freitag, den 09.03.2007, 14:48 +0100 schrieb Sebastian Wiesner:
+> > > Da gibt es ja in Inkscape das "Whiteboard" was afaik ?ber Jabber
+> > > l?uft. Wie w?rs?
+> >
+> > Erkl?r mal, was das ist... Ich habe noch nicht so viel mit Inkscape
+> > gemacht.
+>
+> Ich kenne Inkscape auch erst seit ein paar Tagen ^^ mawe hat mich dazu
+> bewegt.
+> Ich nehme an, dass man damit gemeinsam an einer Grafik ?ber Jabber
+> arbeiten kann. Leider kratzt Inkscape immer, wenn ich versuche micht bei
+> Gmail einzuloggen :-( (ev. keine Unterst?tzung daf?r)
+> Wenn ich da falsch liege: meckern erlaubt ^^
+
+Bei Gelegenheit werde ich es auch mal ausprobieren...
+
+> > > Ich denke, das Logo sollte nicht allzu gross sein. Ein gutes Beispiel
+> > > w?re das von OpenOffice.org [1].
+> > > Was gibt es f?r Kriterien? Hat jemand gute Ideen f?r ein Logo? Kennt
+> > > sich jemand in der Grafikwelt gut aus, oder kennt jemand jemand, der
+> > > sowas kann? ^^
+> > >
+> > > Immer her mit den Informationen ;-)
+> > >
+> > > Greets,
+> > > Pot
+> > >
+> > > [1] http://de.openoffice.org/branding/images/logonew.gif
+> >
+> > Wir haben doch schon zwei Vorschl?ge... Warum brauchen wir denn noch
+> > ein neues? Ich finde cen's Logo gar nicht schlecht...
+>
+> Wie gesagt, meine Meinung ist, dass es ein bisschen zu gross ist. Ich
+> will den header der Website nicht so gross (verkleinern des jetztigen
+> Logos ist dumm, lieber eine gr?ssere Breite, daf?r eine geringere H?he,
+> ev. so wie OO.os Logo).
+
+Stimmt... Da hast du recht; als Logo f?r die Webseite ist es schlecht 
+geeignet. Aber als Icon f?r eine Men? oder als Favicon macht es sich ganz 
+gut! Deswegen sollten wir das Logo nicht wegwerfen...
+
+Das andere Logo (was du mir per mail geschickt hast) fand ich nicht soooo 
+toll...
+
+> BTW: Cen hat sowieso vor, noch ein Logo zu basteln und sogar ein neues
+> Design zu kreieren ^^
+
+Cool! Warten wir mal ab was passiert...
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+
+
+From potrmwn at gmail.com  Sun Mar 11 21:12:48 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Sun, 11 Mar 2007 21:12:48 +0100
+Subject: [Tel-dev] Tel Logo
+In-Reply-To: <200703111505.01213.basti.wiesner@gmx.net>
+References: <1173390945.25226.7.camel@rebian.home>
+	<200703091448.24324.basti.wiesner@gmx.net>
+	<1173457025.5305.13.camel@rebian.home>
+	<200703111505.01213.basti.wiesner@gmx.net>
+Message-ID: <1173643968.5309.1.camel@rebian.home>
+
+Am Sonntag, den 11.03.2007, 15:05 +0100 schrieb Sebastian Wiesner:
+> > Wie gesagt, meine Meinung ist, dass es ein bisschen zu gross ist. Ich
+> > will den header der Website nicht so gross (verkleinern des jetztigen
+> > Logos ist dumm, lieber eine gr?ssere Breite, daf?r eine geringere H?he,
+> > ev. so wie OO.os Logo).
+> 
+> Stimmt... Da hast du recht; als Logo f?r die Webseite ist es schlecht 
+> geeignet. Aber als Icon f?r eine Men? oder als Favicon macht es sich ganz 
+> gut! Deswegen sollten wir das Logo nicht wegwerfen...
+Nein nat?rlich nicht. Aber als Favicon ist es nicht geeignet (Cen hat
+schon probiert)
+
+> > BTW: Cen hat sowieso vor, noch ein Logo zu basteln und sogar ein neues
+> > Design zu kreieren ^^
+> 
+> Cool! Warten wir mal ab was passiert...
+ack
+-- 
+Hacker bauen Dinge auf, Cracker zerst?ren sie.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070311/dc0b0467/attachment.pgp>
+
+From basti.wiesner at gmx.net  Mon Mar 19 21:03:20 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Mon, 19 Mar 2007 21:03:20 +0100
+Subject: [Tel-dev] Bugs Reports
+Message-ID: <200703192103.26201.basti.wiesner@gmx.net>
+
+Hi,
+
+ich denke, wir haben ein kleines Problem mit den Bugreports ...
+
+Ich habe in letzter Zeit meine Aufmerksamkeit mal wieder verst?rkt meinem 
+anderen Projekt zugewandt, da dort per Mail einige Bug-Reports eingetroffen 
+sind, die nat?rlich beseitigt werden wollten ;)
+Deswegen hatte ich nicht gen?gend Zeit, um auf der Projektseite von tel nach 
+neuen Bug Reports zu schauen... und habe deswegen prompt einen Bug-Report 
+?bersehen [1] 
+
+Ich habe den Bug selbst ebenfalls entdeckt und auch lange nach einer L?sung 
+gesucht, bis ich sie nun gestern gefunden und commited habe. Den Report 
+selbst habe ich dagegen erst heute entdeckt, weshalb der Report auch nicht 
+in der Commit-Log-Message erw?hnt wird :/ Vielleicht kannst du das ja noch 
+?ndern, pot? Die betroffene Revisionsnummer ist 97.
+
+Die Frage ist nun, wie man das vermeiden kann... Ich schaue bei BerliOS 
+meistens nur auf die pers?nliche Seite, wo aber leider nur die eigenen Bugs 
+(solche denen man zugewiesen ist) angezeigt werden. Dagegen l?uft mein 
+Mail-Programm immer und holt sich alle 10 Minuten die neuen Mails von 
+Server. Eine E-Mail Benachrichtigung f?r _alle_ Bugreports von tel w?re 
+ideal. Das entsprechende Feld in der Projekt-Verwaltung akzeptiert aber nur 
+eine Adresse, es w?re also eine Mailing-Liste von N?ten. 
+
+Wie soll ich das einrichten? Eine neue Mailingliste f?r solche 
+Benachrichtigungen, oder lieber hier an diese Liste, damit man dann auch 
+?ber Bug-Reports diskutieren kann?
+
+Was tel angeht, so habe ich tel auf mehrere Dateien verteilt. Es gibt jetzt 
+drei Module: cmdoptparse.py (der erweitere Optionsparser f?r 
+Kommandozeilenargumente), phonebook.py (Klassen zum Zugriff auf das 
+Telefonbuch und dessen Eintr?ge) und consoleiface.py (das 
+Konsoleninterface, welches die Tabelle und die Listen ausgibt, und Eintr?ge 
+auf der Konsole bearbeiten kann). tel.py ist jetzt nur noch ein 
+Start-Skript, welches (eine weitere Neuerung) bei der Installalation 
+konfiguriert wird. Dort werden die Platzhalter durch den Installationspfad 
+der Module und der io18n-Dateien ersetzt. 
+
+Das hat folgende Vorteile: Die ?bersetzungsdateien werden jetzt auch 
+gefunden, wenn man z.B. unter ~/Software/tel installiert. Au?erdem sind die 
+Module jetzt generell im Modul-Pfad verf?gbar, was eine Vorraussetzung f?r 
+eine Pluginarchitektur ist, wie sie mir f?r die Unterst?tzung 
+unterschiedlicher Dateitypen vorschwebt.
+
+Der Nachteil ist halt, dass man tel nach der Installation nicht ohne 
+weiteres einfach verschieben kann und ohne Installation nicht verwenden 
+kann, weil tel.py ja unvollst?ndig (unkonfiguriert) ist.
+
+Kommentare und Anmerkungen erw?nscht
+lunar
+
+[1] 
+https://developer.berlios.de/bugs/?func=detailbug&bug_id=10565&group_id=8132
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070319/be865979/attachment.pgp>
+
+From potrmwn at gmail.com  Mon Mar 19 21:15:55 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Mon, 19 Mar 2007 21:15:55 +0100
+Subject: [Tel-dev] Bugs Reports
+In-Reply-To: <200703192103.26201.basti.wiesner@gmx.net>
+References: <200703192103.26201.basti.wiesner@gmx.net>
+Message-ID: <1174335355.5732.12.camel@rebian.home>
+
+Am Montag, den 19.03.2007, 21:03 +0100 schrieb Sebastian Wiesner:
+> ich denke, wir haben ein kleines Problem mit den Bugreports ...
+> [..]
+> Eine E-Mail Benachrichtigung f?r _alle_ Bugreports von tel w?re 
+> ideal. Das entsprechende Feld in der Projekt-Verwaltung akzeptiert aber nur 
+> eine Adresse, es w?re also eine Mailing-Liste von N?ten. 
+> Wie soll ich das einrichten? Eine neue Mailingliste f?r solche 
+> Benachrichtigungen, oder lieber hier an diese Liste, damit man dann auch 
+> ?ber Bug-Reports diskutieren kann?
+Eigentlich geh?ren Bugs ja auch zur Entwicklung, also auch zur
+dev-Mailingliste. Praktisch dabei ist ja, dass gerade alle Entwickler
+informiert werden, man dar?ber diskutieren kann, ..
+Also sehe ich der Einsatz einer extra Mailingliste als ?berfl?ssig.
+
+> Deswegen hatte ich nicht gen?gend Zeit, um auf der Projektseite von tel nach 
+> neuen Bug Reports zu schauen... und habe deswegen prompt einen Bug-Report 
+> ?bersehen [1] 
+Hab mir schon Sorgen gemacht, warum du das wohl ?bersehen hast ^^
+Habs aber nach dem Absenden wieder vergessen und deshalb dich nicht
+drauf angesprochen.
+
+> Ich habe den Bug selbst ebenfalls entdeckt und auch lange nach einer L?sung 
+> gesucht, bis ich sie nun gestern gefunden und commited habe. Den Report 
+> selbst habe ich dagegen erst heute entdeckt, weshalb der Report auch nicht 
+> in der Commit-Log-Message erw?hnt wird :/ Vielleicht kannst du das ja noch 
+> ?ndern, pot? Die betroffene Revisionsnummer ist 97.
+Na klar, werd mich nachher drum k?mmern.
+
+> Das hat folgende Vorteile: Die ?bersetzungsdateien werden jetzt auch 
+> gefunden, wenn man z.B. unter ~/Software/tel installiert. Au?erdem sind die 
+> Module jetzt generell im Modul-Pfad verf?gbar, was eine Vorraussetzung f?r 
+> eine Pluginarchitektur ist, wie sie mir f?r die Unterst?tzung 
+> unterschiedlicher Dateitypen vorschwebt.
+Das ist gut. Wollte ich eigentlich auch noch "reporten" als ichs bemerkt
+habe.
+
+> Der Nachteil ist halt, dass man tel nach der Installation nicht ohne 
+> weiteres einfach verschieben kann und ohne Installation nicht verwenden 
+> kann, weil tel.py ja unvollst?ndig (unkonfiguriert) ist.
+Naja, man muss ja kein Programm verschieben wenn es irgendwo installiert
+ist. ..
+-- 
+Hacker bauen Dinge auf, Cracker zerst?ren sie.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070319/bac0ac7b/attachment.pgp>
+
+From potrmwn at gmail.com  Tue Mar 20 16:33:15 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Tue, 20 Mar 2007 16:33:15 +0100
+Subject: [Tel-dev] Bugs Reports
+In-Reply-To: <200703192103.26201.basti.wiesner@gmx.net>
+References: <200703192103.26201.basti.wiesner@gmx.net>
+Message-ID: <1174404795.5525.0.camel@rebian.home>
+
+Am Montag, den 19.03.2007, 21:03 +0100 schrieb Sebastian Wiesner:
+> Vielleicht kannst du das ja noch 
+> ?ndern, pot? Die betroffene Revisionsnummer ist 97.
+Done
+-- 
+Hacker bauen Dinge auf, Cracker zerst?ren sie.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070320/26720752/attachment.pgp>
+
+From basti.wiesner at gmx.net  Tue Mar 20 17:14:14 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Tue, 20 Mar 2007 17:14:14 +0100
+Subject: [Tel-dev] Bugs Reports
+In-Reply-To: <1174335355.5732.12.camel@rebian.home>
+References: <200703192103.26201.basti.wiesner@gmx.net>
+	<1174335355.5732.12.camel@rebian.home>
+Message-ID: <200703201714.19529.basti.wiesner@gmx.net>
+
+[ Remo Wenger <potrmwn at gmail.com> ]
+> Am Montag, den 19.03.2007, 21:03 +0100 schrieb Sebastian Wiesner:
+> > ich denke, wir haben ein kleines Problem mit den Bugreports ...
+> > [..]
+> > Eine E-Mail Benachrichtigung f?r _alle_ Bugreports von tel w?re
+> > ideal. Das entsprechende Feld in der Projekt-Verwaltung akzeptiert aber
+> > nur eine Adresse, es w?re also eine Mailing-Liste von N?ten.
+> > Wie soll ich das einrichten? Eine neue Mailingliste f?r solche
+> > Benachrichtigungen, oder lieber hier an diese Liste, damit man dann
+> > auch ?ber Bug-Reports diskutieren kann?
+>
+> Eigentlich geh?ren Bugs ja auch zur Entwicklung, also auch zur
+> dev-Mailingliste. Praktisch dabei ist ja, dass gerade alle Entwickler
+> informiert werden, man dar?ber diskutieren kann, ..
+> Also sehe ich der Einsatz einer extra Mailingliste als ?berfl?ssig.
+
+done! ;)
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070320/8dd8e772/attachment.pgp>
+
+From basti.wiesner at gmx.net  Sun Mar 25 18:06:28 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Sun, 25 Mar 2007 18:06:28 +0200
+Subject: [Tel-dev] =?utf-8?q?Plugin_System_f=C3=BCr_neue_Dateitypen?=
+Message-ID: <200703251806.33786.basti.wiesner@gmx.net>
+
+Hi @all,
+
+ich habe mal einen neuen Entwicklungszweig f?r die Entwicklung des 
+Pluginsystems erzeugt. Er ist unter branches/plugin-system-dev zu finden.
+
+Darin ist bereits der erste Entwurf eines backendmanager Moduls zu finden, 
+welches Plugins sucht, l?dt und verwaltet. Au?erdem habe ich ein Plugin f?r 
+CSV Dateien entworfen. Generell sollte das Plugin-System aber auch Backends 
+unterst?tzen, welche nicht auf Dateien basieren... So k?nnte es ?ber solche 
+Backends sp?ter einmal m?glich sein, Datenbanken oder LDAP Server 
+anzusprechen. Prim?r habe ich aber erstmal an KDE/Gnome gedacht. KDE bietet 
+f?r den Zugriff aufs Standardadressbuch ein eigenes API, welches ohne 
+Dateien auskommt.
+
+Die ganze Sache ist zwar schon rudiment?r funktionsf?hig, aber noch nicht in 
+tel integriert (was noch einiges an Arbeit darstellen wird). Man kann 
+backendmanager aber bereits importieren und Backends laden. Remo, du 
+k?nntest auch schon mal mit der Entwicklung des Plugins f?r Mutt-Dateien 
+anfangen. Nimm das CSV Plugin als Beispiel. Allerdings kann sich das Format 
+der Plugin-Dateien noch ?ndern, bis jetzt haben wir es ja noch nicht in der 
+Praxis erprobt und wissen nicht, wie es sich da bew?hrt ;)
+
+lunar
+
+PS: Unter [1] steht ein ?berblick ?ber das Konzept von Entwicklungszweigen 
+und wie man damit arbeitet bereit.
+
+
+[1] http://svnbook.red-bean.com/nightly/en/svn.branchmerge.html (Englisch)
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070325/9b25ace2/attachment.pgp>
+
+From basti.wiesner at gmx.net  Fri Mar 30 12:35:16 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Fri, 30 Mar 2007 12:35:16 +0200
+Subject: [Tel-dev] Fwd: tel requests/bugs
+Message-ID: <200703301235.26007.basti.wiesner@gmx.net>
+
+
+
+----------  Forwarded Message  ----------
+
+Subject: tel requests/bugs
+Date: Thursday 29 March 2007 18:59
+From: Christophe Danker <cdlinux at koala.de>
+To: basti.wiesner at gmx.net
+
+Hi!
+
+Erstmal Daaankeeeeesch??????n.... Nach so was hab ich shcon l?nger
+gesucht.
+
+
+Ich teste das ganze gerade mal 10 Minuten und schon f?llt mir einiges
+auf:
+
+- Bitte Land mit aufnehmen,
+- Bitte Postleitzahl international erlauben
+  (UK zB
+ /^([A-PR-UWYZ0-9][A-HK-Y0-9][AEHMNPRTVXY0-9]?[ABEHMNPRVWXY0-9]?{1,2}[0-9][
+ABD-HJLN-UW-Z]{2}|GIR 0AA)$/ cf.
+ http://regexlib.com/REDetails.aspx?regexp_id=260 ), mindestens mit
+ Landk?rzel vorweg? zB F-49100 etc.
+- Bitte Adressfeldzusatz hinzu?
+  zB "Vorname Name, Altersheim Waldmohr, Stra?e x, D-66000 Etcstadt"
+  Wo bekomme ich das unter ;-)
+
+So, das war's erstmal. Uhm. Ich wollt das nurloswerden, wenn's nicht
+passiert, werd ich's fr?her oder sp?ter selbst einkoden ;) Sollte bis
+dahin nix passiert sein, kann ich ja Diff's schicken (MIT-License,
+oder?)
+
+Ansonsten nochmal vielen Dank vorab, wenn mir noch mehr einf?llt,
+bel?stige ich Dich wieder, ok?
+
+Gru? und Dank!
+Chris
+
+-------------------------------------------------------
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070330/cb1ec434/attachment.pgp>
+
+From basti.wiesner at gmx.net  Fri Mar 30 12:45:06 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Fri, 30 Mar 2007 12:45:06 +0200
+Subject: [Tel-dev] Fwd: tel requests/bugs
+In-Reply-To: <200703301235.26007.basti.wiesner@gmx.net>
+References: <200703301235.26007.basti.wiesner@gmx.net>
+Message-ID: <200703301245.06877.basti.wiesner@gmx.net>
+
+> Ich teste das ganze gerade mal 10 Minuten und schon f?llt mir einiges
+> auf:
+>
+> - Bitte Land mit aufnehmen,
+
+Kein Problem...
+
+> - Bitte Postleitzahl international erlauben
+>   (UK zB
+> 
+> /^([A-PR-UWYZ0-9][A-HK-Y0-9][AEHMNPRTVXY0-9]?[ABEHMNPRVWXY0-9]?{1,2}[0-9]
+>[ ABD-HJLN-UW-Z]{2}|GIR 0AA)$/ cf.
+>  http://regexlib.com/REDetails.aspx?regexp_id=260 ), mindestens mit
+>  Landk?rzel vorweg? zB F-49100 etc.
+
+Ok, prinzipiell ebenfalls kein Problem... Die Reg-Exp zu integrieren ist 
+kein m?glich, aber mir scheint, sie ist nur f?r UK g?ltig... Gibt es eine 
+m?glichst "internationale" regexp f?r Postleitzahlen?
+
+> - Bitte Adressfeldzusatz hinzu?
+>   zB "Vorname Name, Altersheim Waldmohr, Stra?e x, D-66000 Etcstadt"
+
+Meinst du damit, dass die Adresse beim Anzeigen von Eintr?gen 
+mittels "--show" in einem Feld angezeigt werden soll?
+
+>   Wo bekomme ich das unter ;-)
+
+Das erledigen wir schon ;)
+
+> So, das war's erstmal. Uhm. Ich wollt das nurloswerden, wenn's nicht
+> passiert, werd ich's fr?her oder sp?ter selbst einkoden ;)
+
+Klar... Aber die ?nderung an den Feldern ist problemlos m?glich...
+Das mit dem "Adressfeldzusatz" musst du allerdings noch genauer erkl?ren...
+
+> Sollte bis dahin nix passiert sein, kann ich ja Diff's schicken
+> (MIT-License, oder?)
+
+... oder du schickst ein Patch f?r diese ?nderung ;)
+
+> Ansonsten nochmal vielen Dank vorab, wenn mir noch mehr einf?llt,
+> bel?stige ich Dich wieder, ok?
+
+Diese Art von "Bel?stigung" ertrage ich gerne ;)
+Btw, woher hast du diese eMail-Adresse? Ich frage, damit wir die Adresse der 
+Mailing-Liste besser verbreiten k?nnen... Solche Reports sind auf der 
+Mailing-Liste besse aufgehoben, damit andere sie auch kommentieren 
+k?nnen ;) Deswegen habe ich deine Mail dorthin weitergeleitet...
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070330/7f6fea95/attachment.pgp>
+
+From admin at berlios.de  Fri Mar 30 12:41:05 2007
+From: admin at berlios.de (admin at berlios.de)
+Date: Fri, 30 Mar 2007 12:41:05 +0200 (CEST)
+Subject: [Tel-dev] [Feature #3177] Extend import and export
+Message-ID: <200703301041.l2UAf5hF000918@unicorn.berlios.de>
+
+Feature Request #3177, was updated on 2007-Feb-25 09:22
+You can respond by visiting: 
+http://developer.berlios.de/feature/?func=detailfeature&feature_id=3177&group_id=8132
+
+Category: None
+Status: Open
+Priority: 9
+Summary: Extend import and export
+
+By: lunar
+Date: 2007-Mar-30 12:41
+
+Message:
+Logged In: YES 
+user_id=33280
+Browser: Mozilla/5.0 (X11; U; Linux i686; de; rv:1.8.1.3) Gecko/20070310 Iceweasel/2.0.0.3 (Debian-2.0.0.3-1)
+
+The new development branch plugin-system-dev is the place of
+the development of a plugin system, which allows transparent
+support for many different file types and address apis.
+A first draft has been added and is free for testing...
+
+----------------------------------------------------------------------
+
+By: lunar
+Date: 2007-Feb-25 15:08
+
+Message:
+Logged In: YES 
+user_id=33280
+Browser: Mozilla/5.0 (X11; U; Linux i686; de; rv:1.8.1.1) Gecko/20060601 Firefox/2.0.0.1 (Ubuntu-edgy)
+
+Mutt alias files have the following structure:
+alias <shortname> <email> (<fullname>)
+
+The shortname can be created by combining firstname  and
+lastname in a creative way, or by adding a new field called
+"nickname" to the address file.
+
+An example of mutt export can be found at
+ftp://ftp.berlios.de/pub/tel in the mutt.pl script. Look at
+the function "mutt_ex"
+
+----------------------------------------------------------------------
+You can respond by visiting: 
+http://developer.berlios.de/feature/?func=detailfeature&feature_id=3177&group_id=8132
+
+
+From admin at berlios.de  Fri Mar 30 12:50:03 2007
+From: admin at berlios.de (admin at berlios.de)
+Date: Fri, 30 Mar 2007 12:50:03 +0200 (CEST)
+Subject: [Tel-dev] [Bug #10786] Allow international postal codes
+Message-ID: <200703301050.l2UAo3uB012983@unicorn.berlios.de>
+
+Bug #10786, was updated on 2007-Mar-30 12:49
+Here is a current snapshot of the bug.
+
+Project: tel
+Category: None
+Status: Open
+Resolution: None
+Bug Group: None
+Priority: 9
+Submitted by: lunar
+Assigned to : none
+Summary: Allow international postal codes
+
+Details: Support international postal codes.
+
+Regular expression for uk code available at   http://regexlib.com/REDetails.aspx?regexp_id=260 
+
+For detailed info, follow this link:
+http://developer.berlios.de/bugs/?func=detailbug&bug_id=10786&group_id=8132
+
+
+From basti.wiesner at gmx.net  Fri Mar 30 13:27:45 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Fri, 30 Mar 2007 13:27:45 +0200
+Subject: [Tel-dev] Fwd: tel requests/bugs
+In-Reply-To: <200703301245.06877.basti.wiesner@gmx.net>
+References: <200703301235.26007.basti.wiesner@gmx.net>
+	<200703301245.06877.basti.wiesner@gmx.net>
+Message-ID: <200703301327.50703.basti.wiesner@gmx.net>
+
+[ Sebastian Wiesner <basti.wiesner at gmx.net> ]
+> > Ich teste das ganze gerade mal 10 Minuten und schon f?llt mir einiges
+> > auf:
+> >
+> > - Bitte Land mit aufnehmen,
+
+Schon erledigt ;) (zumindest in meiner Working-Copy)
+
+> > - Bitte Postleitzahl international erlauben
+> >   (UK zB
+> >
+> > /^([A-PR-UWYZ0-9][A-HK-Y0-9][AEHMNPRTVXY0-9]?[ABEHMNPRVWXY0-9]?{1,2}[0-
+> >9] [ ABD-HJLN-UW-Z]{2}|GIR 0AA)$/ cf.
+> >  http://regexlib.com/REDetails.aspx?regexp_id=260 ), mindestens mit
+> >  Landk?rzel vorweg? zB F-49100 etc.
+>
+> Ok, prinzipiell ebenfalls kein Problem... Die Reg-Exp zu integrieren ist
+> kein m?glich, aber mir scheint, sie ist nur f?r UK g?ltig... Gibt es eine
+> m?glichst "internationale" regexp f?r Postleitzahlen?
+
+Nachtrag:
+Die erw?hnte regexp ist leider nicht geeignet, da sie deutsche 
+Postleitzahlen nicht akzeptiert...
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070330/cc856c2b/attachment.pgp>
+
+From cdlinux at koala.de  Fri Mar 30 14:45:58 2007
+From: cdlinux at koala.de (Christophe Danker)
+Date: Fri, 30 Mar 2007 14:45:58 +0200
+Subject: [Tel-dev] Fwd: tel requests/bugs
+In-Reply-To: <200703301245.06877.basti.wiesner@gmx.net>
+References: <200703301235.26007.basti.wiesner@gmx.net>
+	<200703301245.06877.basti.wiesner@gmx.net>
+Message-ID: <20070330124557.GY2463@h719935.serverkompetenz.net>
+
+Hi, und Dank fd schnelle Antwort..
+
+* Sebastian Wiesner <basti.wiesner at gmx.net> [2007-03-30 12:45:06 +0200]:
+
+> >  http://regexlib.com/REDetails.aspx?regexp_id=260 ), mindestens mit
+> >  Landk?rzel vorweg? zB F-49100 etc.
+> 
+> Ok, prinzipiell ebenfalls kein Problem... Die Reg-Exp zu integrieren ist 
+> kein m?glich, aber mir scheint, sie ist nur f?r UK g?ltig... Gibt es eine 
+> m?glichst "internationale" regexp f?r Postleitzahlen?
+> 
+
+das ist korrekt. uk war nur ein Beispiel. unter
+http://www.columbia.edu/kermit/postal.html gibt's die weltweit
+?bersicht. im endeffekt l?uft es wohl darauf hinaus plzn etwas "freier"
+zuzulassen. ich habe mir "l?nderk?rzel-plz" f?r europa angew?hnt. us ist
+das schon wieder anders: "FL 33912, Stadt" (zB) und uk ist wie gehabt das
+wohl komplexeste bsp in eu. da Cruz schildert das ganz gut in seinem
+artikel.
+
+> > - Bitte Adressfeldzusatz hinzu?
+> >   zB "Vorname Name, Altersheim Waldmohr, Stra?e x, D-66000 Etcstadt"
+> 
+> Meinst du damit, dass die Adresse beim Anzeigen von Eintr?gen 
+> mittels "--show" in einem Feld angezeigt werden soll?
+> 
+
+ich meine, da? addreszus?tze m?glich sien sollten/m?ssen und eben auch
+so an latex/... weitergegeben werden zu k?nnen:
+
+An den Oberb?rgermeister    * geht zz nicht
+Herrn Dr. Baganz
+Stadt M?lheim an der Ruhr   * als stra?e?
+Postfach 101953             * als ...?
+45466 M?lheim
+GERMANY
+
+ps: da f?llt mir ein, wie w?r's mit "Anrede"/"Titel"?
+
+
+> ... oder du schickst ein Patch f?r diese ?nderung ;)
+
+ach ja, die zeit. aber da ihr ja so aktiv seid ;) 
+wenn's was dringendes ist, was ich ben?tige und selbst code, mach ich
+das gerne...
+
+> Diese Art von "Bel?stigung" ertrage ich gerne ;)
+> Btw, woher hast du diese eMail-Adresse? Ich frage, damit wir die Adresse der 
+> Mailing-Liste besser verbreiten k?nnen... Solche Reports sind auf der 
+> Mailing-Liste besse aufgehoben, damit andere sie auch kommentieren 
+> k?nnen ;) Deswegen habe ich deine Mail dorthin weitergeleitet...
+
+ok, mail geht jetzt auch an ml. priv. adr. von tel.berlioz -> kontakt.
+(und ubuntu forum hat dich als "aktivsten" herausgestellt ;) )
+
+Gru? an tel-team
+Christophe
+
+
+
+From admin at berlios.de  Fri Mar 30 15:34:43 2007
+From: admin at berlios.de (admin at berlios.de)
+Date: Fri, 30 Mar 2007 15:34:43 +0200 (CEST)
+Subject: [Tel-dev] [Bug #10786] Allow international postal codes
+Message-ID: <200703301334.l2UDYhDv015940@unicorn.berlios.de>
+
+Bug #10786, was updated on 2007-Mar-30 12:49
+Here is a current snapshot of the bug.
+
+Project: tel
+Category: None
+Status: Open
+Resolution: Fixed
+Bug Group: None
+Priority: 5
+Submitted by: lunar
+Assigned to : lunar
+Summary: Allow international postal codes
+
+Details: Support international postal codes.
+
+Regular expression for uk code available at   http://regexlib.com/REDetails.aspx?regexp_id=260 
+
+Follow-Ups:
+
+Date: 2007-Mar-30 15:34
+By: lunar
+
+Comment:
+Fixed in revision 116
+-------------------------------------------------------
+
+For detailed info, follow this link:
+http://developer.berlios.de/bugs/?func=detailbug&bug_id=10786&group_id=8132
+
+
+From potrmwn at gmail.com  Fri Mar 30 17:43:54 2007
+From: potrmwn at gmail.com (Remo Wenger)
+Date: Fri, 30 Mar 2007 17:43:54 +0200
+Subject: [Tel-dev] Fwd: tel requests/bugs
+In-Reply-To: <20070330124557.GY2463@h719935.serverkompetenz.net>
+References: <200703301235.26007.basti.wiesner@gmx.net>
+	<200703301245.06877.basti.wiesner@gmx.net>
+	<20070330124557.GY2463@h719935.serverkompetenz.net>
+Message-ID: <1175269434.4925.8.camel@rebian.home>
+
+Hi Christophe
+
+Sch?n, dass du Interesse am tel-Projekt oder immerhin am tel-Programm
+hast.
+
+Bez?glich der Mailinglisten:
+Da du ja (noch) kein offizieller Entwickler von tel bist, k?nntest du
+solche Dinge direkt an die Mailingliste tel-users [1] schreiben, da die
+tel-dev f?r Entwickler sind. Hier brauchst du zuerst eine "Erlaubnis" um
+zu schreiben ;-)
+Und wenn du schon an die tel-dev-Mailingliste schreibst, ist eine Kopie
+an Lunar nicht n?tig, er hat diese ja auch abboniert.
+
+So jetzt genug gemeckert.
+
+Sch?nes Wochenende,
+Pot
+
+
+[1] http://developer.berlios.de/mail/?group_id=8132
+-- 
+Hacker bauen Dinge auf, Cracker zerst?ren sie.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20070330/bb9bf597/attachment.pgp>
+
+From admin at berlios.de  Fri Mar 30 21:25:18 2007
+From: admin at berlios.de (admin at berlios.de)
+Date: Fri, 30 Mar 2007 21:25:18 +0200 (CEST)
+Subject: [Tel-dev] [Bug #10786] Allow international postal codes
+Message-ID: <200703301925.l2UJPIfu029030@unicorn.berlios.de>
+
+Bug #10786, was updated on 2007-Mar-30 12:49
+Here is a current snapshot of the bug.
+
+Project: tel
+Category: None
+Status: Closed
+Resolution: Fixed
+Bug Group: None
+Priority: 5
+Submitted by: lunar
+Assigned to : lunar
+Summary: Allow international postal codes
+
+Details: Support international postal codes.
+
+Regular expression for uk code available at   http://regexlib.com/REDetails.aspx?regexp_id=260 
+
+Follow-Ups:
+
+Date: 2007-Mar-30 15:34
+By: lunar
+
+Comment:
+Fixed in revision 116
+-------------------------------------------------------
+
+For detailed info, follow this link:
+http://developer.berlios.de/bugs/?func=detailbug&bug_id=10786&group_id=8132
+
+

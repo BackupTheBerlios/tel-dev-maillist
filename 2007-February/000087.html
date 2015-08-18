@@ -1,0 +1,175 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Tel-dev] [ Feature Request #3176 ] Sorting: local options mit print_short_list verkn&#252;pfen
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/tel-dev/2007-February/index.html" >
+   <LINK REL="made" HREF="mailto:tel-dev%40lists.berlios.de?Subject=Re%3A%20%5BTel-dev%5D%0A%09%3D%3Fiso-8859-15%3Fq%3F%3D5B_Feature_Request_%3D233176_%3D5D_Sorting%3F%3D%0A%09%3D%3Fiso-8859-15%3Fq%3F%3D3A_local_options_mit_print%3D5Fshort%3D5Flist_verkn%3F%3D%0A%09%3D%3Fiso-8859-15%3Fq%3F%3DFCpfen%3F%3D&In-Reply-To=%3C200702281742.54692.basti.wiesner%40gmx.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000083.html">
+   <LINK REL="Next"  HREF="000091.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Tel-dev] [ Feature Request #3176 ] Sorting: local options mit print_short_list verkn&#252;pfen</H1>
+    <B>Sebastian Wiesner</B> 
+    <A HREF="mailto:tel-dev%40lists.berlios.de?Subject=Re%3A%20%5BTel-dev%5D%0A%09%3D%3Fiso-8859-15%3Fq%3F%3D5B_Feature_Request_%3D233176_%3D5D_Sorting%3F%3D%0A%09%3D%3Fiso-8859-15%3Fq%3F%3D3A_local_options_mit_print%3D5Fshort%3D5Flist_verkn%3F%3D%0A%09%3D%3Fiso-8859-15%3Fq%3F%3DFCpfen%3F%3D&In-Reply-To=%3C200702281742.54692.basti.wiesner%40gmx.net%3E"
+       TITLE="[Tel-dev] [ Feature Request #3176 ] Sorting: local options mit print_short_list verkn&#252;pfen">basti.wiesner at gmx.net
+       </A><BR>
+    <I>Wed Feb 28 17:42:36 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000083.html">[Tel-dev] [ Feature Request #3176 ] Sorting: local options mit print_short_list verkn&#252;pfen
+</A></li>
+        <LI>Next message: <A HREF="000091.html">[Tel-dev] [ Feature Request #3176 ] Sorting: local options mit print_short_list verkn&#252;pfen
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#87">[ date ]</a>
+              <a href="thread.html#87">[ thread ]</a>
+              <a href="subject.html#87">[ subject ]</a>
+              <a href="author.html#87">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Remo Wenger hackte folgendes:
+&gt;<i> Hi,
+</I>&gt;<i>
+</I>&gt;<i> bin gerade dabei mit meinen sehr eingeschr&#228;nkten Python Kenntnissen
+</I>&gt;<i> (darf man das schon Kenntnisse nennen?) die zusatz Option --sort/-s
+</I>&gt;<i> hinzuzuf&#252;gen (Feature Request #3176).
+</I>&gt;<i>
+</I>&gt;<i> Die Option --sort habe ich schon eingef&#252;gt:
+</I>&gt;<i> &gt; make_option('-s', '--sort', action='store', dest='sort',
+</I>&gt;<i> &gt; 	type='string',
+</I>&gt;<i> &gt; 	help=_('supports sorting of output'))
+</I>&gt;<i>
+</I>&gt;<i> So weit, so gut: es scheint zu funktionieren (--help zeigt --sort
+</I>&gt;<i> korrekt an).
+</I>&gt;<i>
+</I>&gt;<i> Nun will ich das mal beim Aufruf von --list auch nutzen. Also gehe ich
+</I>&gt;<i>
+</I>&gt;<i> zur Funktion print_short_list und f&#252;ge ein drittes Argument an:
+</I>&gt;<i> &gt; def print_short_list(self, entries, sort):
+</I>&gt;<i> &gt; 	&quot;&quot;&quot;Prints all `entries` in a short format:&quot;&quot;&quot;
+</I>&gt;<i> &gt; 	print
+</I>&gt;<i> &gt; 	print sort
+</I>&gt;<i> &gt; 	for entry in entries:
+</I>&gt;<i> &gt; 		print repr(entry)
+</I>
+Die print-Funktionen sind nur Helfer-Funktionen. Dadurch kann man sie 
+unabh&#228;ngig von Kommando mehrfach verwenden. Das ist der Grund, warum die 
+Tabelle bei --table und --search gleich aussieht ;)
+Die eigentliche Arbeit passiert woanders...
+
+&gt;<i>
+</I>&gt;<i> Da kommt aber ne Fehlermeldung:
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/tel-dev">remo at rebian</A>:~/tel/trunk$ ./tel.py --list --sort=Mdf
+</I>&gt;<i> &gt; Traceback (most recent call last):
+</I>&gt;<i> &gt;   File &quot;./tel.py&quot;, line 1032, in ?
+</I>&gt;<i> &gt;     ConsoleIFace().start()
+</I>&gt;<i> &gt;   File &quot;./tel.py&quot;, line 1026, in start
+</I>&gt;<i> &gt;     options.command_function(options, *args)
+</I>&gt;<i> &gt;   File &quot;./tel.py&quot;, line 828, in _cmd_list
+</I>&gt;<i> &gt;     self.print_short_list(entries)
+</I>&gt;<i> &gt; TypeError: print_short_list() takes exactly 3 arguments (2 given)
+</I>&gt;<i>
+</I>&gt;<i> Der Grund ist f&#252;r mich klar: Er kennt die Variable &quot;sort&quot; (noch) nicht.
+</I>&gt;<i> Wie also kann ich --short mit dieser Funktion verkn&#252;pfen? Hab schon ein
+</I>&gt;<i> bisschen im Code rumgeschn&#252;ffelt aber bin nicht schlau geworden.
+</I>
+Kurz gesagt: Um --list sortieren zu lassen, musst du in 
+ConsoleIFace._cmd_list das Attribut &quot;sort&quot; aus dem Objekt &quot;options&quot; 
+auslesen und an die Funktion print_short_list &#252;bergeben...
+
+Lang gesagt (oder anders: der Hintergrund dazu):
+Es gibt bei tel eigentlich drei Arten von Optionen (sieht man ja auch in der 
+Hilfe):
+- parser_options: Zeug wie das Ausgeben der Lizenz, der Hilfe oder der  
+Autoren
+- command_options: Alle Kommandos, die etwas bewirken, z.B. Ausgabe, oder 
+Editieren
+- local_options: Optionen, die das Verhalten dieser Kommandos ver&#228;ndern
+
+Kommandos sind wie folgt implementiert:
+Sie werden zur Liste command_options hinzugef&#252;gt (nicht wirklich wichtig, 
+bewirkt nur die Gruppierung der Optionen in der Hilfe-Ausgabe). Viel 
+wichtiger ist aber, dass eine Kommandooption einen bestimmten Callback 
+aufruft: Die Funktion &quot;cb_cmd_opt&quot;
+
+Diese Funktion macht &#252;berpr&#252;ft nur, dass nicht mehrere Kommandos 
+gleichzeitig &#252;bergeben wurden. Dann speichert sie die Kommandooption in der 
+Variable &quot;parser.values.command&quot;. Das Objekt &quot;parser.values&quot; wird sp&#228;ter 
+von der Methode &quot;parser.parse_args&quot;, welche die Argumente parst, 
+zur&#252;ckgegeben, und zwar erstes Element eines Tupels (im Code hei&#223;t die 
+Variable &quot;options&quot;).
+Dies geschieht in der Methode ConsoleIFace.parse_args (ganz unten im Code). 
+Hier wird nun das Attribut &quot;options.command&quot;, welches die angegebene 
+Kommandooption in String-Form enth&#228;lt, an die Methode 
+ConsoleIFace._get_cmd_function &#252;bergeben.
+
+Hier passiert nun das Wichtige: Die Kommandooption (z.B. --table) wird nun 
+umgeformt. Zuerst werden die zwei f&#252;hrenden Striche entfernt [1] (--table 
+wird zu table). Dann werden noch alle anderen Striche durch Unterstriche 
+ersetzt (Python Funktionen erlauben keine Striche im Namen, das w&#228;re ja ein 
+Minus-Operator). Zuguterletzt wird das Prefix _cmd_ hinzugef&#252;gt. 
+Aus --table wird also _cmd_table. Wenn du dir den Code genau angeschaut 
+hast, dann weist du, dass es da eine Methode mit diesem Namen gibt. Diese 
+Methode wird nun &#252;ber die Funktion &quot;getattr&quot; zur&#252;ckgegeben, die im 
+aktuellen Objekt ein Attribut mit diesem Namen sucht. Diese Methode wird 
+dann an den Aufrufer zur&#252;ckgegeben.
+
+Dieses System f&#252;hrt dazu, dass es f&#252;r jedes Kommando eine entsprechende 
+Methode in der Klasse ConsoleIFace gibt:
+--table -&gt; _cmd_table
+--show -&gt; _cmd_show
+--edit -&gt; _cmd_edit
+usw...
+
+Jede dieser Kommandofunktionen erh&#228;lt ein Argument: &quot;options&quot;.
+Dieses Argument ist dasselbe, in &quot;store&quot; bei optparse seine Werte ablegt 
+(parser.values). Zum anderen kann die Funktion das Argument *args annehmen. 
+Darin werden alle &#252;bergebenen Kommandozeilenargumente abgelegt. Table nutzt 
+das z.B. um die Liste der anzuzeigenden Indices zu erlangen.
+
+Ich hoffe, dass hilft dir jetzt ein bisschen...
+
+[1] Dieses Codest&#252;cke habe ich gerade noch mal umgeschrieben. Die If-Abfrage 
+kann man sich auch sparen... Der Code kommt noch ins svn!
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/tel-dev/attachments/20070228/63157da7/attachment.pgp">https://lists.berlios.de/pipermail/tel-dev/attachments/20070228/63157da7/attachment.pgp</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000083.html">[Tel-dev] [ Feature Request #3176 ] Sorting: local options mit print_short_list verkn&#252;pfen
+</A></li>
+	<LI>Next message: <A HREF="000091.html">[Tel-dev] [ Feature Request #3176 ] Sorting: local options mit print_short_list verkn&#252;pfen
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#87">[ date ]</a>
+              <a href="thread.html#87">[ thread ]</a>
+              <a href="subject.html#87">[ subject ]</a>
+              <a href="author.html#87">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/tel-dev">More information about the Tel-dev
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Tel-dev] [ Feature Request #3176 ] Sorting: local options mit print_short_list verkn&#252;pfen
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/tel-dev/2007-March/index.html" >
+   <LINK REL="made" HREF="mailto:tel-dev%40lists.berlios.de?Subject=Re%3A%20%5BTel-dev%5D%0A%09%3D%3Fiso-8859-1%3Fq%3F%3D5B_Feature_Request_%3D233176_%3D5D_Sorting%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F%3D3A_local_options_mit_print%3D5Fshort%3D5Flist_verkn%3DFC%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fpfen%3F%3D&In-Reply-To=%3C1172753669.5184.4.camel%40rebian.home%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000094.html">
+   <LINK REL="Next"  HREF="000096.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Tel-dev] [ Feature Request #3176 ] Sorting: local options mit print_short_list verkn&#252;pfen</H1>
+    <B>Remo Wenger</B> 
+    <A HREF="mailto:tel-dev%40lists.berlios.de?Subject=Re%3A%20%5BTel-dev%5D%0A%09%3D%3Fiso-8859-1%3Fq%3F%3D5B_Feature_Request_%3D233176_%3D5D_Sorting%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F%3D3A_local_options_mit_print%3D5Fshort%3D5Flist_verkn%3DFC%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fpfen%3F%3D&In-Reply-To=%3C1172753669.5184.4.camel%40rebian.home%3E"
+       TITLE="[Tel-dev] [ Feature Request #3176 ] Sorting: local options mit print_short_list verkn&#252;pfen">potrmwn at gmail.com
+       </A><BR>
+    <I>Thu Mar  1 13:54:29 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000094.html">[Tel-dev] [ Feature Request #3176 ] Sorting: local options mit print_short_list verkn&#252;pfen
+</A></li>
+        <LI>Next message: <A HREF="000096.html">[Tel-dev] [ Feature Request #3176 ] Sorting: local options mit print_short_list verkn&#252;pfen
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#95">[ date ]</a>
+              <a href="thread.html#95">[ thread ]</a>
+              <a href="subject.html#95">[ subject ]</a>
+              <a href="author.html#95">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Am Donnerstag, den 01.03.2007, 00:13 +0100 schrieb Sebastian Wiesner:
+&gt;<i> MMh, ich hatte heute abend (nacht ^^) noch ein bisschen Zeit! Deswegen hab 
+</I>&gt;<i> ich mich jetzt selbst mal an die Implementierung gemacht und bin auch 
+</I>&gt;<i> fertig geworden. Tschuldigung, dass ich dir die &#220;bung versaut habe :-( aber 
+</I>&gt;<i> ich konnte einfach meine Finger nicht von lassen ;)
+</I>Arrh b&#246;ses Kind ^^
+
+&gt;<i> Ich bin die ganze Sache letztendlich anders angegangen: --sort ruft jetzt 
+</I>&gt;<i> einen callback auf, der den &#252;bergebenen Wert parst (feldname und 
+</I>&gt;<i> sortierreihenfolge bestimmt) und diese zwei Werte in parser.values ablegt.
+</I>&gt;<i> Den Kommandos steht also options.sortby und options.descending zur 
+</I>&gt;<i> Verf&#252;gung. Diese werden an die print Methoden weitergegeben, welche dann 
+</I>&gt;<i> sortieren.
+</I>&gt;<i> Das eigentliche Sortieren findet in der neuen sorted Methode der Phonebook 
+</I>&gt;<i> Klasse statt.
+</I>&gt;<i> Schau dir einfach mal das diff an:
+</I>&gt;<i> svn diff -r 72:74
+</I>&gt;<i> Dann siehst du alles, was von mir kommt...
+</I>Ok.. hast du meine war wieder weggemacht? Habs eben noch commited weil
+ich nicht wieder von vorne beginnen wollte, wenn du was neues
+raufgeladen h&#228;ttest.
+
+&gt;<i> --show akzeptiert doch beliebig viele Indices als Angabe:
+</I>&gt;<i> python tel.py --show 0-3 8 20
+</I>&gt;<i> Das zeigt jetzt die Eintr&#228;ge 0,1,2,3,8,20 an. Diese Indices landen in args 
+</I>&gt;<i> (und zwar so wie sie auf der Kommanozeile angegeben werden). Gibt es nun 
+</I>&gt;<i> Indices (args ist also nicht leer), dann wird parse_indices aufgerufen. 
+</I>&gt;<i> Diese Methode anaylisiert die Indexangaben, die ja immer noch in Stringform 
+</I>&gt;<i> sind, und erzeugt anhand dieser Angaben eine Liste mit den gew&#252;nschten 
+</I>&gt;<i> Eintr&#228;gen.
+</I>&gt;<i> Wurden dagegen keine Indices angegeben, wird einfach das ganze Telefonbuch 
+</I>&gt;<i> angezeigt.
+</I>Ahaa..
+
+&gt;<i> 
+</I>&gt;<i> PS: das backup skript hab ich nochmal vom ftp entfernt. Ich bastel noch 
+</I>&gt;<i> schnell eine Cleanup Funktion rein, die alle Backups &#228;lter als 30 Tage (ist 
+</I>&gt;<i> konfigurierbar, kannst auch 5 oder 1000 nehmen) l&#246;scht.
+</I>&gt;<i> Die neue Version kommt morgen auf den ftp.
+</I>Was ev. besser w&#228;re ist, wenn man angeben k&#246;nnte dass alle
+telrepos-Backups zusammen kleiner als xMB sein m&#252;ssen, damit das &#228;lteste
+nicht gel&#246;scht wird.
+Das darum, weil ja das Backup immer gr&#246;sser wird.
+
+&gt;<i> Danach fang ich mal damit an, ein Installationsskript f&#252;r linux zu schreiben 
+</I>&gt;<i> und die ersten &#220;bersetzungen zu bewerkstelligen (damit tel endlich auch mal 
+</I>&gt;<i> deutsch spricht)...
+</I>Cen hat sich mal bei mir gemeldet und will auch mithelfen. Er erw&#228;hnte
+dabei Dokumentation, Manpage und &#220;bersetzung. Du kannst ja mal mit ihm
+kontakt aufnehmen. Ich hab' ihm gesagt er solle sich hier in der
+Mailingliste registrieren.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/tel-dev/attachments/20070301/2a63fa11/attachment.pgp">https://lists.berlios.de/pipermail/tel-dev/attachments/20070301/2a63fa11/attachment.pgp</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000094.html">[Tel-dev] [ Feature Request #3176 ] Sorting: local options mit print_short_list verkn&#252;pfen
+</A></li>
+	<LI>Next message: <A HREF="000096.html">[Tel-dev] [ Feature Request #3176 ] Sorting: local options mit print_short_list verkn&#252;pfen
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#95">[ date ]</a>
+              <a href="thread.html#95">[ thread ]</a>
+              <a href="subject.html#95">[ subject ]</a>
+              <a href="author.html#95">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/tel-dev">More information about the Tel-dev
+mailing list</a><br>
+</body></html>

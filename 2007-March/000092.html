@@ -1,0 +1,142 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Tel-dev] [ Feature Request #3176 ] Sorting: local options mit print_short_list verkn&#252;pfen
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/tel-dev/2007-March/index.html" >
+   <LINK REL="made" HREF="mailto:tel-dev%40lists.berlios.de?Subject=Re%3A%20%5BTel-dev%5D%0A%09%3D%3Fiso-8859-15%3Fq%3F%3D5B_Feature_Request_%3D233176_%3D5D_Sorting%3F%3D%0A%09%3D%3Fiso-8859-15%3Fq%3F%3D3A_local_options_mit_print%3D5Fshort%3D5Flist_verkn%3F%3D%0A%09%3D%3Fiso-8859-15%3Fq%3F%3DFCpfen%3F%3D&In-Reply-To=%3C200703010013.31952.basti.wiesner%40gmx.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000093.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Tel-dev] [ Feature Request #3176 ] Sorting: local options mit print_short_list verkn&#252;pfen</H1>
+    <B>Sebastian Wiesner</B> 
+    <A HREF="mailto:tel-dev%40lists.berlios.de?Subject=Re%3A%20%5BTel-dev%5D%0A%09%3D%3Fiso-8859-15%3Fq%3F%3D5B_Feature_Request_%3D233176_%3D5D_Sorting%3F%3D%0A%09%3D%3Fiso-8859-15%3Fq%3F%3D3A_local_options_mit_print%3D5Fshort%3D5Flist_verkn%3F%3D%0A%09%3D%3Fiso-8859-15%3Fq%3F%3DFCpfen%3F%3D&In-Reply-To=%3C200703010013.31952.basti.wiesner%40gmx.net%3E"
+       TITLE="[Tel-dev] [ Feature Request #3176 ] Sorting: local options mit print_short_list verkn&#252;pfen">basti.wiesner at gmx.net
+       </A><BR>
+    <I>Thu Mar  1 00:13:18 CET 2007</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000093.html">[Tel-dev] [ Feature Request #3176 ] Sorting: local options mit print_short_list verkn&#252;pfen
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#92">[ date ]</a>
+              <a href="thread.html#92">[ thread ]</a>
+              <a href="subject.html#92">[ subject ]</a>
+              <a href="author.html#92">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Remo Wenger hackte folgendes:
+&gt;<i> Am Mittwoch, den 28.02.2007, 17:42 +0100 schrieb Sebastian Wiesner:
+</I>&gt;<i> &gt; [..]
+</I>&gt;<i> &gt; Ich hoffe, dass hilft dir jetzt ein bisschen...
+</I>&gt;<i>
+</I>&gt;<i> Danke f&#252;r deine ausf&#252;hrliche Antwort. Jetzt versteh ich tel schon ein
+</I>&gt;<i> bissl mehr ^^
+</I>
+np
+
+&gt;<i> Also ich hab jetzt geschafft dass die Variable sort in der Methode
+</I>&gt;<i> print_long_list habe. Jetzt muss ich es irgendwie hinkriegen, dass ich
+</I>&gt;<i> weiss welcher Eintrag zu welcher Rubrik geh&#246;rt. Bspw. &quot;Remo&quot; geh&#246;rt ja
+</I>&gt;<i> zu Vorname. Wenn das Skript das weiss, kann es &quot;Remo&quot; ja irgendwie nach
+</I>&gt;<i> dieser Rubrik sortieren und dann ausgeben.
+</I>&gt;<i> Doch: Woher kenne ich die Rubrik ;-)
+</I>
+Verstehe nicht ganz, was du meinst...
+Die --sort-by (ich hab sie umbenannt, so ists imho deutlicher) Option erh&#228;lt 
+ja ein Feldnamen (wie auch --fields oder --output) als Parameter. Nach dem 
+Inhalt dieses Feldes muss das Telefonbuch sortiert werden...
+
+MMh, ich hatte heute abend (nacht ^^) noch ein bisschen Zeit! Deswegen hab 
+ich mich jetzt selbst mal an die Implementierung gemacht und bin auch 
+fertig geworden. Tschuldigung, dass ich dir die &#220;bung versaut habe :-( aber 
+ich konnte einfach meine Finger nicht von lassen ;)
+
+Ich bin die ganze Sache letztendlich anders angegangen: --sort ruft jetzt 
+einen callback auf, der den &#252;bergebenen Wert parst (feldname und 
+sortierreihenfolge bestimmt) und diese zwei Werte in parser.values ablegt.
+Den Kommandos steht also options.sortby und options.descending zur 
+Verf&#252;gung. Diese werden an die print Methoden weitergegeben, welche dann 
+sortieren.
+Das eigentliche Sortieren findet in der neuen sorted Methode der Phonebook 
+Klasse statt.
+Schau dir einfach mal das diff an:
+svn diff -r 72:74
+Dann siehst du alles, was von mir kommt...
+
+&gt;<i> Diese Eintr&#228;ge bekommt print_long_list ja direkt von _cmd_show, diese
+</I>&gt;<i> wiederum von parse_indices(*args) ODER von phonebook
+</I>&gt;<i>
+</I>&gt;<i> Was ich bei _cmd_show nicht verstehe:
+</I>&gt;<i>
+</I>&gt;<i> if args:
+</I>&gt;<i> 	...
+</I>&gt;<i> else:
+</I>&gt;<i> 	...
+</I>&gt;<i>
+</I>&gt;<i> Was will denn args beinhalten? Wer gibt hier die Argumente an, woher
+</I>&gt;<i> kommen die? Was genau entscheidet es, ob jetzt parse_indices oder
+</I>&gt;<i> phonebook benutzt wird?
+</I>
+--show akzeptiert doch beliebig viele Indices als Angabe:
+python tel.py --show 0-3 8 20
+Das zeigt jetzt die Eintr&#228;ge 0,1,2,3,8,20 an. Diese Indices landen in args 
+(und zwar so wie sie auf der Kommanozeile angegeben werden). Gibt es nun 
+Indices (args ist also nicht leer), dann wird parse_indices aufgerufen. 
+Diese Methode anaylisiert die Indexangaben, die ja immer noch in Stringform 
+sind, und erzeugt anhand dieser Angaben eine Liste mit den gew&#252;nschten 
+Eintr&#228;gen.
+Wurden dagegen keine Indices angegeben, wird einfach das ganze Telefonbuch 
+angezeigt.
+
+lunar
+
+PS: das backup skript hab ich nochmal vom ftp entfernt. Ich bastel noch 
+schnell eine Cleanup Funktion rein, die alle Backups &#228;lter als 30 Tage (ist 
+konfigurierbar, kannst auch 5 oder 1000 nehmen) l&#246;scht.
+Die neue Version kommt morgen auf den ftp.
+Danach fang ich mal damit an, ein Installationsskript f&#252;r linux zu schreiben 
+und die ersten &#220;bersetzungen zu bewerkstelligen (damit tel endlich auch mal 
+deutsch spricht)...
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/tel-dev/attachments/20070301/76372981/attachment.pgp">https://lists.berlios.de/pipermail/tel-dev/attachments/20070301/76372981/attachment.pgp</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000093.html">[Tel-dev] [ Feature Request #3176 ] Sorting: local options mit print_short_list verkn&#252;pfen
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#92">[ date ]</a>
+              <a href="thread.html#92">[ thread ]</a>
+              <a href="subject.html#92">[ subject ]</a>
+              <a href="author.html#92">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/tel-dev">More information about the Tel-dev
+mailing list</a><br>
+</body></html>

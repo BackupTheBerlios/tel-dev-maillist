@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Tel-dev] Backup
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/tel-dev/2007-March/index.html" >
+   <LINK REL="made" HREF="mailto:tel-dev%40lists.berlios.de?Subject=Re%3A%20%5BTel-dev%5D%20Backup&In-Reply-To=%3C200703011949.34260.basti.wiesner%40gmx.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000098.html">
+   <LINK REL="Next"  HREF="000100.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Tel-dev] Backup</H1>
+    <B>Sebastian Wiesner</B> 
+    <A HREF="mailto:tel-dev%40lists.berlios.de?Subject=Re%3A%20%5BTel-dev%5D%20Backup&In-Reply-To=%3C200703011949.34260.basti.wiesner%40gmx.net%3E"
+       TITLE="[Tel-dev] Backup">basti.wiesner at gmx.net
+       </A><BR>
+    <I>Thu Mar  1 19:49:28 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000098.html">[Tel-dev] [ Feature Request #3176 ] Sorting: local options mit print_short_list verkn&#252;pfen
+</A></li>
+        <LI>Next message: <A HREF="000100.html">[Tel-dev] Backup
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#99">[ date ]</a>
+              <a href="thread.html#99">[ thread ]</a>
+              <a href="subject.html#99">[ subject ]</a>
+              <a href="author.html#99">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi @all
+
+BerliOS ist so freundlich und erstellt t&#228;glich ein Backup des kompletten 
+Repositories f&#252;r uns [1]. Dieses Backup wird aber leider nicht f&#252;r uns 
+zugreifbar gespeichert, sondern nur zum Download [2] angeboten. Dabei wird 
+immer nur das aktuellste Backup verwendet, dass Backup des Vortages geht 
+also verloren.
+
+Es liegt also in unserer Verantwortung, daf&#252;r zu sorgen, dass wir die 
+Backups parat haben. Damit man nicht jeden Tag daran denken muss, das 
+neueste Backup herunterzuladen, habe ich ein kleines Skript geschrieben 
+(nat&#252;rlich in Python ^^), welches die Datei automatisch herunterl&#228;dt. 
+Dieses Skript ist auf dem FTP Server unseres Projekts zu finden [3].
+
+Um dieses Skript zu benutzen, muss man es einmal manuell aufrufen. Es 
+&#252;berpr&#252;ft dann, ob seine Konfigurationsdatei vorhanden ist (standardm&#228;&#223;ig 
+~/.telbackuprc). Ist dies nicht der Fall, stellt das Skript einige Fragen 
+zu Konfiguration und l&#228;dt das erste Backup herunter. M&#246;chte man eine andere 
+Konfigurationsdatei verwenden, so muss man diese bei _jedem_ Aufruf des 
+Skripts &#252;bergeben:
+
+--&gt; telbackup.py /pfad/zu/meiner/configdatei
+
+Hat man das Skript konfiguriert, so l&#228;dt es weitere backups (falls n&#246;tig) 
+bei der erneuten Ausf&#252;hrung des Skripts automatisch herunter. Es eignet 
+sich also prima f&#252;r cronjobs oder &#228;hnliches.
+Ich z.B. habe den Aufruf des Skripts in meinen KDE Autostartordner 
+eingef&#252;gt. Dadurch &#252;berpr&#252;ft das Skript bei jedem Einloggen, ob ein backup 
+n&#246;tig ist (die backups werden ja nur all 24h neu erstellt, also muss nicht 
+jedesmal heruntergeladen werden) und l&#228;dt es ggf herunter. Das passiert nun 
+ohne das eine weitere Eingabe erforderlich w&#228;re.
+
+Probiert es einfach aus!
+Je mehr Leute ein backup haben, desto sicherer ist es ^^
+
+lunar
+
+---
+[1] [Download Your Nightly SVN Tree Dump] - 
+<A HREF="https://developer.berlios.de/project/admin/?group_id=8132">https://developer.berlios.de/project/admin/?group_id=8132</A>
+[2] <A HREF="http://download.berlios.de/svndumps/tel-repos.gz">http://download.berlios.de/svndumps/tel-repos.gz</A>
+[3] <A HREF="ftp://ftp.berlios.de/pub/tel/telbackup.py">ftp://ftp.berlios.de/pub/tel/telbackup.py</A>
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/tel-dev/attachments/20070301/4a216f74/attachment.pgp">https://lists.berlios.de/pipermail/tel-dev/attachments/20070301/4a216f74/attachment.pgp</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000098.html">[Tel-dev] [ Feature Request #3176 ] Sorting: local options mit print_short_list verkn&#252;pfen
+</A></li>
+	<LI>Next message: <A HREF="000100.html">[Tel-dev] Backup
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#99">[ date ]</a>
+              <a href="thread.html#99">[ thread ]</a>
+              <a href="subject.html#99">[ subject ]</a>
+              <a href="author.html#99">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/tel-dev">More information about the Tel-dev
+mailing list</a><br>
+</body></html>

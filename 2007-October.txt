@@ -1,0 +1,355 @@
+From web at yokoy.de  Thu Oct 11 12:47:14 2007
+From: web at yokoy.de (web at yokoy.de)
+Date: Thu, 11 Oct 2007 12:47:14 +0200
+Subject: [Tel-dev] hardcoded
+Message-ID: <20071011124714.177709af.web@yokoy.de>
+
+hi,
+
+erst mal vielen Dank fuer dieses Projekt ;-)
+ich hab die tel-dev Mailingliste just abonniert, weil ich auf der Suche nach einem brauchbaren und schlanken Python Adressbuch bin und gleich auf ein Problem gestossen bin.
+
+Nun habe ich aus meinem alten kaddressbook ein .csv exportiert und wollte es mit tel importieren. Geht natuerlich nicht, weil hier ganz andere Felder/csv verwendet werden. Default Werte vorzugeben ist sinnvoll, aber warum hardcoded? Warum liesst man nicht die Felder aus der ersten Zeile aus und baut damit ein neues Adressbuch mit diesen Feldern auf (falls noch kein .tel/phonebook.csv existiert)?
+Oder habe ich beim importieren Fehler gemacht? Die Ausgabe und die erste Zeile aus dem kaddressbook.csv weiter unten.
+
+
+Gruesse,
+yokoy
+
+
+yokoy at 24u7:~/.tel$ tel --import addressbook_from_kde.csv 
+Traceback (most recent call last):
+  File "/usr/bin/tel", line 62, in <module>
+    ConsoleIFace().start()
+  File "/usr/lib/tel/consoleiface.py", line 585, in start
+    options.command_function(options, *args)
+  File "/usr/lib/tel/consoleiface.py", line 365, in _cmd_import
+    import_book = phonebook.PhoneBook(path)
+  File "/usr/lib/tel/phonebook.py", line 238, in __init__
+    self.load()
+  File "/usr/lib/tel/phonebook.py", line 303, in load
+    entry[k] = row[k].decode('utf-8')
+  File "/usr/lib/tel/phonebook.py", line 138, in __setitem__
+    raise KeyError('Invalid field %s' % key)
+KeyError: 'Invalid field Formatierter Name'
+
+
+erste Zeile, ohne Umbruch:
+
+"Formatierter Name","Nachname","Vorname","Zus?tzliche Namen","Titel-Abk. (vor Name)","Titel-Abk. (n
+ach Name)","Spitzname","Geburtstag","Stra?e (privat)","Stadt (privat)","Staat/Bundesland (privat)",
+"Postleitzahl (privat)","Land (privat)","Aufkleber (Privatadresse)","Stra?e (gesch?ftlich)","Stadt 
+(gesch?ftlich)","Staat/Bundesland (gesch?ftlich)","Postleitzahl (gesch?ftlich)","Land (gesch?ftlich
+)","Aufkleber (Gesch?ftsadresse)","Telefon (privat)","Telefon (gesch?ftlich)","Mobiltelefon","Fax (
+privat)","Fax (gesch?ftlich)","Autotelefon","ISDN","Pager","E-Mail-Adresse","Mail-Programm","Titel"
+,"Stellung","Organisation/Firma","Notiz","Startseite","Abteilung","Beruf","Name des Assistenten","N
+ame des Managers","Name des Partners","B?ro","IM-Adresse","Jubil?um","Blog"
+
+
+
+From basti.wiesner at gmx.net  Sun Oct 14 13:54:03 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Sun, 14 Oct 2007 13:54:03 +0200
+Subject: [Tel-dev] hardcoded
+In-Reply-To: <20071011124714.177709af.web@yokoy.de>
+References: <20071011124714.177709af.web@yokoy.de>
+Message-ID: <200710141354.08528.basti.wiesner@gmx.net>
+
+[ web at yokoy.de ]
+> Nun habe ich aus meinem alten kaddressbook ein .csv exportiert und wollte
+> es mit tel importieren. Geht natuerlich nicht, weil hier ganz andere
+> Felder/csv verwendet werden. Default Werte vorzugeben ist sinnvoll, aber
+> warum hardcoded?
+
+Wie denn sonst?
+
+Nat?rlich w?re es m?glich, die Felder aus der ersten Zeile zu lesen, und 
+beim Bearbeiten als Feldnamen anzugeben.  Allerdings w?re tel damit kaum 
+mehr als ein Tool zur Bearbeitung von CSV Eintr?gen. Gleiches kann man auch 
+mit Excel oder Calc erledigen.
+
+Auf diese Weise w?re es z.B. allerdings unm?glich, Felder auf korrekte 
+Eingaben zu ?berpr?fen. Woher sollte tel z.B. wissen, welches der Felder 
+nun f?r die E-Mail Adresse bestimmt ist?
+
+Au?erdem w?re es so unm?glich, Telefonb?cher zwischen verschiedenen Formaten 
+zu konvertieren. Gegenw?rtig schreibe ich ein Plugin-System, welches tel 
+bef?higte verschiedenste Formate zu lesen und zu bearbeiten, angefangen von 
+CSV-Dateien hin zum KDE Addressbuch oder Mutt-Aliasdateien.  Sowas ist nur 
+m?glich, wenn man eine einheitliche Feldliste definiert, und alle Plugins 
+auf diese Felder verpflichtet.
+
+Das Plugin-System ist zwar bereits fertig, allerdings fehlen noch Plugins 
+und Dokumentation. Die kann ich zur Zeit leider nicht erstellen, weil ich 
+die n?chsten drei Monate nur sehr wenig Zeit habe.
+
+Nicht zu letzt erm?glicht die Verwendung hart codierter Feldnamen die 
+Internationalisierung.  W?rden die Feldnamen aus der ersten Zeile der CSV 
+gelesen, k?nnte ein Franzose mit einem deutschen Addressbuch nichts 
+anfangen.  Dadurch, dass die Felder hart codiert sind, k?nnen die Feldnamen 
+in alle m?glichen Sprachen ?bersetzt werden, wodurch Telefonb?cher 
+sprachen?bergreifend verwendet werden k?nnen.
+
+So gesehen bietet die Verwendung hart codierter Felder mehr Vorteile als 
+Nachteile.  Wenn die Plugins verf?gbar sind, dann wird sich auch das 
+Problem mit dem Import erledigen.  Leider hab ich wie gesagt momentan nicht 
+viel Zeit... :(
+
+Du darfst auch nicht vergessen, dass tel noch in fr?hem Alpha-Stadium ist. 
+Ehrlich gesagt, ich pers?nlich w?rde es noch nicht f?r den produktiven 
+Einsatz empfehlen...
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: This is a digitally signed message part.
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20071014/65d19666/attachment.pgp>
+
+From web at yokoy.de  Sat Oct 27 10:44:44 2007
+From: web at yokoy.de (web at yokoy.de)
+Date: Sat, 27 Oct 2007 10:44:44 +0200
+Subject: [Tel-dev] hardcoded
+In-Reply-To: <200710141354.08528.basti.wiesner@gmx.net>
+References: <20071011124714.177709af.web@yokoy.de>
+	<200710141354.08528.basti.wiesner@gmx.net>
+Message-ID: <20071027104444.73808d4f.web@yokoy.de>
+
+Hallo Sebastian,
+
+danke fuer die Antwort. Wie Du an meiner spaeten Reaktion merkst, habe auch ich wengig Zeit ;-)
+
+Die Internationalisierung bei Tel wird mit gettext vorgenommen, richtig? Kann man nicht die deutschen Felder ins englische "rueckinternationalisieren" und dann uebernehmen? In welcher Reihenfolge sie dann stehen, sollte doch egal sein (natuerlich in der Reihenfolge, wie man sie importiert hat). Keine Ahnung, wie Gettext und Tel im einzelnen Funktioniert, aber so in etwa hatte ich mir die Vorgehensweise beim importieren vorgestellt.
+
+Gruesse,
+yokoy
+
+
+
+
+On Sun, 14 Oct 2007 13:54:03 +0200
+Sebastian Wiesner <basti.wiesner at gmx.net> wrote:
+
+> [ web at yokoy.de ]
+> > Nun habe ich aus meinem alten kaddressbook ein .csv exportiert und wollte
+> > es mit tel importieren. Geht natuerlich nicht, weil hier ganz andere
+> > Felder/csv verwendet werden. Default Werte vorzugeben ist sinnvoll, aber
+> > warum hardcoded?
+> 
+> Wie denn sonst?
+> 
+> Nat?rlich w?re es m?glich, die Felder aus der ersten Zeile zu lesen, und 
+> beim Bearbeiten als Feldnamen anzugeben.  Allerdings w?re tel damit kaum 
+> mehr als ein Tool zur Bearbeitung von CSV Eintr?gen. Gleiches kann man auch 
+> mit Excel oder Calc erledigen.
+> 
+> Auf diese Weise w?re es z.B. allerdings unm?glich, Felder auf korrekte 
+> Eingaben zu ?berpr?fen. Woher sollte tel z.B. wissen, welches der Felder 
+> nun f?r die E-Mail Adresse bestimmt ist?
+> 
+> Au?erdem w?re es so unm?glich, Telefonb?cher zwischen verschiedenen Formaten 
+> zu konvertieren. Gegenw?rtig schreibe ich ein Plugin-System, welches tel 
+> bef?higte verschiedenste Formate zu lesen und zu bearbeiten, angefangen von 
+> CSV-Dateien hin zum KDE Addressbuch oder Mutt-Aliasdateien.  Sowas ist nur 
+> m?glich, wenn man eine einheitliche Feldliste definiert, und alle Plugins 
+> auf diese Felder verpflichtet.
+> 
+> Das Plugin-System ist zwar bereits fertig, allerdings fehlen noch Plugins 
+> und Dokumentation. Die kann ich zur Zeit leider nicht erstellen, weil ich 
+> die n?chsten drei Monate nur sehr wenig Zeit habe.
+> 
+> Nicht zu letzt erm?glicht die Verwendung hart codierter Feldnamen die 
+> Internationalisierung.  W?rden die Feldnamen aus der ersten Zeile der CSV 
+> gelesen, k?nnte ein Franzose mit einem deutschen Addressbuch nichts 
+> anfangen.  Dadurch, dass die Felder hart codiert sind, k?nnen die Feldnamen 
+> in alle m?glichen Sprachen ?bersetzt werden, wodurch Telefonb?cher 
+> sprachen?bergreifend verwendet werden k?nnen.
+> 
+> So gesehen bietet die Verwendung hart codierter Felder mehr Vorteile als 
+> Nachteile.  Wenn die Plugins verf?gbar sind, dann wird sich auch das 
+> Problem mit dem Import erledigen.  Leider hab ich wie gesagt momentan nicht 
+> viel Zeit... :(
+> 
+> Du darfst auch nicht vergessen, dass tel noch in fr?hem Alpha-Stadium ist. 
+> Ehrlich gesagt, ich pers?nlich w?rde es noch nicht f?r den produktiven 
+> Einsatz empfehlen...
+> 
+
+
+-- 
+ <web at yokoy.de>
+
+
+From basti.wiesner at gmx.net  Sat Oct 27 16:08:33 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Sat, 27 Oct 2007 16:08:33 +0200
+Subject: [Tel-dev] hardcoded
+In-Reply-To: <20071027104444.73808d4f.web@yokoy.de>
+References: <20071011124714.177709af.web@yokoy.de>
+	<200710141354.08528.basti.wiesner@gmx.net>
+	<20071027104444.73808d4f.web@yokoy.de>
+Message-ID: <200710271608.38991.basti.wiesner@gmx.net>
+
+[ web at yokoy.de ]
+> Hallo Sebastian,
+>
+> danke fuer die Antwort. Wie Du an meiner spaeten Reaktion merkst, habe
+> auch ich wengig Zeit ;-)
+>
+> Die Internationalisierung bei Tel wird mit gettext vorgenommen, richtig?
+> Kann man nicht die deutschen Felder ins englische
+> "rueckinternationalisieren" und dann uebernehmen?
+
+Und wie soll das gehen?  Was der eine Telefonnummer nennt, ist f?r den 
+anderen einfach nur "Tel."...  Der eine nennt es "Stra?e und Hausnummer", 
+der andere "Adresse"...  Woher soll tel denn wissen, was in einem Feld 
+steht?  Entweder nimmt man die "R?ckinternationalisierung" f?r jede 
+m?gliche Feldbezeichnung vor (was bestenfalls extremst aufw?ndig und schwer 
+wartbar ist), oder man bringt tel bei, die deutsche Sprache zu verstehen 
+(was gegenw?rtig ziemlich unm?glich ist) ;)
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: This is a digitally signed message part.
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20071027/c9c77b19/attachment.pgp>
+
+From web at yokoy.de  Tue Oct 30 20:14:15 2007
+From: web at yokoy.de (web at yokoy.de)
+Date: Tue, 30 Oct 2007 20:14:15 +0100
+Subject: [Tel-dev] hardcoded
+In-Reply-To: <200710271608.38991.basti.wiesner@gmx.net>
+References: <20071011124714.177709af.web@yokoy.de>
+	<200710141354.08528.basti.wiesner@gmx.net>
+	<20071027104444.73808d4f.web@yokoy.de>
+	<200710271608.38991.basti.wiesner@gmx.net>
+Message-ID: <20071030201415.d26c677e.web@yokoy.de>
+
+Hallo Sebanstian,
+
+Kommentare eingefuegt...
+
+On Sat, 27 Oct 2007 16:08:33 +0200
+Sebastian Wiesner <basti.wiesner at gmx.net> wrote:
+
+> [ web at yokoy.de ]
+> > Hallo Sebastian,
+> >
+> > danke fuer die Antwort. Wie Du an meiner spaeten Reaktion merkst, habe
+> > auch ich wengig Zeit ;-)
+> >
+> > Die Internationalisierung bei Tel wird mit gettext vorgenommen, richtig?
+> > Kann man nicht die deutschen Felder ins englische
+> > "rueckinternationalisieren" und dann uebernehmen?
+> 
+> Und wie soll das gehen?  Was der eine Telefonnummer nennt, ist f?r den 
+> anderen einfach nur "Tel."...  Der eine nennt es "Stra?e und Hausnummer", 
+> der andere "Adresse"...  Woher soll tel denn wissen, was in einem Feld 
+> steht?
+
+mal angenommen, andere Adressbuch Programmierer haben auch darueber nachgedacht und sich mehr oder weniger an Standards gehalten, dann sehe ich hier nicht das Problem.
+Verwiesen sei hier auf 
+http://de.wikipedia.org/wiki/Vcard
+http://tools.ietf.org/html/rfc2426
+
+Klar, Tel benutzt CSV und nicht Vcard, aber das hat IMHO nichts mit den Feldnamen zu tun.
+
+
+> Entweder nimmt man die "R?ckinternationalisierung" f?r jede 
+> m?gliche Feldbezeichnung vor (was bestenfalls extremst aufw?ndig und schwer 
+> wartbar ist),
+
+Hmm, wenn Du meinst. Der beste Weg waere eh direkt die VCard zu importieren (oder zu benutzen).  Da Tel CSV benutzt, bin ich den Umweg ueber die Exportfunktion von KAddressbook nach CSV gegangen. Was nichts geholfen hat. Wie dem auch sei, fuer ein Adressbuch ist ein funktionierender Ex/Import unerlaesslich.
+Ich weiss, Tel ist noch im Betastadium...
+
+> oder man bringt tel bei, die deutsche Sprache zu verstehen 
+> (was gegenw?rtig ziemlich unm?glich ist) ;)
+
+lol, KI fuer ein einfaches Adressbuch waere wohl uebertrieben.
+
+
+> 
+> -- 
+> Freiheit ist immer die Freiheit der Andersdenkenden.
+>                                             (Rosa Luxemburg)
+> 
+
+
+-- 
+ <web at yokoy.de>
+
+
+From basti.wiesner at gmx.net  Wed Oct 31 19:26:39 2007
+From: basti.wiesner at gmx.net (Sebastian Wiesner)
+Date: Wed, 31 Oct 2007 19:26:39 +0100
+Subject: [Tel-dev] hardcoded
+In-Reply-To: <20071030201415.d26c677e.web@yokoy.de>
+References: <20071011124714.177709af.web@yokoy.de>
+	<200710271608.38991.basti.wiesner@gmx.net>
+	<20071030201415.d26c677e.web@yokoy.de>
+Message-ID: <200710311926.44613.basti.wiesner@gmx.net>
+
+[ web at yokoy.de ]
+> Hallo Sebanstian,
+>
+> Kommentare eingefuegt...
+>
+> On Sat, 27 Oct 2007 16:08:33 +0200
+>
+> Sebastian Wiesner <basti.wiesner at gmx.net> wrote:
+> > [ web at yokoy.de ]
+> >
+> > > Hallo Sebastian,
+> > >
+> > > danke fuer die Antwort. Wie Du an meiner spaeten Reaktion merkst,
+> > > habe auch ich wengig Zeit ;-)
+> > >
+> > > Die Internationalisierung bei Tel wird mit gettext vorgenommen,
+> > > richtig? Kann man nicht die deutschen Felder ins englische
+> > > "rueckinternationalisieren" und dann uebernehmen?
+> >
+> > Und wie soll das gehen?  Was der eine Telefonnummer nennt, ist f?r den
+> > anderen einfach nur "Tel."...  Der eine nennt es "Stra?e und
+> > Hausnummer", der andere "Adresse"...  Woher soll tel denn wissen, was
+> > in einem Feld steht?
+>
+> mal angenommen, andere Adressbuch Programmierer haben auch darueber
+> nachgedacht und sich mehr oder weniger an Standards gehalten, dann sehe
+> ich hier nicht das Problem. Verwiesen sei hier auf
+> http://de.wikipedia.org/wiki/Vcard
+> http://tools.ietf.org/html/rfc2426
+>
+> Klar, Tel benutzt CSV und nicht Vcard, aber das hat IMHO nichts mit den
+> Feldnamen zu tun.
+
+Doch, weil selbst das KDE Adressbuch wissen muss, welche VCard Eigenschaft 
+den Vornamen enth?lt. Das KDE Adressbuch wird wahrscheinlich auch an einer 
+solchen VCard Zeile scheitern ;) :
+
+Vorname:Mustermann;Hans
+
+> > Entweder nimmt man die "R?ckinternationalisierung" f?r jede
+> > m?gliche Feldbezeichnung vor (was bestenfalls extremst aufw?ndig und
+> > schwer wartbar ist),
+>
+> Hmm, wenn Du meinst. Der beste Weg waere eh direkt die VCard zu
+> importieren (oder zu benutzen).
+Nicht n?tig, sobald ich wieder Zeit zum Programmieren habe, erh?lt tel ein 
+KDE Adressbuch Plugin ;)
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: This is a digitally signed message part.
+URL: <https://lists.berlios.de/pipermail/tel-dev/attachments/20071031/353bd6d5/attachment.pgp>
+

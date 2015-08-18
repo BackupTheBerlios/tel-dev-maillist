@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Tel-dev] [ Feature Request #3176 ] Sorting: local options mit print_short_list verkn&#252;pfen
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/tel-dev/2007-February/index.html" >
+   <LINK REL="made" HREF="mailto:tel-dev%40lists.berlios.de?Subject=Re%3A%20%5BTel-dev%5D%20%3D%3Fiso-8859-1%3Fq%3F%3D5B_Feature_Request_%3D233176_%3D5D_Sorting%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F%3D3A_local_options_mit_print%3D5Fshort%3D5Flist_verkn%3DFC%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fpfen%3F%3D&In-Reply-To=%3C1172675316.5164.22.camel%40rebian.home%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000082.html">
+   <LINK REL="Next"  HREF="000087.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Tel-dev] [ Feature Request #3176 ] Sorting: local options mit print_short_list verkn&#252;pfen</H1>
+    <B>Remo Wenger</B> 
+    <A HREF="mailto:tel-dev%40lists.berlios.de?Subject=Re%3A%20%5BTel-dev%5D%20%3D%3Fiso-8859-1%3Fq%3F%3D5B_Feature_Request_%3D233176_%3D5D_Sorting%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F%3D3A_local_options_mit_print%3D5Fshort%3D5Flist_verkn%3DFC%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fpfen%3F%3D&In-Reply-To=%3C1172675316.5164.22.camel%40rebian.home%3E"
+       TITLE="[Tel-dev] [ Feature Request #3176 ] Sorting: local options mit print_short_list verkn&#252;pfen">potrmwn at gmail.com
+       </A><BR>
+    <I>Wed Feb 28 16:08:36 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000082.html">[Tel-dev] Tabulatorenabstand von Lunar nur halb so gross
+</A></li>
+        <LI>Next message: <A HREF="000087.html">[Tel-dev] [ Feature Request #3176 ] Sorting: local options mit print_short_list verkn&#252;pfen
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#83">[ date ]</a>
+              <a href="thread.html#83">[ thread ]</a>
+              <a href="subject.html#83">[ subject ]</a>
+              <a href="author.html#83">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+bin gerade dabei mit meinen sehr eingeschr&#228;nkten Python Kenntnissen
+(darf man das schon Kenntnisse nennen?) die zusatz Option --sort/-s
+hinzuzuf&#252;gen (Feature Request #3176).
+
+Die Option --sort habe ich schon eingef&#252;gt:
+
+&gt;<i> make_option('-s', '--sort', action='store', dest='sort',
+</I>&gt;<i> 	type='string',
+</I>&gt;<i> 	help=_('supports sorting of output'))
+</I>
+So weit, so gut: es scheint zu funktionieren (--help zeigt --sort
+korrekt an).
+
+Nun will ich das mal beim Aufruf von --list auch nutzen. Also gehe ich
+zur Funktion print_short_list und f&#252;ge ein drittes Argument an:
+
+&gt;<i> def print_short_list(self, entries, sort):
+</I>&gt;<i> 	&quot;&quot;&quot;Prints all `entries` in a short format:&quot;&quot;&quot;
+</I>&gt;<i> 	print
+</I>&gt;<i> 	print sort
+</I>&gt;<i> 	for entry in entries:
+</I>&gt;<i> 		print repr(entry)
+</I>
+Da kommt aber ne Fehlermeldung:
+&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/tel-dev">remo at rebian</A>:~/tel/trunk$ ./tel.py --list --sort=Mdf
+</I>&gt;<i> Traceback (most recent call last):
+</I>&gt;<i>   File &quot;./tel.py&quot;, line 1032, in ?
+</I>&gt;<i>     ConsoleIFace().start()
+</I>&gt;<i>   File &quot;./tel.py&quot;, line 1026, in start
+</I>&gt;<i>     options.command_function(options, *args)
+</I>&gt;<i>   File &quot;./tel.py&quot;, line 828, in _cmd_list
+</I>&gt;<i>     self.print_short_list(entries)
+</I>&gt;<i> TypeError: print_short_list() takes exactly 3 arguments (2 given)
+</I>
+Der Grund ist f&#252;r mich klar: Er kennt die Variable &quot;sort&quot; (noch) nicht.
+Wie also kann ich --short mit dieser Funktion verkn&#252;pfen? Hab schon ein
+bisschen im Code rumgeschn&#252;ffelt aber bin nicht schlau geworden.
+
+Greets,
+Pot
+
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/tel-dev/attachments/20070228/d34e5693/attachment.pgp">https://lists.berlios.de/pipermail/tel-dev/attachments/20070228/d34e5693/attachment.pgp</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000082.html">[Tel-dev] Tabulatorenabstand von Lunar nur halb so gross
+</A></li>
+	<LI>Next message: <A HREF="000087.html">[Tel-dev] [ Feature Request #3176 ] Sorting: local options mit print_short_list verkn&#252;pfen
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#83">[ date ]</a>
+              <a href="thread.html#83">[ thread ]</a>
+              <a href="subject.html#83">[ subject ]</a>
+              <a href="author.html#83">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/tel-dev">More information about the Tel-dev
+mailing list</a><br>
+</body></html>

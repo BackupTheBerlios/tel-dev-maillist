@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Tel-dev] tel Homepage
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/tel-dev/2007-February/index.html" >
+   <LINK REL="made" HREF="mailto:tel-dev%40lists.berlios.de?Subject=Re%3A%20%5BTel-dev%5D%20tel%20Homepage&In-Reply-To=%3C1172430793.5322.6.camel%40rebian.home%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000021.html">
+   <LINK REL="Next"  HREF="000022.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Tel-dev] tel Homepage</H1>
+    <B>Remo Wenger</B> 
+    <A HREF="mailto:tel-dev%40lists.berlios.de?Subject=Re%3A%20%5BTel-dev%5D%20tel%20Homepage&In-Reply-To=%3C1172430793.5322.6.camel%40rebian.home%3E"
+       TITLE="[Tel-dev] tel Homepage">potrmwn at gmail.com
+       </A><BR>
+    <I>Sun Feb 25 20:13:13 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000021.html">[Tel-dev] tel Homepage
+</A></li>
+        <LI>Next message: <A HREF="000022.html">[Tel-dev] tel Homepage
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#20">[ date ]</a>
+              <a href="thread.html#20">[ thread ]</a>
+              <a href="subject.html#20">[ subject ]</a>
+              <a href="author.html#20">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Am Sonntag, den 25.02.2007, 10:35 +0100 schrieb Sebastian Wiesner:
+&gt;<i> Nachtrag:
+</I>&gt;<i> 
+</I>&gt;<i> Ich habe mir die Website mal heruntergeladen und auf meinem lokalen 
+</I>&gt;<i> Webserver getestet. 
+</I>&gt;<i> Dabei ist mir aufgefallen, dass Berlios f&#252;r php offenbar alle Warnungen 
+</I>&gt;<i> deaktiviert hat.
+</I>Ist mir auch schon aufgefallen.
+
+&gt;<i> Zumindest kamen bei mir Warnung, wenn man index.php ohne 
+</I>&gt;<i> to aufruft. Daraufhin habe ich die Reihenfolge der if Abfragen in der Datei 
+</I>&gt;<i> etwas ver&#228;ndert, damit diese Warnungen nicht mehr kommen.
+</I>Ok.
+
+&gt;<i> Au&#223;erdem habe ich die Navigationsleiste am linken Rand so ver&#228;ndert, dass 
+</I>&gt;<i> nun eine Liste &lt;ul&gt;&lt;/ul&gt; verwendet wird.
+</I>Gut.
+
+&gt;<i> Damit die Listenzeichen verschwinden und au&#223;erdem die Links im Men&#252; zur 
+</I>&gt;<i> besseren Lesbarkeit einen gr&#246;&#223;eren Abstand voneinander haben, gibts im 
+</I>&gt;<i> Stylesheet eine neue Klasse &quot;navigation&quot;, die sowohl f&#252;r die Liste als auch 
+</I>&gt;<i> f&#252;r die Links im Inhaltsverzeichnis verwendet werden muss.
+</I>&gt;<i> Die Liste wird in header.php erzeugt. Die Navigationslinks werden in der 
+</I>&gt;<i> jeweiligen ihv.php nun so erzeugt:
+</I>&gt;<i> &lt;li&gt;&lt;a class=&quot;navigation&quot; href=&quot;blubb&quot;&gt;test&lt;/a&gt;&lt;/li&gt;
+</I>Ist &quot;blubb&quot; der Kurzname? Oder der Link?
+Es ist imho m&#246;glich das ganze einem DIV zuzuweisen, dann entf&#228;llt das
+class=&quot;navigation&quot;.
+
+&gt;<i> Ich denke, so sieht die Seite besser aus... Einen Screenshot im Firefox habe 
+</I>&gt;<i> ich mal angeh&#228;ngt.
+</I>Glaube ich auch. Auch der Code ist so besser.
+
+&gt;<i> Au&#223;erdem hab ich noch einen Link zu &#220;bersicht eingef&#252;gt, damit man wieder 
+</I>&gt;<i> dahin zur&#252;ckfindet. ;)
+</I>Den gibt es schon (versteckt), der Banner ;-)
+
+&gt;<i> Leider kann ich das alles nicht hochladen... scp bringt mir ein &quot;Permission 
+</I>&gt;<i> denied&quot; :( Offenbar ein Rechte-Problem...
+</I>&gt;<i> Ich w&#252;rde deswegen vorschlagen, dass wir die Website auch ins svn einf&#252;gen 
+</I>&gt;<i> (als vierter Ordner website neben trunk, branches und tags). Dann kann 
+</I>&gt;<i> jeder seine &#196;nderungen dorthin commiten. Sobald die Website dann 
+</I>&gt;<i> aktualisiert wurden, ziehst du dir die neueste Version und kopierst sie auf 
+</I>&gt;<i> den Server. So vermeiden wir das Rechteproblem, ohne dass du jedes mal ein 
+</I>&gt;<i> chmod nach dem Hochladen ausf&#252;hren musst. Au&#223;erdem verhindern wir so, dass 
+</I>&gt;<i> einer versehentlich die &#196;nderungen des anderen &#252;berschreibt. Was h&#228;lst du 
+</I>&gt;<i> davon?
+</I>K&#246;nnten wir, wir k&#246;nnten auch das automatisieren (so wie bei meinem SVN
+Server), dass ein Script ausgef&#252;hrt wird, der alle ge&#228;nderten Dateien in
+den htdocs-Ordner kopiert, sobald ein commit ausgef&#252;hrt wird.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/tel-dev/attachments/20070225/3a3a9fae/attachment.pgp">https://lists.berlios.de/pipermail/tel-dev/attachments/20070225/3a3a9fae/attachment.pgp</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000021.html">[Tel-dev] tel Homepage
+</A></li>
+	<LI>Next message: <A HREF="000022.html">[Tel-dev] tel Homepage
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#20">[ date ]</a>
+              <a href="thread.html#20">[ thread ]</a>
+              <a href="subject.html#20">[ subject ]</a>
+              <a href="author.html#20">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/tel-dev">More information about the Tel-dev
+mailing list</a><br>
+</body></html>

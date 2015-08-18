@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Tel-dev] Feature Request 003193: fields priority
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/tel-dev/2007-March/index.html" >
+   <LINK REL="made" HREF="mailto:tel-dev%40lists.berlios.de?Subject=Re%3A%20%5BTel-dev%5D%20Feature%20Request%20003193%3A%20fields%20priority&In-Reply-To=%3C200703022000.08213.basti.wiesner%40gmx.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000125.html">
+   <LINK REL="Next"  HREF="000106.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Tel-dev] Feature Request 003193: fields priority</H1>
+    <B>Sebastian Wiesner</B> 
+    <A HREF="mailto:tel-dev%40lists.berlios.de?Subject=Re%3A%20%5BTel-dev%5D%20Feature%20Request%20003193%3A%20fields%20priority&In-Reply-To=%3C200703022000.08213.basti.wiesner%40gmx.net%3E"
+       TITLE="[Tel-dev] Feature Request 003193: fields priority">basti.wiesner at gmx.net
+       </A><BR>
+    <I>Fri Mar  2 20:00:03 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000125.html">[Tel-dev] Es weht smarty Wind
+</A></li>
+        <LI>Next message: <A HREF="000106.html">[Tel-dev] Feature Request 003193: fields priority
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#105">[ date ]</a>
+              <a href="thread.html#105">[ thread ]</a>
+              <a href="subject.html#105">[ subject ]</a>
+              <a href="author.html#105">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi @all (besonders Remo):
+
+Im Feature-Request 003193 [1] schreibst
+
+&gt;<i> Ich weiss, dass man mittels -o felder,felder,felder,.. die auszugebenen 
+</I>&gt;<i> Felder selbst w&#228;hlen kann,
+</I>
+Das ist mir gerade aufgefallen, als ich deinen Kommentar ins Englische 
+&#252;bersetzen wollte. 
+Die Tatsache, dass du nur -o feld1,feld2 erw&#228;hnst, legt den Schluss nahe, 
+dass du den netten Trick, den ich eingebaut habe, gar nicht kennst. Ebenso 
+wie --sort unterst&#252;tzt --output das Minuszeichen (aber nicht das 
+Pluszeichen, das war unn&#246;tig):
+
+python tel.py --table -o -index,-tags,-birthdate
+
+Zeigt _alle_ Felder _bis auf_ index, tags und birthdate an. Damit kann man 
+auch mit wenig Aufwand eine Tabelle an die Zeilenl&#228;nge anpassen.
+
+[1] 
+<A HREF="https://developer.berlios.de/feature/?func=detailfeature&amp;group_id=8132&amp;feature_id=3193">https://developer.berlios.de/feature/?func=detailfeature&amp;group_id=8132&amp;feature_id=3193</A>
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/tel-dev/attachments/20070302/e9ff13d9/attachment.pgp">https://lists.berlios.de/pipermail/tel-dev/attachments/20070302/e9ff13d9/attachment.pgp</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000125.html">[Tel-dev] Es weht smarty Wind
+</A></li>
+	<LI>Next message: <A HREF="000106.html">[Tel-dev] Feature Request 003193: fields priority
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#105">[ date ]</a>
+              <a href="thread.html#105">[ thread ]</a>
+              <a href="subject.html#105">[ subject ]</a>
+              <a href="author.html#105">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/tel-dev">More information about the Tel-dev
+mailing list</a><br>
+</body></html>

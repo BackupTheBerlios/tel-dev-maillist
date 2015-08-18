@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Tel-dev] Preview 0.1.6
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/tel-dev/2007-March/index.html" >
+   <LINK REL="made" HREF="mailto:tel-dev%40lists.berlios.de?Subject=Re%3A%20%5BTel-dev%5D%20Preview%200.1.6&In-Reply-To=%3C200703031632.30281.basti.wiesner%40gmx.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000119.html">
+   <LINK REL="Next"  HREF="000109.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Tel-dev] Preview 0.1.6</H1>
+    <B>Sebastian Wiesner</B> 
+    <A HREF="mailto:tel-dev%40lists.berlios.de?Subject=Re%3A%20%5BTel-dev%5D%20Preview%200.1.6&In-Reply-To=%3C200703031632.30281.basti.wiesner%40gmx.net%3E"
+       TITLE="[Tel-dev] Preview 0.1.6">basti.wiesner at gmx.net
+       </A><BR>
+    <I>Sat Mar  3 16:32:23 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000119.html">[Tel-dev] Feature Request 003193: fields priority
+</A></li>
+        <LI>Next message: <A HREF="000109.html">[Tel-dev] Preview 0.1.6
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#108">[ date ]</a>
+              <a href="thread.html#108">[ thread ]</a>
+              <a href="subject.html#108">[ subject ]</a>
+              <a href="author.html#108">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi @all interested
+
+ich habe jetzt ein Installationsskript f&#252;r tel geschrieben. Dieses Skript 
+bietet Unterst&#252;tzung f&#252;r Internationalisierungsdateien (message Kataloge). 
+tel.py spricht also zum ersten Mal Deutsch! Diese Skript installiert tel 
+nach folgendem Muster:
+
+Die Quelldateien (momentan nur tel.py) wandern nach $PREFIX/share/tel/
+Um tel ohne Angabe eines Pfades ausf&#252;hren zu k&#246;nnen, wird ein symbolischer 
+Link erzeugt, der von PREFIX/bin/tel nach $PREFIX/share/tel/tel.py zeigt. 
+Au&#223;erdem werden die message Kataloge unter $PREFIX/share/locale 
+installiert, und zwar nach folgendem Muster:
+$PREFIX/share/locale/$SPRACHE/LC_MESSAGE/tel.mo
+
+$PREFIX steht dabei f&#252;r das Installationsprefix, welches standardm&#228;&#223;ig /usr 
+ist. Allerdings kann man es mittels der --prefix Option auch umstellen, 
+z.B. auf /usr/local.
+
+Au&#223;erdem erleichtert das Setupskript das Erstellen eines Releases, da das 
+Packen in ein Archiv mit allen ben&#246;tigen Dateien von einem komfortablen 
+Befehl &#252;bernommen wird (python setup.py sdist).
+
+Ich habe ein Preview auf den FTP Server [1] hochgeladen. Bitte probiert es 
+aus, bevor wir ein neues Release erstellen. Ich habe es zwar schon etwas 
+getestet, aber man wei&#223; ja nie...
+
+Die Installation ist ganz einfach. Das Archiv entpacken, in den Ordner 
+wechseln und folgendes ausf&#252;hren:
+    
+    python setup.py install
+
+Jetzt wird tel unter /usr installiert. Wer sich sein Prefix selbst nehmen 
+m&#246;chte, verwendet
+
+    python setup.py install --prefix /usr/local
+
+Beide Befehl ben&#246;tigen Root Rechte. Wer meiner Programmierkunst nicht so 
+traut ^^ und lieber erstmal langsam anf&#228;ngt, kann das root verzeichnis 
+umbiegen:
+
+    python setup.py install --root ~/test
+
+Dieses Kommando installiert alle Dateien unter ~/test. Die ausf&#252;hrbare Datei 
+ist also unter ~/test/usr/bin/tel zu finden.
+
+Have fun!
+lunar
+
+[1] <A HREF="ftp://ftp.berlios.de/pub/tel/tel-0.1.6-pre.tar.gz">ftp://ftp.berlios.de/pub/tel/tel-0.1.6-pre.tar.gz</A>
+
+-- 
+Freiheit ist immer die Freiheit der Andersdenkenden.
+                                            (Rosa Luxemburg)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/tel-dev/attachments/20070303/878f6d55/attachment.pgp">https://lists.berlios.de/pipermail/tel-dev/attachments/20070303/878f6d55/attachment.pgp</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000119.html">[Tel-dev] Feature Request 003193: fields priority
+</A></li>
+	<LI>Next message: <A HREF="000109.html">[Tel-dev] Preview 0.1.6
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#108">[ date ]</a>
+              <a href="thread.html#108">[ thread ]</a>
+              <a href="subject.html#108">[ subject ]</a>
+              <a href="author.html#108">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/tel-dev">More information about the Tel-dev
+mailing list</a><br>
+</body></html>
